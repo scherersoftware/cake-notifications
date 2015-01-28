@@ -1,0 +1,20 @@
+{
+	"name": "codekanzlei/cake-notifications",
+	"description": "CakePHP3 Notifications Plugin",
+	"license": "MIT",
+	"type": "cakephp-plugin",
+	"extra": {
+		"installer-name": "Notifications"
+	},
+	"require": {
+		"cakephp/plugin-installer": "*"
+	},
+	"require-dev": {
+		"cakephp/cakephp": "3.0.x-dev"
+	},
+	"autoload": {
+		"psr-4": {
+		"Notifications\\": "src"
+		}
+	}
+}
