@@ -48,6 +48,7 @@ class NotificationQueuesTableTest extends TestCase {
 	public function tearDown() {
 		unset($this->NotificationQueue);
 		unset($this->NotificationContents);
+		TableRegistry::clear();
 		parent::tearDown();
 	}
 	
