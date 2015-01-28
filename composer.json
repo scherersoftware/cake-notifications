@@ -7,14 +7,22 @@
 		"installer-name": "Notifications"
 	},
 	"require": {
-		"cakephp/plugin-installer": "*"
+		"cakephp/plugin-installer": "*",
+		"parse/php-sdk": "1.0.*"
 	},
 	"require-dev": {
 		"cakephp/cakephp": "3.0.x-dev"
 	},
 	"autoload": {
 		"psr-4": {
-		"Notifications\\": "src"
+			"Notifications\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Notifications\\": "src",
+			"Notifications\\Test\\": "tests",
+			"Notifications\\Test\\Fixture\\": "tests/Fixture"
 		}
 	}
 }
