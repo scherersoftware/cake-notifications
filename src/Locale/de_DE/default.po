@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2015-01-29 16:02+0100\n"
+"PO-Revision-Date: 2015-01-29 16:05+0100\n"
+"Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: Controller/NotificationContentsController.php:57;81
+msgid "crud.save_successful"
+msgstr "Gespeichert"
+
+#: Controller/NotificationContentsController.php:60;84
+msgid "crud.validation_failed"
+msgstr "Validierung fehlgeschlagen"
+
+#: Template/NotificationContents/edit.ctp:44
+msgid "forms.actions"
+msgstr "Aktionen"
+
+#: Template/NotificationContents/edit.ctp:46
+#: Template/NotificationContents/view.ctp:25
+msgid "lists.back_to_list"
+msgstr "Zurück zur Liste"
+
+#: Template/NotificationContents/index.ctp:8
+msgid "created"
+msgstr "erstellt"
+
+#: Template/NotificationContents/index.ctp:9
+msgid "modified"
+msgstr "geändert"
+
+#: Template/NotificationContents/index.ctp:10;32
+#: Template/NotificationContents/view.ctp:22
+msgid "lists.actions"
+msgstr "Aktionen"
+
+#: Template/NotificationContents/index.ctp:20
+msgid "lists.view"
+msgstr "Details"
+
+#: Template/NotificationContents/index.ctp:21
+msgid "lists.edit"
+msgstr "bearbeiten"

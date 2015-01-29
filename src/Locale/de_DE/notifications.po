@@ -1,0 +1,63 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-01-29 16:02+0100\n"
+"PO-Revision-Date: 2015-01-29 16:06+0100\n"
+"Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
+"Language-Team:  <EMAIL@ADDRESS>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.4\n"
+
+#: Model/Table/NotificationQueueTable.php:93
+msgid "create_notification.invalid_identifier"
+msgstr "Ungültige Bezeichnung"
+
+#: Template/NotificationContents/edit.ctp:5
+msgid "notification_contents.form"
+msgstr "Formular"
+
+#: Template/NotificationContents/edit.ctp:8
+#: Template/NotificationContents/index.ctp:7
+#: Template/NotificationContents/view.ctp:7
+msgid "notification_content.notification_identifier"
+msgstr "Benachrichtigungskennung"
+
+#: Template/NotificationContents/edit.ctp:11
+#: Template/NotificationContents/view.ctp:10
+msgid "notification_content.notes"
+msgstr "Notizen"
+
+#: Template/NotificationContents/index.ctp:2
+msgid "notification contents.headline"
+msgstr "Benachrichtigungsinhalte"
+
+#: Template/NotificationContents/index.ctp:34
+msgid "notification_contents.add"
+msgstr "hinzufügen"
+
+#: Template/NotificationContents/view.ctp:1
+msgid "notification_contents.view"
+msgstr "Details"
+
+#: Template/NotificationContents/view.ctp:4
+msgid "notification_content.id"
+msgstr "Kennung"
+
+#: Template/NotificationContents/view.ctp:13
+msgid "notification_content.created"
+msgstr "erstellt"
+
+#: Template/NotificationContents/view.ctp:16
+msgid "notification_content.modified"
+msgstr "geändert"
+
+#: Template/NotificationContents/view.ctp:24
+msgid "notification_contents.edit"
+msgstr "bearbeiten"
