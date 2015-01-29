@@ -289,7 +289,7 @@ class NotificationQueuesTableTest extends TestCase {
 		$content = $this->_createNotificationContent($identifier);
 
 		
-		$testAttachmentPath = TMP . '/tests/test_attachment.txt';
+		$testAttachmentPath = ROOT . 'tmp/tests/test_attachment.txt';
 		file_put_contents($testAttachmentPath, 'foobar');
 		$testAttachmentName = 'my_attachment.txt';
 
