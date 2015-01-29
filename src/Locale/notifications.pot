@@ -1,0 +1,63 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-01-22 16:08+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Model/Table/NotificationQueueTable.php:93
+msgid "create_notification.invalid_identifier"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/edit.ctp:5
+msgid "notification_contents.form"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/edit.ctp:8
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/index.ctp:7
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/view.ctp:7
+msgid "notification_content.notification_identifier"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/edit.ctp:11
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/view.ctp:10
+msgid "notification_content.notes"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/index.ctp:2
+msgid "notification contents.headline"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/index.ctp:34
+msgid "notification_contents.add"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/view.ctp:1
+msgid "notification_contents.view"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/view.ctp:4
+msgid "notification_content.id"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/view.ctp:13
+msgid "notification_content.created"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/view.ctp:16
+msgid "notification_content.modified"
+msgstr ""
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend/Notifications/Template/NotificationContents/view.ctp:24
+msgid "notification_contents.edit"
+msgstr ""
+
