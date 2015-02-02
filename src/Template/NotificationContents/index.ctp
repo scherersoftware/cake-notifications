@@ -25,13 +25,11 @@
 	</tbody>
 </table>
 
-<p><?= $this->Paginator->counter() ?></p>
-<?= $this->Bootstrap->pagination() ?>
+<?= $this->Paginator->numbers() ?>
 
 <div class="actions">
 	<h3><?= __('lists.actions') ?></h3>
 	<ul>
 		<li><?= $this->Html->link(__d('notifications', 'notification_contents.add'), ['action' => 'add']) ?></li>
-
 	</ul>
 </div>
