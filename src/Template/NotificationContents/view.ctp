@@ -1,3 +1,6 @@
+<?php
+$this->assign('title', __d('notifications', 'notification contents.headline') . ' - ' . __d('notifications', 'notification_contents.view'));
+?>
 <h2><?= __d('notifications', 'notification_contents.view') ?></h2>
 
 <dl class="dl-horizontal">

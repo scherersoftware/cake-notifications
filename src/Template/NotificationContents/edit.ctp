@@ -1,4 +1,7 @@
-<?php $this->set('loadCkEditor', true) ?>
+<?php 
+    $this->set('loadCkEditor', true);
+    $this->assign('title', __d('notifications', 'notification contents.headline') . ' - ' . (($this->request->action === 'add') ? __d('notifications', 'notification_contents.add') : __d('notifications', 'notification_contents.edit')));
+?>
 
 <?= $this->Form->create($notificationContent, ['horizontal' => true]) ?>
 	<fieldset>
@@ -37,7 +40,7 @@
 		
 	</fieldset>
 	
-<?= $this->Form->formActions() ?>
+<?= $this->Form->submit() ?>
 
 
 <div class="actions">

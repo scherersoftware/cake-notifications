@@ -1,3 +1,6 @@
+<?php
+    $this->assign('title', __d('notifications', 'notification contents.headline'));
+?>
 <h2 class="page-header">
 	<?= __d('notifications', 'notification contents.headline') ?>
 </h2>
