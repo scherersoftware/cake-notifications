@@ -44,4 +44,4 @@
 	
 	</fieldset>
 
-<?= $this->Form->submit() ?>
+<?= $this->Form->button(__('forms.save'), ['class' => 'btn-success']) ?>
