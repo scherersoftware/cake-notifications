@@ -19,9 +19,8 @@ class NotificationContentsController extends AppController {
  */
 	public function beforeFilter(\Cake\Event\Event $event) {
 		$this->loadModel('Notifications.NotificationContents');
-        $defaultLanguage = Configure::read('Notifications.default_language');
-        if(isset($defaultLanguage)) {
-    		$this->NotificationContents->locale($defaultLanguage);
+        if (Configure::check('Notifications.default_language')) {
+    		$this->NotificationContents->locale(Configure::read('Notifications.default_language'));
         } else {
     		$this->NotificationContents->locale('eng');
         }
