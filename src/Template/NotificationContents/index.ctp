@@ -3,6 +3,9 @@
 ?>
 <h2 class="page-header">
 	<?= __d('notifications', 'notification contents.headline') ?>
+    <div class="pull-right">
+        <?= $this->Html->link('<i class="fa fa-plus fa-fw"></i><span class="button-text">' . __d('notifications', 'notification_contents.add') . '</span>', ['action' => 'add'], ['class' => 'btn btn-xs btn-success add-button', 'escape' => false]) ?>
+    </div>
 </h2>
 <table class="table table-striped table-bordered">
 	<thead>
@@ -19,20 +22,13 @@
 			<td><?= h($notificationContent->notification_identifier) ?></td>
 			<td><?= h($notificationContent->created) ?></td>
 			<td><?= h($notificationContent->modified) ?></td>
-			<td class="actions">
-				<?= $this->Html->link(__('lists.view'), ['action' => 'view', $notificationContent->id]) ?>
-				<?= $this->Html->link(__('lists.edit'), ['action' => 'edit', $notificationContent->id]) ?>
-			</td>
+            <td class="actions">
+                <?= $this->Html->link('<span class="glyphicon glyphicon-zoom-in"></span><span class="sr-only">Details</span>', ['action' => 'view', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.view')]) ?>
+                <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span><span class="sr-only">Bearbeiten</span>', ['action' => 'edit', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.edit')]) ?>
+            </td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>
 
 <?= $this->Paginator->numbers() ?>
-
-<div class="actions">
-	<h3><?= __('lists.actions') ?></h3>
-	<ul>
-		<li><?= $this->Html->link(__d('notifications', 'notification_contents.add'), ['action' => 'add']) ?></li>
-	</ul>
-</div>

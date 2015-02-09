@@ -51,8 +51,9 @@ class NotificationContentsController extends AppController {
  * @return void
  */
 	public function add() {
-		$notificationContent = $this->NotificationContents->newEntity($this->request->data);
+		$notificationContent = $this->NotificationContents->newEntity();
 		if ($this->request->is('post')) {
+            $this->NotificationContents->patchEntity($notificationContent, $this->request->data);
 			if ($this->NotificationContents->save($notificationContent)) {
 				$this->Flash->success(__('crud.save_successful'));
 				return $this->redirect(['action' => 'index']);

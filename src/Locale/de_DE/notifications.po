@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2015-01-29 16:02+0100\n"
-"PO-Revision-Date: 2015-01-29 16:06+0100\n"
+"PO-Revision-Date: 2015-02-09 10:18+0100\n"
 "Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
 "Language-Team:  <EMAIL@ADDRESS>\n"
 "Language: de_DE\n"
@@ -27,7 +27,7 @@ msgstr "Formular"
 #: Template/NotificationContents/index.ctp:7
 #: Template/NotificationContents/view.ctp:7
 msgid "notification_content.notification_identifier"
-msgstr "Benachrichtigungskennung"
+msgstr "Kennung"
 
 #: Template/NotificationContents/edit.ctp:11
 #: Template/NotificationContents/view.ctp:10
@@ -48,7 +48,7 @@ msgstr "Details"
 
 #: Template/NotificationContents/view.ctp:4
 msgid "notification_content.id"
-msgstr "Kennung"
+msgstr "ID"
 
 #: Template/NotificationContents/view.ctp:13
 msgid "notification_content.created"
