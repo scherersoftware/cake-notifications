@@ -22,6 +22,7 @@ class Notification extends Entity {
 		'locked' => true,
 		'sent' => true,
 		'send_tries' => true,
+		'send_after' => true,
 		'debug' => true,
 		'recipient_user' => true,
 		'created' => true
