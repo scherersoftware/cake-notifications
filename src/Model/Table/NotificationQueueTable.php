@@ -2,6 +2,7 @@
 namespace Notifications\Model\Table;
 
 use Cake\Core\Configure;
+use Cake\I18n\Time;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
@@ -144,7 +145,11 @@ class NotificationQueueTable extends Table {
 		$query->where([
 			'locked' => false,
 			'send_tries <' => $this->getMaxSendTries(),
-			'sent' => false
+			'sent' => false,
+			'OR' => [
+				'send_after IS' => null,
+				'send_after <=' => Time::now()
+			]
 		]);
 		$query->order(['created' => 'ASC']);
 		$query->limit($size);
