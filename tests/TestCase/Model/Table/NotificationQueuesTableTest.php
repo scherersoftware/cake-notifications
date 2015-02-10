@@ -232,6 +232,14 @@ class NotificationQueuesTableTest extends TestCase {
 		$this->assertEquals(count($batch3), 1);
 
 		$this->assertEquals($batch3[0]->id, $firstNotification->id);
+
+		// notification to be sent in the future shouldn't be in the batch
+		$data['send_after'] = Time::parse('+2 hours');
+		$notification3 = $this->NotificationQueue->createNotification($identifier, $data);
+		$this->NotificationQueue->save($notification3);
+		$batch4 = $this->NotificationQueue->getBatch();
+		$this->assertTrue(is_array($batch4));
+		$this->assertEquals(count($batch3), count($batch4));
 	}
 
 	public function testRenderNotification() {

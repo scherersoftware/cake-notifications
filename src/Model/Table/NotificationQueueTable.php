@@ -86,6 +86,7 @@ class NotificationQueueTable extends Table {
 			'locked' => false,
 			'send_tries' => 0,
 			'sent' => 0,
+			'send_after' => null,
 			'notification_identifier' => $identifier
 		], $data);
 
