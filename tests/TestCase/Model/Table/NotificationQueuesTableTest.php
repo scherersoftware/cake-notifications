@@ -239,7 +239,7 @@ class NotificationQueuesTableTest extends TestCase {
 		$this->NotificationQueue->save($notification3);
 		$batch4 = $this->NotificationQueue->getBatch();
 		$this->assertTrue(is_array($batch4));
-		$this->assertEquals(count($batch3), count($batch4));
+		$this->assertEmpty(count($batch4));
 	}
 
 	public function testRenderNotification() {
