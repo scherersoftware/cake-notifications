@@ -3,7 +3,6 @@
     "description": "CakePHP3 Notifications Plugin",
     "license": "MIT",
     "type": "cakephp-plugin",
-    "version": "1.0.0",
     "extra": {
         "installer-name": "Notifications"
     },
