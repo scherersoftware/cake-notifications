@@ -16,6 +16,7 @@ CREATE TABLE `notification_queue` (
   `transport` varchar(45) NOT NULL,
   `locked` tinyint(1) DEFAULT NULL,
   `sent` tinyint(1) DEFAULT NULL,
+  `send_after` datetime DEFAULT NULL,
   `send_tries` int(2) unsigned NOT NULL DEFAULT '0',
   `debug` mediumtext,
   `created` datetime DEFAULT NULL,
