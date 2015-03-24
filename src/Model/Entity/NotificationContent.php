@@ -2,7 +2,7 @@
 namespace Notifications\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\Utility\String;
+use Cake\Utility\Text;
 
 /**
  * NotificationContent Entity.
@@ -32,7 +32,7 @@ class NotificationContent extends Entity {
  * @return string
  */
 	public function render($field, Notification $notification) {
-		return String::insert($this->get($field), $notification->config, [
+		return Text::insert($this->get($field), $notification->config, [
 			'before' => '{{',
 			'after' => '}}',
 		]);
