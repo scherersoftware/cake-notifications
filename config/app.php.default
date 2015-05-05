@@ -7,6 +7,13 @@ $config = [
 				'rest_key' => '',
 				'master_key' => '',
 			]
+		],
+		'email' => [
+			'profile' => 'default',
+			'emailTransport' => 'default',
+			'templated' => false,
+			'template' => 'default',
+			'layout' => 'default'
 		]
 	]
 ];

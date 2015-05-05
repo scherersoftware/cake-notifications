@@ -2,19 +2,27 @@
 namespace Notifications\Transport;
 
 use App\Model\Entity\User;
+use Cake\Core\Configure;
 use Cake\Network\Email\Email;
+use Cake\Utility\Hash;
 use Notifications\Model\Entity\Notification;
 use Notifications\Model\Entity\NotificationContent;
 
 class EmailTransport extends Transport {
 
 /**
- * @var array
+ * Creates a Transport instance
+ *
+ * @param array $config transport-specific configuration options
  */
-	protected $_config = [
-		'profile' => 'default',
-		'emailTransport' => 'default'
-	];
+	public function __construct(array $config) {
+		$config = Hash::merge(Configure::read('Notifications.transports.email'), $config);
+		$config	= Hash::merge([
+			'profile' => 'default',
+			'emailTransport' => 'default'
+		], $config);
+		parent::__construct($config);
+	}
 
 /**
  * Abstract sender method
@@ -28,7 +36,6 @@ class EmailTransport extends Transport {
 		$subject = $content->render('email_subject', $notification);
 		$htmlBody = $content->render('email_html', $notification);
 		$textBody = $content->render('email_text', $notification);
-
 		$email = new Email($this->_config['profile']);
 		$email->transport($this->_config['emailTransport']);
 		$email->emailFormat('html');
@@ -39,6 +46,12 @@ class EmailTransport extends Transport {
 
 		$email->to([ $user->email => $user->firstname . ' ' . $user->lastname ]);
 		$email->subject($subject);
+
+		if (!empty($this->_config['templated']) && !empty($this->_config['template']) && !empty($this->_config['layout'])) {
+			$email->template($this->_config['template'], $this->_config['layout']);
+			$email->viewVars(['content' => $htmlBody]);
+			return $email->send();
+		}
 		return $email->send($htmlBody);
 	}
 }
