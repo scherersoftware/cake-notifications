@@ -283,9 +283,10 @@ class NotificationQueuesTableTest extends TestCase {
 
 		$emailTransport = new \Cake\Network\Email\DebugTransport();
 		$res = $this->NotificationQueue->send($notification, [
-			'emailTransport' => $emailTransport
+			'emailTransport' => $emailTransport,
+			'templated' => false
 		]);
-		
+
 		$this->assertTrue(is_array($res));
 		$this->assertContains('<' . $user->email . '>', $res['headers']);
 		$this->assertContains('Subject: Test Subject with PL1', $res['headers']);
