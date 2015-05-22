@@ -34,13 +34,34 @@ class NotificationContentFixture extends TestFixture {
  * @var array
  */
 	public $records = [
-		[
-			'id' => '132c28a1-cada-45d7-8a86-37b6711df5f1',
-			'notification_identifier' => 'supplier_invitation',
-			'notes' => '- {{supplier.firstname}}\r\n- {{supplier.lastname}}\r\n- {{activateAccountUrl}}',
-			'created' => '2014-10-17 15:45:14',
-			'modified' => '2014-10-17 15:46:14',
-		]
+        [
+            'id' => 1,
+            'notification_identifier' => 'offer_sent',
+            'notes' => 'Angebot wurde an den Kunden zur Freigabe geschickt. ',
+            'created' =>'2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
+        [
+            'id' => 2,
+            'notification_identifier' => 'offer_declined',
+            'notes' => 'Angebot wurde vom Kunden abgelehnt.',
+            'created' => '2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
+        [
+            'id' => 3,
+            'notification_identifier' => 'offer_accepted',
+            'notes' => 'Angebot wurde vom Kunden angenommen. ',
+            'created' => '2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
+        [
+            'id' => 4,
+            'notification_identifier' => 'offer_status_change',
+            'notes' => 'Status des Angebotes wurde geändert.',
+            'created' => '2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
 	];
 
 }

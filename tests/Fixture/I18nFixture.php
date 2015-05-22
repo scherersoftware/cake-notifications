@@ -53,7 +53,86 @@ class I18nFixture extends TestFixture {
  * @var array
  */
 	public $records = [
-
+        [
+            'id' => 1,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 1,
+            'field' => 'email_html',
+            'content' => 'Das Angebot mit der Nummer {{order.order_number}} wurde an den Kunden zur Freigabe geschickt.'
+        ],
+        [
+            'id' => 2,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 2,
+            'field' => 'email_html',
+            'content' => 'Das Angebot mit der Nummer {{order.order_number}} wurde vom Kunden abgelehnt.'
+        ],
+        [
+            'id' => 3,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 3,
+            'field' => 'email_html',
+            'content' => 'Das Angebot mit der Nummer {{order.order_number}} wurde vom Kunden angenommen.'
+        ],
+        [
+            'id' => 4,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 4,
+            'field' => 'email_html',
+            'content' => 'Das Angebot mit der Nummer {{order.order_number}} wurde auf den Status {{orders.status}} geändert.'
+        ],
+        [
+            'id' => 9,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 1,
+            'field' => 'subject',
+            'content' => 'Angebot zur Freigabe verschickt'
+        ],
+        [
+            'id' => 10,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 2,
+            'field' => 'subject',
+            'content' => 'Angebot abgelehnt'
+        ],
+        [
+            'id' => 11,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 3,
+            'field' => 'subject',
+            'content' => 'Angebot angenommen'
+        ],
+        [
+            'id' => 12,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 4,
+            'field' => 'subject',
+            'content' => 'Angebot Status geändert'
+        ],
+        [
+            'id' => 13,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 1,
+            'field' => 'email_text',
+            'content' => 'Das Angebot mit der Nummer {{order.order_number}} wurde an den Kunden zur Freigabe geschickt.'
+        ],
+        [
+            'id' => 14,
+            'locale' => 'de_DE',
+            'model' => 'NotificationContents',
+            'foreign_key' => 2,
+            'field' => 'email_text',
+            'content' => 'Das Angebot mit der Nummer {{order.order_number}} wurde vom Kunden abgelehnt.'
+        ],
 	];
 
 }
