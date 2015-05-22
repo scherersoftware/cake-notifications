@@ -2,5 +2,5 @@
 use Cake\Routing\Router;
 
 Router::plugin('Notifications', function ($routes) {
-	$routes->fallbacks('InflectedRoute');
+	$routes->fallbacks('DashedRoute');
 });

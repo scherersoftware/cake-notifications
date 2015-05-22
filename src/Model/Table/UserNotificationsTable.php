@@ -61,7 +61,7 @@ class UserNotificationsTable extends Table
         return $validator;
     }
 
-    public function createNotification($identifier, array $data, bool $asEmail = false) {
+    public function createNotification($identifier, array $data, $asEmail = false) {
         $data = Hash::merge([
             'locale' => Configure::read('locale'),
             'recipient_user_id' => [],
@@ -93,15 +93,17 @@ class UserNotificationsTable extends Table
     }
 
 
-    public function getNotificationsForUser($userId, $unreadOnly = false)
+    public function getNotificationsForUser($userId, $unreadOnly = false, $countOnly = false)
     {
         $query = $this->find()
             ->where(['UserNotifications.recipient_user_id' => $userId]);
-
         if ($unreadOnly) {
             $query->where(['UserNotifications.read' => false]);
         }
 
+        if ($countOnly) {
+            return $query->count();
+        }
         return $query->toArray();
     }
 

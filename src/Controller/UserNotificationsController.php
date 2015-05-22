@@ -9,5 +9,11 @@ use Notifications\Controller\AppController;
  */
 class UserNotificationsController extends AppController
 {
-
+    public function renderUserNotificationBox()
+    {
+        $userId = $this->Auth->user('id');
+        $unreadNotifications = $this->UserNotifications->getNotificationsForUser($userId, true);
+        $this->set(compact('unreadNotifications'));
+        $this->layout = false;
+    }
 }
