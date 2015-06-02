@@ -57,7 +57,7 @@ class I18nFixture extends TestFixture {
             "id" => 1,
             "locale" => "de",
             "model" => "NotificationContents",
-            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "foreign_key" => "fe700a46-240b-4d19-8dab-0ac5dd321525",
             "field" => "email_subject",
             "content" => "Angebot veröffentlicht"
         ],
@@ -65,7 +65,7 @@ class I18nFixture extends TestFixture {
             "id" => 2,
             "locale" => "de",
             "model" => "NotificationContents",
-            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "foreign_key" => "fe700a46-240b-4d19-8dab-0ac5dd321525",
             "field" => "email_html",
             "content" => "Das Angebot {{offer.offer_number}} für Projekt {{project.project_number}} in der {{project.address}} wurde soeben abgegeben."
         ],
@@ -73,7 +73,7 @@ class I18nFixture extends TestFixture {
             "id" => 3,
             "locale" => "de",
             "model" => "NotificationContents",
-            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "foreign_key" => "fe700a46-240b-4d19-8dab-0ac5dd321525",
             "field" => "push_message",
             "content" => "Test Body {{placeholder1}}"
         ],
@@ -81,7 +81,7 @@ class I18nFixture extends TestFixture {
             "id" => 4,
             "locale" => "de",
             "model" => "NotificationContents",
-            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "foreign_key" => "fe700a46-240b-4d19-8dab-0ac5dd321525",
             "field" => "sms_message",
             "content" => "Test Body {{placeholder1}}"
         ],
