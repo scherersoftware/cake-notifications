@@ -21,7 +21,7 @@ class NotificationContent extends Entity {
 		'email_html' => true,
 		'email_text' => true,
 		'push_message' => true,
-		'sms_message' => true
+		'sms_message' => true,
 	];
 
 /**

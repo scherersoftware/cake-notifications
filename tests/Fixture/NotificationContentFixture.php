@@ -36,11 +36,11 @@ class NotificationContentFixture extends TestFixture {
 	public $records = [
 		[
 			'id' => '132c28a1-cada-45d7-8a86-37b6711df5f1',
-			'notification_identifier' => 'supplier_invitation',
-			'notes' => '- {{supplier.firstname}}\r\n- {{supplier.lastname}}\r\n- {{activateAccountUrl}}',
+			'notification_identifier' => 'offer_sent',
+			'notes' => '',
 			'created' => '2014-10-17 15:45:14',
 			'modified' => '2014-10-17 15:46:14',
-		]
+		],
 	];
 
 }

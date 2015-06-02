@@ -53,7 +53,46 @@ class I18nFixture extends TestFixture {
  * @var array
  */
 	public $records = [
-
+        [
+            "id" => 1,
+            "locale" => "de",
+            "model" => "NotificationContents",
+            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "field" => "email_subject",
+            "content" => "Angebot veröffentlicht"
+        ],
+        [
+            "id" => 2,
+            "locale" => "de",
+            "model" => "NotificationContents",
+            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "field" => "email_html",
+            "content" => "Das Angebot {{offer.offer_number}} für Projekt {{project.project_number}} in der {{project.address}} wurde soeben abgegeben."
+        ],
+        [
+            "id" => 3,
+            "locale" => "de",
+            "model" => "NotificationContents",
+            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "field" => "push_message",
+            "content" => "Test Body {{placeholder1}}"
+        ],
+        [
+            "id" => 4,
+            "locale" => "de",
+            "model" => "NotificationContents",
+            "foreign_key" => "D665F2EA-0518-11E5-8A9F-64B39330F945",
+            "field" => "sms_message",
+            "content" => "Test Body {{placeholder1}}"
+        ],
+        [
+            "id" => 5,
+            "locale" => "de",
+            "model" => "UserNotificationContents",
+            "foreign_key" => "90cf6a81-b5dd-4131-894b-83979b658494",
+            "field" => "notification",
+            "content" => "Das Angebot {{offer.offer_number}} für Projekt {{project.project_number}} in der {{project.address}} wurde veröffentlicht"
+        ]
 	];
 
 }

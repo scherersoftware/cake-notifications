@@ -32,7 +32,7 @@ CREATE TABLE `user_notifications` (
   `foreign_key` char(36) DEFAULT NULL,
   `notification_identifier` varchar(255) DEFAULT NULL,
   `config` mediumtext NOT NULL,
-  `read` tinyint(1) NOT NULL DEFAULT 0,
+  `seen` tinyint(1) NOT NULL DEFAULT 0,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`))

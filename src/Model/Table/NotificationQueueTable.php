@@ -50,7 +50,7 @@ class NotificationQueueTable extends Table {
 			->allowEmpty('id', 'create')
 			->requirePresence('locale', 'create')
 			->notEmpty('locale')
-			->add('recipient_user_id', 'valid', ['rule' => 'uuid'])
+			// ->add('recipient_user_id', 'valid', ['rule' => 'uuid'])
 			->requirePresence('recipient_user_id', 'create')
 			->notEmpty('recipient_user_id')
 			->allowEmpty('notification_identifier')

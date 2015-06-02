@@ -35,4 +35,29 @@ class UserNotificationHelper extends Helper
      * @var array
      */
     public $helpers = ['Html'];
+
+    public function renderUserNotification($notification)
+    {
+        $string = '<div class="message">';
+        $string .= $this->Html->link($notification->content, [
+            'plugin' => 'Notifications',
+            'controller' => 'UserNotifications',
+            'action' => 'read',
+            $notification->id
+        ], [
+            'class' => 'message-subject'
+        ]);
+        $string .= '<div class="message-description">' . __('from') . ' ';
+        $string .= $this->Html->link($notification->recipient_user->full_name, [
+            'plugin' => false,
+            'controller' => 'users',
+            'action' => 'view',
+            $notification->recipient_user->id
+        ]);
+        $string .= '&nbsp;&nbsp;·&nbsp;&nbsp;';
+        $string .= $notification->created->timeAgoInWords();
+        $string .= '</div></div>';
+
+        return $string;
+    }
 }

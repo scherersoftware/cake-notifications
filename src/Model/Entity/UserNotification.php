@@ -4,7 +4,7 @@ namespace Notifications\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * UserNotification Entity.
+ * UserNotificationQueue Entity.
  */
 class UserNotification extends Entity
 {
@@ -19,18 +19,19 @@ class UserNotification extends Entity
         'recipient_user_id' => true,
         'notification_identifier' => true,
         'config' => true,
+        'seen' => true,
         'model' => true,
         'foreign_key' => true,
-        'read' => true,
         'recipient_user' => true,
+        'created' => true
     ];
 
     /**
-     * Marks the notification as read
+     * Marks the notification as seen
      *
      * @return void
      */
     public function read() {
-        $this->read = true;
+        $this->seen = true;
     }
 }

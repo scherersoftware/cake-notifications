@@ -27,7 +27,7 @@ class NotificationContentsTable extends Table {
 			'email_text',
 			'email_html',
 			'push_message',
-			'sms_message'
+			'sms_message',
 		]]);
 	}
 
