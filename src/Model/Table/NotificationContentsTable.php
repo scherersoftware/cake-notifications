@@ -1,6 +1,7 @@
 <?php
 namespace Notifications\Model\Table;
 
+use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -28,7 +29,9 @@ class NotificationContentsTable extends Table {
 			'email_html',
 			'push_message',
 			'sms_message',
-		]]);
+		],
+            'allowEmptyTranslations' => true
+        ]);
 	}
 
 /**
@@ -85,15 +88,12 @@ class NotificationContentsTable extends Table {
 			$oldLocale = $this->locale();
 			$this->locale($locale);
 		}
-
 		$res = $this->find()->where([
 			'notification_identifier' => $identifier
 		])->first();
-
 		if ($locale) {
 			$this->locale($oldLocale);
 		}
-
 		return $res;
 	}
 }

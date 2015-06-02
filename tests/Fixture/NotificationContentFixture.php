@@ -34,13 +34,34 @@ class NotificationContentFixture extends TestFixture {
  * @var array
  */
 	public $records = [
-		[
-			'id' => '132c28a1-cada-45d7-8a86-37b6711df5f1',
-			'notification_identifier' => 'offer_sent',
-			'notes' => '',
-			'created' => '2014-10-17 15:45:14',
-			'modified' => '2014-10-17 15:46:14',
-		],
+        [
+            'id' => 'fe700a46-240b-4d19-8dab-0ac5dd321525',
+            'notification_identifier' => 'offer_sent',
+            'notes' => 'Angebot wurde an den Kunden zur Freigabe geschickt. ',
+            'created' =>'2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
+        [
+            'id' => '453804d7-6300-466b-885b-b3b314dc46ba',
+            'notification_identifier' => 'offer_declined',
+            'notes' => 'Angebot wurde vom Kunden abgelehnt.',
+            'created' => '2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
+        [
+            'id' => '533955f3-0c51-4c49-93c5-145ff5042a8f',
+            'notification_identifier' => 'offer_accepted',
+            'notes' => 'Angebot wurde vom Kunden angenommen. ',
+            'created' => '2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
+        [
+            'id' => 'a721c70f-619f-4bc3-a83f-33823e71bcd5',
+            'notification_identifier' => 'offer_status_change',
+            'notes' => 'Status des Angebotes wurde geändert.',
+            'created' => '2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
 	];
 
 }

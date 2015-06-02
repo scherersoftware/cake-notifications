@@ -39,7 +39,7 @@ class UserNotificationContentsFixture extends TestFixture
      */
     public $records = [
         [
-            'id' => 'c944357c-090a-11e5-9d8b-9064eb8a2689',
+            'id' => '90cf6a81-b5dd-4131-894b-83979b658494',
             'notification_identifier' => 'offer_sent',
             'notes' => '',
             'created' => '2015-06-02 11:29:58',
