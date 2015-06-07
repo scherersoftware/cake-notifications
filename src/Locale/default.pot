@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-01-29 16:02+0100\n"
+"POT-Creation-Date: 2015-06-07 20:37+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,41 +14,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Controller/NotificationContentsController.php:57;81
+#: Controller/NotificationContentsController.php:63;87
 msgid "crud.save_successful"
 msgstr ""
 
-#: Controller/NotificationContentsController.php:60;84
+#: Controller/NotificationContentsController.php:66;90
 msgid "crud.validation_failed"
 msgstr ""
 
-#: Template/NotificationContents/edit.ctp:44
-msgid "forms.actions"
+#: Template/NotificationContents/edit.ctp:47
+msgid "forms.save"
 msgstr ""
 
-#: Template/NotificationContents/edit.ctp:46
-#: Template/NotificationContents/view.ctp:25
-msgid "lists.back_to_list"
-msgstr ""
-
-#: Template/NotificationContents/index.ctp:8
+#: Template/NotificationContents/index.ctp:14
 msgid "created"
 msgstr ""
 
-#: Template/NotificationContents/index.ctp:9
+#: Template/NotificationContents/index.ctp:15
 msgid "modified"
 msgstr ""
 
-#: Template/NotificationContents/index.ctp:10;32
-#: Template/NotificationContents/view.ctp:22
+#: Template/NotificationContents/index.ctp:16
 msgid "lists.actions"
 msgstr ""
 
-#: Template/NotificationContents/index.ctp:20
+#: Template/NotificationContents/index.ctp:26
 msgid "lists.view"
 msgstr ""
 
-#: Template/NotificationContents/index.ctp:21
+#: Template/NotificationContents/index.ctp:27
 msgid "lists.edit"
+msgstr ""
+
+#: View/Helper/UserNotificationHelper.php:50
+msgid "from"
 msgstr ""
 

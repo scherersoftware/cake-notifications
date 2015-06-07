@@ -3,15 +3,17 @@
 <?php endif; ?>
 
     <?php if (empty($unreadNotifications)) : ?>
-        no message here
+        <?= __d('notifications', 'no_unread_onpage_notifications') ?>
     <?php else : ?>
-        <?php foreach($unreadNotifications as $key => $notification) : ?>
+        <?php foreach($unreadNotifications as $notification) : ?>
             <?php echo $this->UserNotification->renderUserNotification($notification) ?>
         <?php endforeach; ?>
     <?php endif; ?>
 
     <?php if ($moreEntriesAvailable) : ?>
-        <a href="javascript:" data-page="<?php echo ++$page ?>" class="messages-link">MORE MESSAGES</a>
+        <a href="javascript:" data-page="<?php echo ++$page ?>" class="messages-link">
+            <?= __d('notifications', 'load_more_onpage_notifications') ?>
+        </a>
     <?php endif; ?>
 
 <?php if(!$excludeMessageListWrapper) : ?>
