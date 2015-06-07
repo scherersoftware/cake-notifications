@@ -90,8 +90,8 @@ class I18nFixture extends TestFixture {
             "locale" => "de",
             "model" => "UserNotificationContents",
             "foreign_key" => "90cf6a81-b5dd-4131-894b-83979b658494",
-            "field" => "notification",
-            "content" => "Das Angebot {{offer.offer_number}} für Projekt {{project.project_number}} in der {{project.address}} wurde veröffentlicht"
+            "field" => "onpage",
+            "content" => "Ein Angebot für {{object.address}} wurde veröffentlicht."
         ]
 	];
 

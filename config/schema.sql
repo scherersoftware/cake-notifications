@@ -18,22 +18,9 @@ CREATE TABLE `notification_queue` (
   `sent` tinyint(1) DEFAULT NULL,
   `send_after` datetime DEFAULT NULL,
   `send_tries` int(2) unsigned NOT NULL DEFAULT '0',
+  `seen` tinyint(1) NULL DEFAULT NULL,
   `debug` mediumtext,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `user_notifications` (
-  `id` char(36) NOT NULL,
-  `locale` varchar(3) NOT NULL,
-  `recipient_user_id` char(36) NOT NULL,
-  `model` varchar(145) DEFAULT NULL,
-  `foreign_key` char(36) DEFAULT NULL,
-  `notification_identifier` varchar(255) DEFAULT NULL,
-  `config` mediumtext NOT NULL,
-  `seen` tinyint(1) NOT NULL DEFAULT 0,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB DEFAULT CHARSET=utf8;

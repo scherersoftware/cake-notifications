@@ -16,7 +16,7 @@ class UserNotificationsController extends AppController
      */
     public function initialize()
     {
-        $this->loadModel('Notifications.UserNotificationQueue');
+        $this->loadModel('Notifications.NotificationQueue');
     }
 
     /**
@@ -26,11 +26,11 @@ class UserNotificationsController extends AppController
      * @return void
      */
     public function beforeFilter(\Cake\Event\Event $event) {
-        $this->loadModel('Notifications.UserNotificationContents');
+        $this->loadModel('Notifications.NotificationContents');
         if (Configure::check('Notifications.default_language')) {
-            $this->UserNotificationContents->locale(Configure::read('Notifications.default_language'));
+            $this->NotificationContents->locale(Configure::read('Notifications.default_language'));
         } else {
-            $this->UserNotificationContents->locale('eng');
+            $this->NotificationContents->locale('eng');
         }
         parent::beforeFilter($event);
     }
@@ -44,7 +44,7 @@ class UserNotificationsController extends AppController
     public function renderUserNotificationBox($page = 1)
     {
         $userId = $this->Auth->user('id');
-        $unreadNotifications = $this->UserNotificationQueue->getNotificationsForUser($userId, true, false, 5, $page);
+        $unreadNotifications = $this->NotificationQueue->getOnpageNotificationsForUser($userId, true, false, 5, $page);
         $moreEntriesAvailable = $unreadNotifications['moreEntriesAvailable'];
         // unset so it doesn't disturb the foreach over all notifications in the element
         unset($unreadNotifications['moreEntriesAvailable']);
@@ -64,12 +64,12 @@ class UserNotificationsController extends AppController
      */
     public function read($id = null)
     {
-        $notification = $this->UserNotificationQueue->get($id);
+        $notification = $this->NotificationQueue->get($id);
         if (empty($notification)) {
             // bad
         }
 
-        if ($this->UserNotificationQueue->read($id)) {
+        if ($this->NotificationQueue->read($id)) {
             if (!empty($notification->config['link'])) {
                 $this->redirect($notification->config['link']);
             } else {

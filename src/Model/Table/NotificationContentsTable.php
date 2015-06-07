@@ -29,6 +29,7 @@ class NotificationContentsTable extends Table {
 			'email_html',
 			'push_message',
 			'sms_message',
+            'onpage'
 		],
             'allowEmptyTranslations' => true
         ]);
