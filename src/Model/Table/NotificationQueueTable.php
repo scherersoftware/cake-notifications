@@ -282,7 +282,7 @@ class NotificationQueueTable extends Table
      * @param  string $identifier the notification identifier
      * @param  array  $data       view vars and configuration
      * @param  bool   $asEmail    whether to send an email additionally
-     * @return Notification
+     * @return mixed false on failure, the Notification entity on success
      */
     public function createOnpageNotification($identifier, array $data, $asEmail = false) {
         $data = Hash::merge([
@@ -308,8 +308,7 @@ class NotificationQueueTable extends Table
 
         $userNotification = $this->newEntity($data);
         if (!$this->save($userNotification)) {
-            // TODO
-            debug($userNotification);exit;
+            return false;
         }
 
         if ($asEmail) {
@@ -435,7 +434,7 @@ class NotificationQueueTable extends Table
     {
         $notification = $this->get($id);
         if ($notification->transport !== 'onpage') {
-            // TODO
+            return false;
         }
         $notification->read();
         return $this->save($notification) !== false;

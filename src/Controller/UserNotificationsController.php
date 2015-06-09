@@ -66,15 +66,17 @@ class UserNotificationsController extends AppController
     {
         $notification = $this->NotificationQueue->get($id);
         if (empty($notification)) {
-            // bad
+            $this->Flash->set(__d('notifications', 'error'));
+            return $this->redirect($this->referer());
         }
 
         if ($this->NotificationQueue->read($id)) {
             if (!empty($notification->config['link'])) {
                 $this->redirect($notification->config['link']);
-            } else {
-                // what now?
             }
+        } else {
+            $this->Flash->error(__d('notifications', 'error'));
         }
+        return $this->redirect($this->referer());
     }
 }

@@ -47,14 +47,13 @@ class UserNotificationHelper extends Helper
         ], [
             'class' => 'message-subject'
         ]);
-        $string .= '<div class="message-description">' . __('from') . ' ';
-        $string .= $this->Html->link($notification->recipient_user->full_name, [
-            'plugin' => false,
-            'controller' => 'users',
-            'action' => 'view',
-            $notification->recipient_user->id
-        ]);
-        $string .= '&nbsp;&nbsp;·&nbsp;&nbsp;';
+        $string .= '<div class="message-description">';
+
+        if (!empty($notification->config['responsible_user.full_name'])) {
+            $string .= __d('notifications', 'from') . ' ' . $notification->config['responsible_user.full_name'];
+            $string .= '&nbsp;&nbsp;·&nbsp;&nbsp;';
+        }
+
         $string .= $notification->created->timeAgoInWords();
         $string .= '</div></div>';
 
