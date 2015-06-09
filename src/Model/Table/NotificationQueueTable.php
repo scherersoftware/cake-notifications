@@ -439,4 +439,19 @@ class NotificationQueueTable extends Table
         $notification->read();
         return $this->save($notification) !== false;
     }
+    
+    /**
+     * returns notifcation with transport = 'onpage' AND seen = 0
+     *
+     * @return void
+     */
+    public function getUnreadOnpageNotifications()
+    {
+        return $this->find()
+            ->where([
+                'transport' => 'onpage',
+                'seen' => 0
+            ])
+            ->toArray();
+    }
 }
