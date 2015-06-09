@@ -293,7 +293,7 @@ class NotificationQueueTable extends Table
             'transport' => 'onpage',
             'locked' => false,
             'send_tries' => 0,
-            'sent' => 0,
+            'sent' => 1,
             'send_after' => null,
             'notification_identifier' => $identifier
         ], $data);
@@ -439,7 +439,7 @@ class NotificationQueueTable extends Table
         $notification->read();
         return $this->save($notification) !== false;
     }
-    
+
     /**
      * returns notifcation with transport = 'onpage' AND seen = 0
      *
