@@ -3,7 +3,9 @@
 <?php endif; ?>
 
     <?php if (empty($unreadNotifications)) : ?>
-        <?= __d('notifications', 'no_unread_onpage_notifications') ?>
+        <div class="no-messages">
+            <?= __d('notifications', 'no_unread_onpage_notifications') ?>
+        </div>
     <?php else : ?>
         <?php foreach($unreadNotifications as $notification) : ?>
             <?php echo $this->UserNotification->renderUserNotification($notification) ?>
