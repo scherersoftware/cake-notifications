@@ -1,6 +1,7 @@
 <?php
 namespace Notifications\Controller;
 
+use App\Model\Entity\User;
 use Cake\Core\Configure;
 use Notifications\Controller\AppController;
 
@@ -71,8 +72,23 @@ class UserNotificationsController extends AppController
         }
 
         if ($this->NotificationQueue->read($id)) {
+            // TODO actually business logic and out of place in this plugin
+            // TODO actually should be hasUserRight('viewCompleteProject') but AuthComponent has no
+            // access to userrights right now, so:
+            // if not a internal employee redirect to normal view of the linked entity, not
+            // the deep link, which normal users don't have access to
+            if (!in_array($this->Auth->user('role'), [User::ROLE_ADMIN, User::ROLE_USER])
+                && !empty($notification->config['model'])
+                && !empty($notification->config['foreign_key'])) {
+                return $this->redirect([
+                    'plugin' => false,
+                    'controller' => $notification->config['model'],
+                    'action' => 'view',
+                    $notification->config['foreign_key']
+                ]);
+            }
             if (!empty($notification->config['link'])) {
-                $this->redirect($notification->config['link']);
+                return $this->redirect($notification->config['link']);
             }
         } else {
             $this->Flash->error(__d('notifications', 'error'));
