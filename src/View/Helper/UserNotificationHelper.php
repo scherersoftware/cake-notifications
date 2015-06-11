@@ -2,7 +2,7 @@
 namespace Notifications\View\Helper;
 
 // use Cake\Collection\Collection;
-// use Cake\Core\Configure;
+use Cake\Core\Configure;
 // use Cake\Core\Exception\Exception;
 // use Cake\Form\Form;
 // use Cake\ORM\Entity;
@@ -34,19 +34,30 @@ class UserNotificationHelper extends Helper
      *
      * @var array
      */
-    public $helpers = ['Html'];
+    public $helpers = ['Html', 'Auth'];
 
     public function renderUserNotification($notification)
     {
+        $checkUrl = [
+            'plugin' => false,
+            'controller' => $notification->config['model'],
+            'action' => 'view',
+            $notification->config['foreign_key']
+        ];
+        
         $string = '<div class="message">';
-        $string .= $this->Html->link($notification->content, [
-            'plugin' => 'Notifications',
-            'controller' => 'UserNotifications',
-            'action' => 'read',
-            $notification->id
-        ], [
-            'class' => 'message-subject'
-        ]);
+        if (Configure::read('Notifications.checkAuthenticationForLinks') && $this->Auth->urlAllowed($checkUrl)) {
+            $string .= $this->Html->link($notification->content, [
+                'plugin' => 'Notifications',
+                'controller' => 'UserNotifications',
+                'action' => 'read',
+                $notification->id
+            ], [
+                'class' => 'message-subject'
+            ]);
+        } else {
+            $string .= '<div class="message-subject">' . $notification->content . "</div>";
+        }
         $string .= '<div class="message-description">';
 
         if (!empty($notification->config['responsible_user.full_name'])) {
