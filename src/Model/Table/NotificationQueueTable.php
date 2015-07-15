@@ -292,6 +292,7 @@ class NotificationQueueTable extends Table
             'locale' => Configure::read('locale'),
             'recipient_user_id' => [],
             'config' => [],
+            'transport_config' => [],
             'seen' => 0,
             'transport' => 'onpage',
             'locked' => false,
@@ -322,6 +323,7 @@ class NotificationQueueTable extends Table
                         'recipient_user_id' => $recipientUserId,
                         'transport' => 'email',
                         'config' => $data['config'],
+                        'transport_config' => $data['transport_config'],
                     ];
                     $this->createNotification($identifier, $emailData, true);
                 }
@@ -330,6 +332,7 @@ class NotificationQueueTable extends Table
                     'recipient_user_id' => $data['recipient_user_id'],
                     'transport' => 'email',
                     'config' => $data['config'],
+                    'transport_config' => $data['transport_config'],
                 ];
                 $this->createNotification($identifier, $emailData, true);
             }

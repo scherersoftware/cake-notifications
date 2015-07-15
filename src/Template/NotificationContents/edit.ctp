@@ -70,4 +70,15 @@
 
     <?php endif; ?>
 
+    <?php if (isset($transports['onpage'])): ?>
+
+        <fieldset>
+            <legend>OnPage Message Transport</legend>
+
+            <?php echo $this->Form->input('onpage') ?>
+
+        </fieldset>
+
+    <?php endif; ?>
+
 <?= $this->Form->button(__('forms.save'), ['class' => 'btn-success']) ?>

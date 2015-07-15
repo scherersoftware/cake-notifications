@@ -15,12 +15,12 @@ $config = [
 				'layout' => 'default'
 			],
 			'hipchat' => [
-				'show' => true,
                 'api_key' => '',
                 'endpoint' => 'https://api.hipchat.com',
 				'defaultRoom' => 'codekanzlei',
 				'defaultSentFrom' => 'Büro'
-			]
+			],
+			'onpage' => []
 		]
 	]
 ];
