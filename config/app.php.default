@@ -6,6 +6,14 @@ $config = [
 				'app_id' => '',
 				'rest_key' => '',
 				'master_key' => '',
+			],
+			'email' => [
+				'profile' => 'default',
+				'emailTransport' => 'default',
+				'templated' => false,
+				'template' => 'default',
+				'layout' => 'default'
+			],
 			'hipchat' => [
 				'show' => true,
                 'api_key' => '',
@@ -13,13 +21,6 @@ $config = [
 				'defaultRoom' => 'codekanzlei',
 				'defaultSentFrom' => 'Büro'
 			]
-		],
-		'email' => [
-			'profile' => 'default',
-			'emailTransport' => 'default',
-			'templated' => false,
-			'template' => 'default',
-			'layout' => 'default'
 		]
 	]
 ];
