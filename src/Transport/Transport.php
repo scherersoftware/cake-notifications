@@ -45,6 +45,7 @@ abstract class Transport {
 			'email' => 'Notifications\Transport\EmailTransport',
 			'push_message' => 'Notifications\Transport\PushMessageTransport',
 			'sms' => 'Notifications\Transport\SmsTransport',
+			'hipchat' => 'Notifications\Transport\HipChatTransport'
 		];
 		if (!isset($map[$type])) {
 			throw new \InvalidArgumentException("{$type} is not a valid transport");

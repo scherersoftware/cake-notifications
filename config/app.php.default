@@ -6,6 +6,12 @@ $config = [
 				'app_id' => '',
 				'rest_key' => '',
 				'master_key' => '',
+			'hipchat' => [
+				'show' => true,
+                'api_key' => '',
+                'endpoint' => 'https://api.hipchat.com',
+				'defaultRoom' => 'codekanzlei',
+				'defaultSentFrom' => 'Büro'
 			]
 		],
 		'email' => [
