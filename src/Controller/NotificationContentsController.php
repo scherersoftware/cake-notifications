@@ -17,24 +17,24 @@ class NotificationContentsController extends AppController {
  * @param Event $event event
  * @return void
  */
-	public function beforeFilter(\Cake\Event\Event $event) {
-		$this->loadModel('Notifications.NotificationContents');
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->loadModel('Notifications.NotificationContents');
         if (Configure::check('Notifications.default_language')) {
-    		$this->NotificationContents->locale(Configure::read('Notifications.default_language'));
+            $this->NotificationContents->locale(Configure::read('Notifications.default_language'));
         } else {
-    		$this->NotificationContents->locale('eng');
+            $this->NotificationContents->locale('eng');
         }
-		parent::beforeFilter($event);
-	}
+        parent::beforeFilter($event);
+    }
 
 /**
  * Index method
  *
  * @return void
  */
-	public function index() {
-		$this->set('notificationContents', $this->paginate($this->NotificationContents));
-	}
+    public function index() {
+        $this->set('notificationContents', $this->paginate($this->NotificationContents));
+    }
 
 /**
  * View method
@@ -43,33 +43,33 @@ class NotificationContentsController extends AppController {
  * @return void
  * @throws \Cake\Network\Exception\NotFoundException
  */
-	public function view($id = null) {
-		$notificationContent = $this->NotificationContents->get($id, [
-			'contain' => []
-		]);
-		$this->set('notificationContent', $notificationContent);
-	}
+    public function view($id = null) {
+        $notificationContent = $this->NotificationContents->get($id, [
+            'contain' => []
+        ]);
+        $this->set('notificationContent', $notificationContent);
+    }
 
 /**
  * Add method
  *
  * @return void
  */
-	public function add() {
-		$notificationContent = $this->NotificationContents->newEntity();
-		$transports = Configure::read('Notifications.transports');
-		if ($this->request->is('post')) {
+    public function add() {
+        $notificationContent = $this->NotificationContents->newEntity();
+        $transports = Configure::read('Notifications.transports');
+        if ($this->request->is('post')) {
             $this->NotificationContents->patchEntity($notificationContent, $this->request->data);
-			if ($this->NotificationContents->save($notificationContent)) {
-				$this->Flash->success(__('crud.save_successful'));
-				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('crud.validation_failed'));
-			}
-		}
-		$this->set(compact('notificationContent', 'transports'));
-		return $this->render('edit');
-	}
+            if ($this->NotificationContents->save($notificationContent)) {
+                $this->Flash->success(__('crud.save_successful'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('crud.validation_failed'));
+            }
+        }
+        $this->set(compact('notificationContent', 'transports'));
+        return $this->render('edit');
+    }
 
 /**
  * Edit method
@@ -78,21 +78,21 @@ class NotificationContentsController extends AppController {
  * @return void
  * @throws \Cake\Network\Exception\NotFoundException
  */
-	public function edit($id = null) {
-		$notificationContent = $this->NotificationContents->get($id, [
-			'contain' => []
-		]);
-		$transports = Configure::read('Notifications.transports');
-		if ($this->request->is(['patch', 'post', 'put'])) {
-			$notificationContent = $this->NotificationContents->patchEntity($notificationContent, $this->request->data);
-			if ($this->NotificationContents->save($notificationContent)) {
-				$this->Flash->success(__('crud.save_successful'));
-				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('crud.validation_failed'));
-			}
-		}
-		$this->set(compact('notificationContent', 'transports'));
-	}
+    public function edit($id = null) {
+        $notificationContent = $this->NotificationContents->get($id, [
+            'contain' => []
+        ]);
+        $transports = Configure::read('Notifications.transports');
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $notificationContent = $this->NotificationContents->patchEntity($notificationContent, $this->request->data);
+            if ($this->NotificationContents->save($notificationContent)) {
+                $this->Flash->success(__('crud.save_successful'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('crud.validation_failed'));
+            }
+        }
+        $this->set(compact('notificationContent', 'transports'));
+    }
 
 }

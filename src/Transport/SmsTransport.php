@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Notifications\Transport;
 
 use App\Model\Entity\User;

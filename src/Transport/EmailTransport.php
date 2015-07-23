@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Notifications\Transport;
 
 use App\Model\Entity\User;
@@ -15,14 +15,14 @@ class EmailTransport extends Transport {
  *
  * @param array $config transport-specific configuration options
  */
-	public function __construct(array $config) {
-		$config = Hash::merge(Configure::read('Notifications.transports.email'), $config);
-		$config	= Hash::merge([
-			'profile' => 'default',
-			'emailTransport' => 'default'
-		], $config);
-		parent::__construct($config);
-	}
+    public function __construct(array $config) {
+        $config = Hash::merge(Configure::read('Notifications.transports.email'), $config);
+        $config = Hash::merge([
+            'profile' => 'default',
+            'emailTransport' => 'default'
+        ], $config);
+        parent::__construct($config);
+    }
 
 /**
  * Abstract sender method
@@ -32,26 +32,26 @@ class EmailTransport extends Transport {
  * @param NotificationContent $content the content
  * @return mixed
  */
-	public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
-		$subject = $content->render('email_subject', $notification);
-		$htmlBody = $content->render('email_html', $notification);
-		$textBody = $content->render('email_text', $notification);
-		$email = new Email($this->_config['profile']);
-		$email->transport($this->_config['emailTransport']);
-		$email->emailFormat('html');
+    public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
+        $subject = $content->render('email_subject', $notification);
+        $htmlBody = $content->render('email_html', $notification);
+        $textBody = $content->render('email_text', $notification);
+        $email = new Email($this->_config['profile']);
+        $email->transport($this->_config['emailTransport']);
+        $email->emailFormat('html');
 
-		if (!empty($notification->config['attachments'])) {
-			$email->attachments($notification->config['attachments']);
-		}
+        if (!empty($notification->config['attachments'])) {
+            $email->attachments($notification->config['attachments']);
+        }
 
-		$email->to([ $user->email => $user->firstname . ' ' . $user->lastname ]);
-		$email->subject($subject);
+        $email->to([ $user->email => $user->firstname . ' ' . $user->lastname ]);
+        $email->subject($subject);
 
-		if (!empty($this->_config['templated']) && !empty($this->_config['template']) && !empty($this->_config['layout'])) {
-			$email->template($this->_config['template'], $this->_config['layout']);
-			$email->viewVars(['content' => $htmlBody]);
-			return $email->send();
-		}
-		return $email->send($htmlBody);
-	}
+        if (!empty($this->_config['templated']) && !empty($this->_config['template']) && !empty($this->_config['layout'])) {
+            $email->template($this->_config['template'], $this->_config['layout']);
+            $email->viewVars(['content' => $htmlBody]);
+            return $email->send();
+        }
+        return $email->send($htmlBody);
+    }
 }
