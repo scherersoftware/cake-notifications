@@ -14,16 +14,17 @@ class NotificationContent extends Entity {
  *
  * @var array
  */
-	protected $_accessible = [
-		'notification_identifier' => true,
-		'notes' => true,
-		'email_subject' => true,
-		'email_html' => true,
-		'email_text' => true,
-		'push_message' => true,
-		'sms_message' => true,
+    protected $_accessible = [
+        'notification_identifier' => true,
+        'notes' => true,
+        'email_subject' => true,
+        'email_html' => true,
+        'email_text' => true,
+        'push_message' => true,
+        'sms_message' => true,
+        'hipchat_message' => true,
         'onpage' => true
-	];
+    ];
 
 /**
  * Render a field by replacing the placeholders
@@ -32,10 +33,10 @@ class NotificationContent extends Entity {
  * @param Notification $notification notification containing the view vars
  * @return string
  */
-	public function render($field, Notification $notification) {
-		return Text::insert($this->get($field), $notification->config, [
-			'before' => '{{',
-			'after' => '}}',
-		]);
-	}
+    public function render($field, Notification $notification) {
+        return Text::insert($this->get($field), $notification->config, [
+            'before' => '{{',
+            'after' => '}}',
+        ]);
+    }
 }

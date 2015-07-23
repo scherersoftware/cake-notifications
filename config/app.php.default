@@ -1,19 +1,26 @@
 <?php
 $config = [
-	'Notifications' => [
-		'transports' => [
-			'push_message' => [
-				'app_id' => '',
-				'rest_key' => '',
-				'master_key' => '',
-			]
-		],
-		'email' => [
-			'profile' => 'default',
-			'emailTransport' => 'default',
-			'templated' => false,
-			'template' => 'default',
-			'layout' => 'default'
-		]
-	]
+    'Notifications' => [
+        'transports' => [
+            'push_message' => [
+                'app_id' => '',
+                'rest_key' => '',
+                'master_key' => '',
+            ],
+            'email' => [
+                'profile' => 'default',
+                'emailTransport' => 'default',
+                'templated' => false,
+                'template' => 'default',
+                'layout' => 'default'
+            ],
+            'hipchat' => [
+                'api_key' => '',
+                'endpoint' => 'https://api.hipchat.com',
+                'defaultRoom' => 'codekanzlei',
+                'defaultSentFrom' => 'Büro'
+            ],
+            'onpage' => []
+        ]
+    ]
 ];

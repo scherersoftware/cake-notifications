@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Notifications\Transport;
 
 use App\Model\Entity\User;
@@ -11,16 +11,16 @@ abstract class Transport {
 /**
  * @var array
  */
-	protected $_config = [];
+    protected $_config = [];
 
 /**
  * Creates a Transport instance
  *
  * @param array $config transport-specific configuration options
  */
-	public function __construct(array $config) {
-		$this->_config = Hash::merge($this->_config, $config);
-	}
+    public function __construct(array $config) {
+        $this->_config = Hash::merge($this->_config, $config);
+    }
 
 /**
  * Abstract sender method
@@ -30,27 +30,28 @@ abstract class Transport {
  * @param NotificationContent $content the content
  * @return mixed
  */
-	abstract public function sendNotification(User $user, Notification $notification, NotificationContent $content);
+    abstract public function sendNotification(User $user, Notification $notification, NotificationContent $content);
 
 /**
  * Creates a Transport instance based on the given type and config
  *
- * @param string $type email/push_message/sms
- * @param array $config transport-specific configuration options
+ * @param string $type email/push_message/sms/hipchat
+ * @param array $config text transport-specific configuration options
  * @return Transport
  * @throws \InvalidArgumentException
  */
-	public static function factory($type, array $config = []) {
-		$map = [
-			'email' => 'Notifications\Transport\EmailTransport',
-			'push_message' => 'Notifications\Transport\PushMessageTransport',
-			'sms' => 'Notifications\Transport\SmsTransport',
-		];
-		if (!isset($map[$type])) {
-			throw new \InvalidArgumentException("{$type} is not a valid transport");
-		}
-		$className = $map[$type];
-		$transport = new $className($config);
-		return $transport;
-	}
+    public static function factory($type, array $config = []) {
+        $map = [
+            'email' => 'Notifications\Transport\EmailTransport',
+            'push_message' => 'Notifications\Transport\PushMessageTransport',
+            'sms' => 'Notifications\Transport\SmsTransport',
+            'hipchat' => 'Notifications\Transport\HipChatTransport'
+        ];
+        if (!isset($map[$type])) {
+            throw new \InvalidArgumentException("{$type} is not a valid transport");
+        }
+        $className = $map[$type];
+        $transport = new $className($config);
+        return $transport;
+    }
 }

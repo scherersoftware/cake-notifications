@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Notifications\Transport;
 
 use App\Model\Entity\User;
@@ -16,11 +16,11 @@ class PushMessageTransport extends Transport {
  *
  * @param array $config transport-specific configuration options
  */
-	public function __construct(array $config) {
-		parent::__construct($config);
-		$keys = Configure::read('Notifications.transports.push_message');
-		ParseClient::initialize( $keys['app_id'], $keys['rest_key'], $keys['master_key'] );
-	}
+    public function __construct(array $config) {
+        parent::__construct($config);
+        $keys = Configure::read('Notifications.transports.push_message');
+        ParseClient::initialize( $keys['app_id'], $keys['rest_key'], $keys['master_key'] );
+    }
 
 /**
  * Abstract sender method
@@ -30,16 +30,16 @@ class PushMessageTransport extends Transport {
  * @param NotificationContent $content the content
  * @return mixed
  */
-	public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
-		$query = ParseInstallation::query();
-		$query->equalTo('user_id', $user->id);
-		$data = [
-			'alert' => $content->render('push_message', $notification)
-		];
-		$result = ParsePush::send(array(
-			'where' => $query,
-			'data' => $data
-		));
-		return is_array($result) && isset($result['result']) && $result['result'];
-	}
+    public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
+        $query = ParseInstallation::query();
+        $query->equalTo('user_id', $user->id);
+        $data = [
+            'alert' => $content->render('push_message', $notification)
+        ];
+        $result = ParsePush::send(array(
+            'where' => $query,
+            'data' => $data
+        ));
+        return is_array($result) && isset($result['result']) && $result['result'];
+    }
 }

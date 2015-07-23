@@ -44,7 +44,7 @@ class UserNotificationHelper extends Helper
             'action' => 'view',
             $notification->config['foreign_key']
         ];
-        
+
         $string = '<div class="message">';
         if (Configure::read('Notifications.checkAuthenticationForLinks') && $this->Auth->urlAllowed($checkUrl)) {
             $string .= $this->Html->link($notification->content, [
