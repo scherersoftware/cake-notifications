@@ -39,12 +39,25 @@ class HipChatTransport extends Transport
 
 		$message = $content->render('hipchat_message', $notification);
 
+		// Define the room
+
 		$room = isset($notification->transport_config['room']) ? $notification->transport_config['room'] : $this->_config['defaultRoom'];
+
+		// Define the place where the message was sent from
+
 		$sentFrom = isset($notification->transport_config['sentFrom']) ? $notification->transport_config['sentFrom'] : $this->_config['defaultSentFrom'];
+
+		// Define the message format
+
+		$messageFormat = isset($notification->transport_config['messageFormat']) ? $notification->transport_config['messageFormat'] : HipChat::FORMAT_TEXT;
+
+		// Define the color, normal is yellow, error is red
+
+		$textColor = isset($notification->transport_config['textColor']) ? $notification->transport_config['textColor'] : HipChat::COLOR_YELLOW;
 
 		// Give back the result
 
-		return $hipChat->message_room($room, $sentFrom, $message);
+		return $hipChat->message_room($room, $sentFrom, $message, false, $textColor, $messageFormat);
 
 	}
 
