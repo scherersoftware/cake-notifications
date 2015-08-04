@@ -97,9 +97,16 @@ class NotificationQueueTable extends Table
             'notification_identifier' => $identifier,
         ], $data);
 
-        $content = TableRegistry::get('Notifications.NotificationContents')->getByIdentifier($identifier, $data['locale']);
-        if (!$content) {
+        $notificationContent = TableRegistry::get('Notifications.NotificationContents')->getByIdentifier($identifier, $data['locale']);
+        if (!$notificationContent) {
+            // if no such notification content identifier exist, fail loudly
             throw new \InvalidArgumentException(__d('notifications', 'create_notification.invalid_identifier', $identifier));
+        }
+        
+        $content = $notificationContent->get($data['transport']);
+        if ($data['transport'] !== 'email' && !$content) {
+            // if no notification content defined in i18n for this transport and language, fail silently
+            return false;
         }
 
         $notification = $this->newEntity($data);
@@ -128,7 +135,11 @@ class NotificationQueueTable extends Table
         foreach ($data['transport'] as $transport) {
             $notificationData = $data;
             $notificationData['transport'] = $transport;
-            $notifications[] = $this->createNotification($identifier, $notificationData, $enqueue);
+            if ($transport === 'onpage') {
+                $notifications[] = $this->createOnpageNotification($identifier, $notificationData);
+            } else {
+                $notifications[] = $this->createNotification($identifier, $notificationData, $enqueue);
+            }
         }
 
         return $notifications;
@@ -305,9 +316,21 @@ class NotificationQueueTable extends Table
             throw new \InvalidArgumentException(__d('notifications', 'create_notification.no_recipient_user_given'));
         }
 
-        $content = TableRegistry::get('Notifications.NotificationContents')->getByIdentifier($identifier, $data['locale']);
-        if (!$content) {
+        $notificationContent = TableRegistry::get('Notifications.NotificationContents')->getByIdentifier($identifier, $data['locale']);
+        if (!$notificationContent) {
+            // if no such notification content identifier exist, fail loudly
             throw new \InvalidArgumentException(__d('notifications', 'create_notification.invalid_identifier', $identifier));
+        }
+
+        $content = $notificationContent->get('onpage');
+        if (!$content) {
+            // if no notification content defined in i18n for this transport and language, fail silently
+            return false;
+        }
+
+        $link = $notificationContent->get('onpage_link');
+        if (!empty($link)) {
+            $data['config']['link'] = $link;
         }
 
         $userNotification = $this->newEntity($data);
@@ -316,7 +339,7 @@ class NotificationQueueTable extends Table
         }
 
         if ($asEmail) {
-            $data['config']['link'] = Router::url($data['config']['link'], true);
+            $data['config']['redirect_link'] = Router::url($data['config']['redirect_link'], true);
             if (is_array($data['recipient_user_id'])) {
                 foreach ($data['recipient_user_id'] as $recipientUserId) {
                     $emailData = [

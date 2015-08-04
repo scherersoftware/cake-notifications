@@ -30,7 +30,8 @@ class NotificationContentsTable extends Table {
             'push_message',
             'sms_message',
             'hipchat_message',
-            'onpage'
+            'onpage',
+            'onpage_link',
         ],
             'allowEmptyTranslations' => true
         ]);

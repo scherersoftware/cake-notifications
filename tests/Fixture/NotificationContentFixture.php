@@ -62,6 +62,13 @@ class NotificationContentFixture extends TestFixture {
             'created' => '2014-10-17 15:45:14',
             'modified' => '2014-10-17 15:45:14'
         ],
+        [
+            'id' => 'b9d10652-39e2-11e5-817e-7abbcbc47cc1',
+            'notification_identifier' => 'test_email_notification',
+            'notes' => 'test',
+            'created' => '2014-10-17 15:45:14',
+            'modified' => '2014-10-17 15:45:14'
+        ],
 	];
 
 }

@@ -53,7 +53,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testAddBasicEmailNotification() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $this->_createNotificationContent($identifier);
 
         $data = [
@@ -84,7 +84,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testNotificationLocking() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $this->_createNotificationContent($identifier);
 
         $data = [
@@ -122,7 +122,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testNotificationFailing() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $this->_createNotificationContent($identifier);
 
         $data = [
@@ -150,7 +150,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testNotificationSucceeding() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $this->_createNotificationContent($identifier);
 
         $data = [
@@ -174,7 +174,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testGetBatch() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $this->_createNotificationContent($identifier);
 
         $data = [
@@ -243,7 +243,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testRenderNotification() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $content = $this->_createNotificationContent($identifier);
 
         $data = [
@@ -265,7 +265,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testSendWithEmailTransport() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $content = $this->_createNotificationContent($identifier);
 
         $data = [
@@ -294,7 +294,7 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testSendWithEmailTransportAndAttachment() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test_email_notification_custom';
         $content = $this->_createNotificationContent($identifier);
 
 
@@ -334,8 +334,10 @@ class NotificationQueuesTableTest extends TestCase {
     }
 
     public function testCreateNotificationsWithMultipleTransports() {
-        $identifier = 'test_email_notification';
-        $content = $this->_createNotificationContent($identifier);
+        $identifier = 'test_email_notification_custom';
+        $content = $this->_createNotificationContent($identifier, [
+            'push_message' => 'push message content with {{placeholder1}}'
+        ]);
 
         $data = [
             'locale' => 'eng',

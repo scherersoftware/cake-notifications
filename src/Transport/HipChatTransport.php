@@ -13,7 +13,7 @@ class HipChatTransport extends Transport
 
     /**
      * Get the config from app.php and merge it with existing
-     * @param array $config [description]
+     * @param array $config custom config
      */
     public function __construct(array $config)
     {

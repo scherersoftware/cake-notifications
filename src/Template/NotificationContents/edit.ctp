@@ -75,7 +75,12 @@
         <fieldset>
             <legend>OnPage Message Transport</legend>
 
-            <?php echo $this->Form->input('onpage') ?>
+            <?php echo $this->Form->input('onpage', [
+                'type' => 'textarea',
+                'label' => 'Onpage Message',
+            ]) ?>
+
+            <?php echo $this->Form->input('onpage_link') ?>
 
         </fieldset>
 

@@ -92,6 +92,14 @@ class I18nFixture extends TestFixture {
             "foreign_key" => "90cf6a81-b5dd-4131-894b-83979b658494",
             "field" => "onpage",
             "content" => "Ein Angebot für {{object.address}} wurde veröffentlicht."
+        ],
+        [
+            'id' => 6,
+            'locale' => 'eng',
+            'model' => 'NotificationContents',
+            'foreign_key' => 'b9d10652-39e2-11e5-817e-7abbcbc47cc1',
+            'field' => 'email',
+            'content' => 'Lorem ipsum'
         ]
 	];
 

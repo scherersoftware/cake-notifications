@@ -10,6 +10,12 @@ use Notifications\Controller\AppController;
  */
 class UserNotificationsController extends AppController
 {
+
+    /**
+     * @var array
+     */
+    public $components = ['RequestHandler'];
+
     /**
      * initialize method
      *
@@ -72,8 +78,8 @@ class UserNotificationsController extends AppController
         }
 
         if ($this->NotificationQueue->read($id)) {
-            // TODO actually business logic and out of place in this plugin
-            // TODO actually should be hasUserRight('viewCompleteProject') but AuthComponent has no
+            // TODO actually business logic and therefor out of place in this plugin
+            // TODO should be hasUserRight('viewCompleteProject') but AuthComponent has no
             // access to userrights right now, so:
             // if not a internal employee redirect to normal view of the linked entity, not
             // the deep link, which normal users don't have access to
@@ -87,12 +93,42 @@ class UserNotificationsController extends AppController
                     $notification->config['foreign_key']
                 ]);
             }
-            if (!empty($notification->config['link'])) {
-                return $this->redirect($notification->config['link']);
+            if (!empty($notification->config['redirect_link'])) {
+                return $this->redirect($notification->config['redirect_link']);
             }
         } else {
             $this->Flash->error(__d('notifications', 'error'));
         }
         return $this->redirect($this->referer());
+    }
+
+    public function readAll($ids = [])
+    {
+        // Force a JSON response regardless of extension
+        $this->RequestHandler->renderAs($this, 'json');
+        $code = 'success';
+        if (!empty($ids)) {
+            foreach ($ids as $id) {
+                if (!$this->NotificationQueue->read($id)) {
+                    $code = 'error';
+                }
+            }
+        }
+        $this->set(compact('code'));
+        $this->set('_serialize', ['code']);
+    }
+
+    public function mine()
+    {
+        // Force a JSON response regardless of extension
+        $this->RequestHandler->renderAs($this, 'json');
+        
+        $userId = $this->Auth->user('id');
+        $unreadNotifications = $this->NotificationQueue->getOnpageNotificationsForUser($userId, true, false, 50, 1);
+        unset($unreadNotifications['moreEntriesAvailable']);
+        
+        $code = 'success';
+        $this->set(compact('unreadNotifications', 'code'));
+        $this->set('_serialize', ['unreadNotifications', 'code']);
     }
 }
