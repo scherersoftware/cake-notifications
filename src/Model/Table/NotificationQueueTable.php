@@ -339,7 +339,10 @@ class NotificationQueueTable extends Table
         }
 
         if ($asEmail) {
-            $data['config']['redirect_link'] = Router::url($data['config']['redirect_link'], true);
+            if (!empty($data['config']['redirect_link'])) {
+                $data['config']['redirect_link'] = Router::url($data['config']['redirect_link'], true);
+            }
+            
             if (is_array($data['recipient_user_id'])) {
                 foreach ($data['recipient_user_id'] as $recipientUserId) {
                     $emailData = [
