@@ -81,6 +81,7 @@
             ]) ?>
 
             <?php echo $this->Form->input('onpage_link') ?>
+            <?php echo $this->Form->input('onpage_link_title') ?>
 
         </fieldset>
 

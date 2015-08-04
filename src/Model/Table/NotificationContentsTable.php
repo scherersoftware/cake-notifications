@@ -32,6 +32,7 @@ class NotificationContentsTable extends Table {
             'hipchat_message',
             'onpage',
             'onpage_link',
+            'onpage_link_title',
         ],
             'allowEmptyTranslations' => true
         ]);

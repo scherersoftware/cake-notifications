@@ -25,6 +25,7 @@ class NotificationContent extends Entity {
         'hipchat_message' => true,
         'onpage' => true,
         'onpage_link' => true,
+        'onpage_link_title' => true,
     ];
 
 /**

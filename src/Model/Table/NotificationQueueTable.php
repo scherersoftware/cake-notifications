@@ -330,8 +330,13 @@ class NotificationQueueTable extends Table
         }
 
         $link = $notificationContent->get('onpage_link');
-        if (!empty($link)) {
+        // if present in i18n table and not set in code, which is always more important
+        if (!empty($link) && empty($data['config']['link'])) {
             $data['config']['link'] = $link;
+        }
+        $linkTitle = $notificationContent->get('onpage_link_title');
+        if (!empty($linkTitle) && empty($data['config']['link_title'])) {
+            $data['config']['link_title'] = $linkTitle;
         }
 
         $userNotification = $this->newEntity($data);
