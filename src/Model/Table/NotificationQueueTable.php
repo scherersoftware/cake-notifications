@@ -312,6 +312,7 @@ class NotificationQueueTable extends Table
             'send_after' => null,
             'notification_identifier' => $identifier
         ], $data);
+        
         if (empty($data['recipient_user_id'])) {
             throw new \InvalidArgumentException(__d('notifications', 'create_notification.no_recipient_user_given'));
         }
