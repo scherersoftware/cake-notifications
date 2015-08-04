@@ -128,7 +128,7 @@ class UserNotificationsController extends AppController
         unset($unreadNotifications['moreEntriesAvailable']);
         
         $code = 'success';
-        $this->set(compact('unreadNotifications', 'code'));
-        $this->set('_serialize', ['unreadNotifications', 'code']);
+        $this->set(compact('code', 'unreadNotifications'));
+        $this->set('_serialize', ['code', 'unreadNotifications']);
     }
 }
