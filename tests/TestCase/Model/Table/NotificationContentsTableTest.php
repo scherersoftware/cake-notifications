@@ -58,7 +58,7 @@ class NotificationContentsTableTest extends TestCase {
  * @return void
  */
     public function testBasicEmailNotification() {
-        $identifier = 'test_email_notification';
+        $identifier = 'test2_email_notification';
         $this->NotificationContents->locale('eng');
         $entity = $this->NotificationContents->newEntity([
             'notification_identifier' => $identifier,
