@@ -84,7 +84,9 @@
                 'label' => 'Onpage Link*'
             ]) ?>
 
-            <?php echo $this->Form->input('onpage_link_title') ?>
+            <?php echo $this->Form->input('onpage_link_title', [
+                'maxlength' => 25
+            ]) ?>
 
         </fieldset>
 
