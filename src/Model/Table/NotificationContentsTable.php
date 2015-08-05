@@ -52,6 +52,15 @@ class NotificationContentsTable extends Table {
             ->requirePresence('notification_identifier', 'create')
             ->notEmpty('notification_identifier')
             ->allowEmpty('notes')
+            ->allowEmpty('onpage_link_title')
+            ->add('onpage_link_title', 'length', [
+                'rule' => ['maxLength', 25]
+            ])
+            ->allowEmpty('onpage_link')
+            ->add('onpage_link', 'url', [
+                'rule' => ['url', true],
+                'message' => 'A full and valid URL is required'
+            ])
             ->allowEmpty('email_subject')
             ->requirePresence('email_subject')
             ->add('email_subject', 'custom', [
