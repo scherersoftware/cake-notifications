@@ -80,7 +80,10 @@
                 'label' => 'Onpage Message',
             ]) ?>
 
-            <?php echo $this->Form->input('onpage_link') ?>
+            <?php echo $this->Form->input('onpage_link', [
+                'label' => 'Onpage Link*'
+            ]) ?>
+
             <?php echo $this->Form->input('onpage_link_title') ?>
 
         </fieldset>
@@ -88,3 +91,5 @@
     <?php endif; ?>
 
 <?= $this->Form->button(__('forms.save'), ['class' => 'btn-success']) ?>
+<br><br>
+*<?= __d('notifications', 'notification_content.onpage_link_may_have_no_effect') ?>

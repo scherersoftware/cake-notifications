@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-06-07 20:39+0100\n"
-"PO-Revision-Date: 2015-06-07 20:39+0100\n"
+"POT-Creation-Date: 2015-08-05 11:29+0200\n"
+"PO-Revision-Date: 2015-08-05 11:29+0200\n"
 "Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
 "Language-Team: EMAIL@ADDRESS\n"
 "Language: en\n"
@@ -13,67 +13,79 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.4\n"
 
-#: Model/Table/NotificationQueueTable.php:99;306
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Controller/UserNotificationsController.php:76;100
+msgid "error"
+msgstr "Error"
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Model/Table/NotificationQueueTable.php:103;323
 msgid "create_notification.invalid_identifier"
 msgstr "Invalid identifier"
 
-#: Model/Table/NotificationQueueTable.php:301
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Model/Table/NotificationQueueTable.php:317
 msgid "create_notification.no_recipient_user_given"
 msgstr "No recipient User given"
 
-#: Template/Element/user_notification_list.ctp:6
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/Element/user_notification_list.ctp:7
 msgid "no_unread_onpage_notifications"
 msgstr "No Unread Messages"
 
-#: Template/Element/user_notification_list.ctp:15
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/Element/user_notification_list.ctp:17
 msgid "load_more_onpage_notifications"
 msgstr "Load More Messages"
 
-#: Template/NotificationContents/edit.ctp:3;6
-#: Template/NotificationContents/index.ctp:2;5
-#: Template/NotificationContents/view.ctp:2
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:3;6
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:2;5
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:2
 msgid "notification contents.headline"
 msgstr "Notification Contents"
 
-#: Template/NotificationContents/edit.ctp:3
-#: Template/NotificationContents/index.ctp:7
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:3
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:7
 msgid "notification_contents.add"
 msgstr "Add"
 
-#: Template/NotificationContents/edit.ctp:3
-#: Template/NotificationContents/view.ctp:7
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:3
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:7
 msgid "notification_contents.edit"
 msgstr "Edit"
 
-#: Template/NotificationContents/edit.ctp:8
-#: Template/NotificationContents/view.ctp:8
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:8
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:8
 msgid "forms.back_to_list"
 msgstr "Back"
 
-#: Template/NotificationContents/edit.ctp:15
-#: Template/NotificationContents/index.ctp:13
-#: Template/NotificationContents/view.ctp:12
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:15
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:13
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:12
 msgid "notification_content.notification_identifier"
 msgstr "Identifier"
 
-#: Template/NotificationContents/edit.ctp:18
-#: Template/NotificationContents/view.ctp:15
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:18
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:15
 msgid "notification_content.notes"
 msgstr "Notes"
 
-#: Template/NotificationContents/view.ctp:2;5
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:95
+msgid "notification_content.onpage_link_may_have_no_effect"
+msgstr "Input may have no effects if the link is overwritten in the code."
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:2;5
 msgid "notification_contents.view"
 msgstr "View"
 
-#: Template/NotificationContents/view.ctp:18
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:18
 msgid "notification_content.created"
 msgstr "created"
 
-#: Template/NotificationContents/view.ctp:21
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:21
 msgid "notification_content.modified"
 msgstr "modified\t"
+
+#: /Users/flix/Sites/codekanzlei/familynet_backend//src/View/Helper/UserNotificationHelper.php:64
+msgid "from"
+msgstr "from"
 
 #~ msgid "notification_contents.form"
 #~ msgstr "Notification Content"
