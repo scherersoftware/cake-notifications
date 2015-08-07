@@ -33,8 +33,12 @@ class PushMessageTransport extends Transport {
     public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
         $query = ParseInstallation::query();
         $query->equalTo('user_id', $user->id);
+        $alert = $content->render('push_message', $notification);
+        if (empty($alert) && !empty($notification->config['content_fallback_transport'])) {
+            $alert = $content->render($notification->config['content_fallback_transport'], $notification);
+        }
         $data = [
-            'alert' => $content->render('push_message', $notification)
+            'alert' => $alert
         ];
         $result = ParsePush::send(array(
             'where' => $query,

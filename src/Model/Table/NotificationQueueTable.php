@@ -124,9 +124,10 @@ class NotificationQueueTable extends Table
      * @param string $identifier content identifier
      * @param array $data view vars and configuration
      * @param bool $enqueue whether to immediately save and enqueue the notifications
+     * @param bool $forceOnpagePush whether to force to send a identical push_message in case of onpage notification and no push_message content available for $identifier
      * @return array Array of Notification instances created
      */
-    public function createNotifications($identifier, array $data, $enqueue = false)
+    public function createNotifications($identifier, array $data, $enqueue = false, $forceOnpagePush = false)
     {
         if (!is_array($data['transport'])) {
             $data = [$data['transport']];
@@ -136,7 +137,7 @@ class NotificationQueueTable extends Table
             $notificationData = $data;
             $notificationData['transport'] = $transport;
             if ($transport === 'onpage') {
-                $notifications[] = $this->createOnpageNotification($identifier, $notificationData);
+                $notifications[] = $this->createOnpageNotification($identifier, $notificationData, false, $forceOnpagePush);
             } else {
                 $notifications[] = $this->createNotification($identifier, $notificationData, $enqueue);
             }
@@ -296,9 +297,11 @@ class NotificationQueueTable extends Table
      * @param  string $identifier the notification identifier
      * @param  array  $data       view vars and configuration
      * @param  bool   $asEmail    whether to send an email additionally
+     * @param  bool   $asEmail    whether to force to send an additional push message if there is no push message content
      * @return mixed false on failure, the Notification entity on success
      */
-    public function createOnpageNotification($identifier, array $data, $asEmail = false) {
+    public function createOnpageNotification($identifier, array $data, $asEmail = false, $forcePush = false) {
+        $originialData = $data;
         $data = Hash::merge([
             'locale' => Configure::read('locale'),
             'recipient_user_id' => [],
@@ -369,6 +372,28 @@ class NotificationQueueTable extends Table
                 $this->createNotification($identifier, $emailData, true);
             }
         }
+
+        if ($forcePush && empty($notificationContent->get('push_message'))) {
+            $data = Hash::merge([
+                'locale' => Configure::read('locale'),
+                'recipient_user_id' => [],
+                'config' => [],
+                'transport_config' => [],
+                'seen' => 0,
+                'transport' => 'push_message',
+                'locked' => false,
+                'send_tries' => 0,
+                'sent' => 0,
+                'send_after' => null,
+                'notification_identifier' => $identifier
+            ], $originialData);
+            $data['transport'] = 'push_message';
+            $data['config']['content_fallback_transport'] = 'onpage';
+
+            $notification = $this->newEntity($data);
+            $this->enqueue($notification);
+        }
+
         return $userNotification;
     }
 
