@@ -38,7 +38,8 @@ class PushMessageTransport extends Transport {
             $alert = $content->render($notification->config['content_fallback_transport'], $notification);
         }
         $data = [
-            'alert' => $alert
+            'alert' => $alert,
+            'badge' => 'Increment'
         ];
         $result = ParsePush::send(array(
             'where' => $query,
