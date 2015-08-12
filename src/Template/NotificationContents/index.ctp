@@ -23,8 +23,8 @@
 			<td><?= h($notificationContent->created) ?></td>
 			<td><?= h($notificationContent->modified) ?></td>
 			<td class="actions">
-				<?= $this->Html->link('<span class="glyphicon glyphicon-zoom-in"></span><span class="sr-only">Details</span>', ['action' => 'view', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.view')]) ?>
-				<?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span><span class="sr-only">Bearbeiten</span>', ['action' => 'edit', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.edit')]) ?>
+				<?= $this->Html->link('<span class="fa fa-eye"></span><span class="sr-only">Details</span>', ['action' => 'view', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.view')]) ?>
+				<?= $this->Html->link('<span class="fa fa-pencil"></span><span class="sr-only">Bearbeiten</span>', ['action' => 'edit', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.edit')]) ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
