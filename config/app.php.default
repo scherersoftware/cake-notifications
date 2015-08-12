@@ -21,6 +21,10 @@ $config = [
                 'defaultSentFrom' => 'Büro'
             ],
             'onpage' => []
+        ],
+        'Administration' => [
+            'layout' => 'default',
+            'helpers' => []
         ]
     ]
 ];
