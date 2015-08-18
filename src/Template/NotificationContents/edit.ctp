@@ -8,7 +8,7 @@
         <?= $this->Html->link('<i class="fa fa-arrow-left fa-fw"></i><span class="button-text">' . __d('notifications', 'forms.back_to_list') .'</span>', ['action' => 'index'], ['class' => 'btn btn-xs btn-primary back-button', 'escape' => false]) ?>
     </div>
 </h2>
-<?= $this->Form->create($notificationContent, ['horizontal' => true]) ?>
+<?= $this->Form->create($notificationContent, ['align' => 'horizontal']) ?>
     <fieldset>
         <?php
             echo $this->Form->input('notification_identifier', [
@@ -89,9 +89,9 @@
             ]) ?>
 
         </fieldset>
+*<?= __d('notifications', 'notification_content.onpage_link_may_have_no_effect') ?>
 
     <?php endif; ?>
 
 <?= $this->Form->button(__('forms.save'), ['class' => 'btn-success']) ?>
 <br><br>
-*<?= __d('notifications', 'notification_content.onpage_link_may_have_no_effect') ?>
