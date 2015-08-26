@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-08-26 13:54+0200\n"
-"PO-Revision-Date: 2015-08-26 13:55+0200\n"
+"POT-Creation-Date: 2015-08-26 18:30+0200\n"
+"PO-Revision-Date: 2015-08-26 18:31+0200\n"
 "Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
 "Language-Team: EMAIL@ADDRESS\n"
 "Language: en\n"
@@ -14,6 +14,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
+
+#: Controller/NotificationContentsController.php:64;89
+msgid "notification_content.crud.save_successful"
+msgstr "The data was saved."
+
+#: Controller/NotificationContentsController.php:67;92
+msgid "notification_content.crud.validation_failed"
+msgstr "Couldn’t save the data. Please check your inputs."
 
 #: Controller/UserNotificationsController.php:76;100
 msgid "error"

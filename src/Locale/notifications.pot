@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-08-26 13:52+0200\n"
+"POT-Creation-Date: 2015-08-26 18:29+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -13,6 +13,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/NotificationContentsController.php:64;89
+msgid "notification_content.crud.save_successful"
+msgstr ""
+
+#: Controller/NotificationContentsController.php:67;92
+msgid "notification_content.crud.validation_failed"
+msgstr ""
 
 #: Controller/UserNotificationsController.php:76;100
 msgid "error"
