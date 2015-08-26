@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-08-05 11:08+0200\n"
-"PO-Revision-Date: 2015-08-05 11:28+0200\n"
+"POT-Creation-Date: 2015-08-26 13:52+0200\n"
+"PO-Revision-Date: 2015-08-26 13:54+0200\n"
 "Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
 "Language-Team: EMAIL@ADDRESS\n"
 "Language: de_DE\n"
@@ -15,80 +15,129 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Controller/UserNotificationsController.php:76;100
+#: Controller/UserNotificationsController.php:76;100
 msgid "error"
 msgstr "Fehler"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Model/Table/NotificationQueueTable.php:103;323
+#: Model/Table/NotificationQueueTable.php:103;326
 msgid "create_notification.invalid_identifier"
 msgstr "Ungültige Bezeichnung"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Model/Table/NotificationQueueTable.php:317
+#: Model/Table/NotificationQueueTable.php:320
 msgid "create_notification.no_recipient_user_given"
 msgstr "Empfänger fehlt"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/Element/user_notification_list.ctp:7
+#: Template/Element/user_notification_list.ctp:7
 msgid "no_unread_onpage_notifications"
 msgstr "Keine Nachrichten vorhanden"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/Element/user_notification_list.ctp:17
+#: Template/Element/user_notification_list.ctp:17
 msgid "load_more_onpage_notifications"
 msgstr "Mehr Nachrichten"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:3;6
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:2;5
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:2
+#: Template/NotificationContents/edit.ctp:3;6
+#: Template/NotificationContents/index.ctp:2;5
+#: Template/NotificationContents/view.ctp:2
 msgid "notification contents.headline"
 msgstr "Benachrichtigungsinhalte"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:3
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:7
+#: Template/NotificationContents/edit.ctp:3
+#: Template/NotificationContents/index.ctp:7
 msgid "notification_contents.add"
 msgstr "hinzufügen"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:3
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:7
+#: Template/NotificationContents/edit.ctp:3
+#: Template/NotificationContents/view.ctp:7
 msgid "notification_contents.edit"
 msgstr "bearbeiten"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:8
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:8
+#: Template/NotificationContents/edit.ctp:8
+#: Template/NotificationContents/view.ctp:8
 msgid "forms.back_to_list"
 msgstr "Zurück"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:15
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:13
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:12
+#: Template/NotificationContents/edit.ctp:15
+#: Template/NotificationContents/index.ctp:13
+#: Template/NotificationContents/view.ctp:12
 msgid "notification_content.notification_identifier"
 msgstr "Kennung"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:18
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:15
+#: Template/NotificationContents/edit.ctp:18
+#: Template/NotificationContents/view.ctp:15
 msgid "notification_content.notes"
 msgstr "Notizen"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:95
+#: Template/NotificationContents/edit.ctp:29
+msgid "notification_content.email_subject"
+msgstr "Email Betreff"
+
+#: Template/NotificationContents/edit.ctp:33
+msgid "notification_content.email_body"
+msgstr "Email Inhalt"
+
+#: Template/NotificationContents/edit.ctp:47
+msgid "notification_content.push_message"
+msgstr "Push Nachricht"
+
+#: Template/NotificationContents/edit.ctp:61
+msgid "notification_content.hipchat_message"
+msgstr "Hipchat Nachricht"
+
+#: Template/NotificationContents/edit.ctp:74
+msgid "notification_content.sms_message"
+msgstr "SMS Nachricht"
+
+#: Template/NotificationContents/edit.ctp:88
+msgid "notification_content.onpage_message"
+msgstr "Onpage Nachricht"
+
+#: Template/NotificationContents/edit.ctp:92
+msgid "notification_content.onpage_link"
+msgstr "Onpage Link"
+
+#: Template/NotificationContents/edit.ctp:96
+msgid "notification_content.onpage_link_title"
+msgstr "Onpage Link Titel"
+
+#: Template/NotificationContents/edit.ctp:101
 msgid "notification_content.onpage_link_may_have_no_effect"
-msgstr "Eingaben können keinen Effekt zeigen, wenn der Link im Code überschrieben wird."
+msgstr ""
+"Eingaben können keinen Effekt zeigen, wenn der Link im Code überschrieben "
+"wird."
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:2;5
-msgid "notification_contents.view"
-msgstr "Details"
+#: Template/NotificationContents/edit.ctp:105
+msgid "forms.save"
+msgstr "Speichern"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:18
+#: Template/NotificationContents/index.ctp:14
+#: Template/NotificationContents/view.ctp:18
 msgid "notification_content.created"
 msgstr "erstellt"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/view.ctp:21
+#: Template/NotificationContents/index.ctp:15
+#: Template/NotificationContents/view.ctp:21
 msgid "notification_content.modified"
 msgstr "geändert"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/View/Helper/UserNotificationHelper.php:64
+#: Template/NotificationContents/index.ctp:16
+msgid "notification_content.lists.actions"
+msgstr "Aktionen"
+
+#: Template/NotificationContents/index.ctp:26
+msgid "notification_content.lists.view"
+msgstr "Details"
+
+#: Template/NotificationContents/index.ctp:27
+msgid "notification_content.lists.edit"
+msgstr "bearbeiten"
+
+#: Template/NotificationContents/view.ctp:2;5
+msgid "notification_contents.view"
+msgstr "Details"
+
+#: View/Helper/UserNotificationHelper.php:64
 msgid "from"
 msgstr "von"
 
 #~ msgid "notification_contents.form"
 #~ msgstr "Formular"
-
-#~ msgid "notification_content.id"
-#~ msgstr "ID"

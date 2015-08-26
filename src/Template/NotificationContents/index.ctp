@@ -11,9 +11,9 @@
 	<thead>
 		<tr>
 			<th><?= $this->Paginator->sort('notification_identifier', __d('notifications', 'notification_content.notification_identifier')) ?></th>
-			<th><?= $this->Paginator->sort('created', __('created')) ?></th>
-			<th><?= $this->Paginator->sort('modified', __('modified')) ?></th>
-			<th class="actions"><?= __('lists.actions') ?></th>
+			<th><?= $this->Paginator->sort('created', __d('notifications', 'notification_content.created')) ?></th>
+			<th><?= $this->Paginator->sort('modified', __d('notifications', 'notification_content.modified')) ?></th>
+			<th class="actions"><?= __d('notifications', 'notification_content.lists.actions') ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -23,8 +23,8 @@
 			<td><?= h($notificationContent->created) ?></td>
 			<td><?= h($notificationContent->modified) ?></td>
 			<td class="actions">
-				<?= $this->Html->link('<span class="fa fa-eye"></span><span class="sr-only">Details</span>', ['action' => 'view', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.view')]) ?>
-				<?= $this->Html->link('<span class="fa fa-pencil"></span><span class="sr-only">Bearbeiten</span>', ['action' => 'edit', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __('lists.edit')]) ?>
+				<?= $this->Html->link('<span class="fa fa-eye"></span><span class="sr-only">Details</span>', ['action' => 'view', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __d('notifications', 'notification_content.lists.view')]) ?>
+				<?= $this->Html->link('<span class="fa fa-pencil"></span><span class="sr-only">Bearbeiten</span>', ['action' => 'edit', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __d('notifications', 'notification_content.lists.edit')]) ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
