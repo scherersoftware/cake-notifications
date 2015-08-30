@@ -31,8 +31,8 @@ class AppController extends BaseController {
         // For good integration in existing administration areas, configure
         // View things here.
         $view = $this->getView();
-        $view->layout = Configure::read('Cms.Administration.layout');
-        foreach (Configure::read('Cms.Administration.helpers') as $helper) {
+        $view->layout = Configure::read('Notifications.Administration.layout');
+        foreach (Configure::read('Notifications.Administration.helpers') as $helper) {
             $view->loadHelper($helper);
         }
         parent::beforeRender($event);
