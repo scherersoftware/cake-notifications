@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2015-08-26 18:30+0200\n"
-"PO-Revision-Date: 2015-08-26 18:30+0200\n"
+"PO-Revision-Date: 2015-09-01 16:44+0200\n"
 "Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
 "Language-Team: EMAIL@ADDRESS\n"
 "Language: de_DE\n"
@@ -94,7 +94,7 @@ msgid "notification_content.hipchat_message"
 msgstr "Hipchat Nachricht"
 
 #: Template/NotificationContents/edit.ctp:74
-msgid "notification_content.sms_message"
+msgid "notification_content.sms"
 msgstr "SMS Nachricht"
 
 #: Template/NotificationContents/edit.ctp:88

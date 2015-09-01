@@ -82,7 +82,7 @@ class I18nFixture extends TestFixture {
             "locale" => "de",
             "model" => "NotificationContents",
             "foreign_key" => "fe700a46-240b-4d19-8dab-0ac5dd321525",
-            "field" => "sms_message",
+            "field" => "sms",
             "content" => "Test Body {{placeholder1}}"
         ],
         [

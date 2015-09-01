@@ -38,7 +38,7 @@ class SmsTransport extends Transport {
 		if (!empty($user->user_profile->phone)) {
 			$maxSmsPerMessage = 1;
 			$test = true;
-			$text = $content->render('sms_message', $notification);
+			$text = $content->render('sms', $notification);
 			$message  = new \WebSmsCom_TextMessage([$user->user_profile->phone], $text);
 
 			if (empty($text)) {

@@ -70,8 +70,8 @@
         <fieldset>
             <legend>SMS Message Transport</legend>
 
-            <?php echo $this->Form->input('sms_message', [
-                'label' => __d('notifications', 'notification_content.sms_message')
+            <?php echo $this->Form->input('sms', [
+                'label' => __d('notifications', 'notification_content.sms')
             ]) ?>
 
         </fieldset>

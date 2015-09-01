@@ -91,7 +91,7 @@ msgid "notification_content.hipchat_message"
 msgstr ""
 
 #: Template/NotificationContents/edit.ctp:74
-msgid "notification_content.sms_message"
+msgid "notification_content.sms"
 msgstr ""
 
 #: Template/NotificationContents/edit.ctp:88
