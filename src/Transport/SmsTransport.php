@@ -3,11 +3,12 @@ namespace Notifications\Transport;
 
 use App\Model\Entity\User;
 use Cake\Core\Configure;
+use Cake\Core\Plugin;
 use Cake\ORM\TableRegistry;
 use Notifications\Model\Entity\Notification;
 use Notifications\Model\Entity\NotificationContent;
 
-require ROOT . DS . 'vendor' . DS . 'codekanzlei' . DS . 'cake-notifications' . DS . 'src' . DS . 'Lib' . DS . 'WebSmsCom_Toolkit.inc';
+require_once Plugin::path('Notifications') . 'src' . DS . 'Lib' . DS . 'WebSmsCom_Toolkit.inc';
 
 class SmsTransport extends Transport {
 
@@ -69,6 +70,6 @@ class SmsTransport extends Transport {
 			}
 			return $response->getStatusCode() === 2000;
 		}
-		
+
 	}
 }
