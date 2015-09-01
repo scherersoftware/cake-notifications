@@ -24,7 +24,7 @@ $config = [
             'sms' => [
                 'username' => '',
                 'password' => '',
-                'gateway' => ''
+                'gateway' => '',
             ],
         ],
         'Administration' => [
