@@ -20,7 +20,12 @@ $config = [
                 'defaultRoom' => 'codekanzlei',
                 'defaultSentFrom' => 'Büro'
             ],
-            'onpage' => []
+            'onpage' => [],
+            'sms' => [
+                'username' => '',
+                'password' => '',
+                'gateway' => ''
+            ],
         ]
     ]
 ];
