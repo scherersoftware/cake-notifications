@@ -101,6 +101,6 @@
 *<?= __d('notifications', 'notification_content.onpage_link_may_have_no_effect') ?>
 
     <?php endif; ?>
-
+<br><br>
 <?= $this->Form->button(__d('notifications', 'forms.save'), ['class' => 'btn-success']) ?>
 <br><br>
