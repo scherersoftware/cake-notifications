@@ -8,7 +8,7 @@
         <?= $this->Html->link('<i class="fa fa-arrow-left fa-fw"></i><span class="button-text">' . __d('notifications', 'forms.back_to_list') .'</span>', ['action' => 'index'], ['class' => 'btn btn-xs btn-primary back-button', 'escape' => false]) ?>
     </div>
 </h2>
-<?= $this->Form->create($notificationContent, ['horizontal' => true]) ?>
+<?= $this->Form->create($notificationContent, ['align' => 'horizontal']) ?>
     <fieldset>
         <?php
             echo $this->Form->input('notification_identifier', [
@@ -25,10 +25,12 @@
         <fieldset>
             <legend>E-Mail Transport</legend>
 
-            <?php echo $this->Form->input('email_subject') ?>
+            <?php echo $this->Form->input('email_subject', [
+                'label' => __d('notifications', 'notification_content.email_subject')
+            ]) ?>
             <?php echo $this->Form->input('email_html', [
                 'type' => 'textarea',
-                'label' => 'Email Body',
+                'label' => __d('notifications', 'notification_content.email_body'),
                 'class' => 'wysiwyg'
             ]) ?>
 
@@ -41,7 +43,9 @@
         <fieldset>
             <legend>Push Message Transport</legend>
 
-            <?php echo $this->Form->input('push_message') ?>
+            <?php echo $this->Form->input('push_message', [
+                'label' => __d('notifications', 'notification_content.push_message')
+            ]) ?>
 
         </fieldset>
 
@@ -53,7 +57,9 @@
 
             <legend>HipChat Transport</legend>
 
-            <?php echo $this->Form->input('hipchat_message') ?>
+            <?php echo $this->Form->input('hipchat_message', [
+                'label' => __d('notifications', 'notification_content.hipchat_message')
+            ]) ?>
 
         </fieldset>
 
@@ -64,7 +70,9 @@
         <fieldset>
             <legend>SMS Message Transport</legend>
 
-            <?php echo $this->Form->input('sms_message') ?>
+            <?php echo $this->Form->input('sms_message', [
+                'label' => __d('notifications', 'notification_content.sms_message')
+            ]) ?>
 
         </fieldset>
 
@@ -77,21 +85,22 @@
 
             <?php echo $this->Form->input('onpage', [
                 'type' => 'textarea',
-                'label' => 'Onpage Message',
+                'label' => __d('notifications', 'notification_content.onpage_message'),
             ]) ?>
 
             <?php echo $this->Form->input('onpage_link', [
-                'label' => 'Onpage Link*'
+                'label' => __d('notifications', 'notification_content.onpage_link') . '*',
             ]) ?>
 
             <?php echo $this->Form->input('onpage_link_title', [
+                'label' => __d('notifications', 'notification_content.onpage_link_title') . '*',
                 'maxlength' => 25
             ]) ?>
 
         </fieldset>
+*<?= __d('notifications', 'notification_content.onpage_link_may_have_no_effect') ?>
 
     <?php endif; ?>
 
-<?= $this->Form->button(__('forms.save'), ['class' => 'btn-success']) ?>
+<?= $this->Form->button(__d('notifications', 'forms.save'), ['class' => 'btn-success']) ?>
 <br><br>
-*<?= __d('notifications', 'notification_content.onpage_link_may_have_no_effect') ?>

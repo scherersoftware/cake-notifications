@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-08-05 11:07+0200\n"
+"POT-Creation-Date: 2015-08-26 13:52+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,35 +14,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Controller/NotificationContentsController.php:64;89
+#: Controller/NotificationContentsController.php:64;89
 msgid "crud.save_successful"
 msgstr ""
 
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Controller/NotificationContentsController.php:67;92
+#: Controller/NotificationContentsController.php:67;92
 msgid "crud.validation_failed"
-msgstr ""
-
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/edit.ctp:93
-msgid "forms.save"
-msgstr ""
-
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:14
-msgid "created"
-msgstr ""
-
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:15
-msgid "modified"
-msgstr ""
-
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:16
-msgid "lists.actions"
-msgstr ""
-
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:26
-msgid "lists.view"
-msgstr ""
-
-#: /Users/flix/Sites/codekanzlei/familynet_backend//src/Template/NotificationContents/index.ctp:27
-msgid "lists.edit"
 msgstr ""
 

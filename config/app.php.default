@@ -26,6 +26,10 @@ $config = [
                 'password' => '',
                 'gateway' => ''
             ],
+        ],
+        'Administration' => [
+            'layout' => 'default',
+            'helpers' => []
         ]
     ]
 ];
