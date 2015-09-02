@@ -5,6 +5,7 @@ use App\Model\Entity\User;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\ORM\TableRegistry;
+use Cake\Utility\Hash;
 use Notifications\Model\Entity\Notification;
 use Notifications\Model\Entity\NotificationContent;
 
@@ -19,6 +20,7 @@ class SmsTransport extends Transport {
  * @param array $config transport-specific configuration options
  */
     public function __construct(array $config) {
+    	$config = Hash::merge(Configure::read('Notifications.transports.sms'), $config);
         parent::__construct($config);
 
         $keys = Configure::read('Notifications.transports.sms');
