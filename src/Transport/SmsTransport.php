@@ -37,7 +37,7 @@ class SmsTransport extends Transport {
 		$user = TableRegistry::get('Users')->getUser($user->id);
 
 		if (!empty($user->user_profile->phone)) {
-			$maxSmsPerMessage = 1;
+        	$maxSmsPerMessage = isset($notification->transport_config['maxSmsPerMessage']) ? $notification->transport_config['maxSmsPerMessage'] : $this->_config['defaultMaxSmsPerMessage'];
 			$test = Configure::read('debug');
 			$text = $content->render('sms', $notification);
 			$message  = new \WebSmsCom_TextMessage([$user->user_profile->phone], $text);
@@ -70,6 +70,6 @@ class SmsTransport extends Transport {
 			}
 			return $response->getStatusCode() === 2000;
 		}
-
+		
 	}
 }

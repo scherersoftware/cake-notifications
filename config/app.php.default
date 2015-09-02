@@ -25,6 +25,7 @@ $config = [
                 'username' => '',
                 'password' => '',
                 'gateway' => '',
+                'defaultMaxSmsPerMessage' => 1
             ],
         ],
         'Administration' => [
