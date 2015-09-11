@@ -37,12 +37,16 @@ class SmsTransport extends Transport {
  */
 	public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
 		$user = TableRegistry::get('Users')->getUser($user->id);
+        $phone = $user->user_profile->phone;
 
-		if (!empty($user->user_profile->phone)) {
-        	$maxSmsPerMessage = isset($notification->transport_config['maxSmsPerMessage']) ? $notification->transport_config['maxSmsPerMessage'] : $this->_config['defaultMaxSmsPerMessage'];
-			$test = Configure::read('debug');
-			$text = $content->render('sms', $notification);
-			$message  = new \WebSmsCom_TextMessage([$user->user_profile->phone], $text);
+        if (!empty($phone)) {
+            if (substr($phone, 0, 2) === '00') {
+                $phone = substr($phone, 2);
+            }
+            $maxSmsPerMessage = isset($notification->transport_config['maxSmsPerMessage']) ? $notification->transport_config['maxSmsPerMessage'] : $this->_config['defaultMaxSmsPerMessage'];
+            $test = Configure::read('debug');
+            $text = $content->render('sms', $notification);
+            $message  = new \WebSmsCom_TextMessage([$phone], $text);
 
 			if (empty($text)) {
 				return false;
@@ -72,6 +76,6 @@ class SmsTransport extends Transport {
 			}
 			return $response->getStatusCode() === 2000;
 		}
-		
+
 	}
 }
