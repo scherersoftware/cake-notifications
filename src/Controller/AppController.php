@@ -30,10 +30,17 @@ class AppController extends BaseController {
     {
         // For good integration in existing administration areas, configure
         // View things here.
-        $view = $this->getView();
-        $view->layout = Configure::read('Notifications.Administration.layout');
-        foreach (Configure::read('Notifications.Administration.helpers') as $helper) {
-            $view->loadHelper($helper);
+        if (method_exists($this, 'getView')) {
+            // CakePHP 3.0.x
+            $view = $this->getView();
+            $view->layout = Configure::read('Notifications.Administration.layout');
+            foreach (Configure::read('Notifications.Administration.helpers') as $helper) {
+                $view->loadHelper($helper);
+            }
+        } else {
+            // CakePHP 3.1.x
+            $this->viewBuilder()->helpers(Configure::read('Notifications.Administration.helpers'));
+            $this->viewBuilder()->layout(Configure::read('Notifications.Administration.layout'));
         }
         parent::beforeRender($event);
     }
