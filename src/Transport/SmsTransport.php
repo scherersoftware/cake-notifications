@@ -37,7 +37,7 @@ class SmsTransport extends Transport {
  */
 	public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
 		$user = TableRegistry::get('Users')->getUser($user->id);
-        $phone = $user->user_profile->phone;
+        $phone = $user->phone;
 
         if (!empty($phone)) {
             if (substr($phone, 0, 2) === '00') {
