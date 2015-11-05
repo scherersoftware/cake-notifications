@@ -23,7 +23,6 @@
 			<td><?= h($notificationContent->created) ?></td>
 			<td><?= h($notificationContent->modified) ?></td>
 			<td class="actions">
-				<?= $this->Html->link('<span class="fa fa-eye"></span><span class="sr-only">Details</span>', ['action' => 'view', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __d('notifications', 'notification_content.lists.view')]) ?>
 				<?= $this->Html->link('<span class="fa fa-pencil"></span><span class="sr-only">Bearbeiten</span>', ['action' => 'edit', $notificationContent->id], ['escape' => false, 'class' => 'btn btn-xs btn-default', 'title' => __d('notifications', 'notification_content.lists.edit')]) ?>
 			</td>
 		</tr>

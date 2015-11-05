@@ -37,20 +37,6 @@ class NotificationContentsController extends AppController {
     }
 
 /**
- * View method
- *
- * @param string $id content id
- * @return void
- * @throws \Cake\Network\Exception\NotFoundException
- */
-    public function view($id = null) {
-        $notificationContent = $this->NotificationContents->get($id, [
-            'contain' => []
-        ]);
-        $this->set('notificationContent', $notificationContent);
-    }
-
-/**
  * Add method
  *
  * @return void
