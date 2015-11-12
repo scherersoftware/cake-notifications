@@ -37,7 +37,7 @@ class SmsTransport extends Transport {
  */
 	public function sendNotification(User $user, Notification $notification, NotificationContent $content) {
 		$user = TableRegistry::get('Users')->getUser($user->id);
-        $phone = $user->phone;
+        $phone = !empty($notification->transport_config['phoneNumberOverride']) ? $notification->transport_config['phoneNumberOverride'] : $user->phone;
 
         if (!empty($phone)) {
             if (substr($phone, 0, 2) === '00') {
@@ -45,6 +45,8 @@ class SmsTransport extends Transport {
             }
             $maxSmsPerMessage = isset($notification->transport_config['maxSmsPerMessage']) ? $notification->transport_config['maxSmsPerMessage'] : $this->_config['defaultMaxSmsPerMessage'];
             $test = Configure::read('debug');
+            // if you need to send SMS in development, uncomment next line
+            // $test = false;
             $text = $content->render('sms', $notification);
             $message  = new \WebSmsCom_TextMessage([$phone], $text);
 
