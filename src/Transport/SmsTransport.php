@@ -78,6 +78,5 @@ class SmsTransport extends Transport {
 			}
 			return $response->getStatusCode() === 2000;
 		}
-
 	}
 }
