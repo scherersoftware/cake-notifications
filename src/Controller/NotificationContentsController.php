@@ -19,11 +19,6 @@ class NotificationContentsController extends AppController {
  */
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->loadModel('Notifications.NotificationContents');
-        if (Configure::check('Notifications.default_language')) {
-            $this->NotificationContents->locale(Configure::read('Notifications.default_language'));
-        } else {
-            $this->NotificationContents->locale('eng');
-        }
         parent::beforeFilter($event);
     }
 
@@ -33,21 +28,12 @@ class NotificationContentsController extends AppController {
  * @return void
  */
     public function index() {
+        if (Configure::check('Notifications.default_language')) {
+            $this->NotificationContents->locale(Configure::read('Notifications.default_language'));
+        } else {
+            $this->NotificationContents->locale('eng');
+        }
         $this->set('notificationContents', $this->paginate($this->NotificationContents));
-    }
-
-/**
- * View method
- *
- * @param string $id content id
- * @return void
- * @throws \Cake\Network\Exception\NotFoundException
- */
-    public function view($id = null) {
-        $notificationContent = $this->NotificationContents->get($id, [
-            'contain' => []
-        ]);
-        $this->set('notificationContent', $notificationContent);
     }
 
 /**
@@ -79,20 +65,32 @@ class NotificationContentsController extends AppController {
  * @throws \Cake\Network\Exception\NotFoundException
  */
     public function edit($id = null) {
-        $notificationContent = $this->NotificationContents->get($id, [
-            'contain' => []
-        ]);
+        $supportedLanguages = Configure::read('Notifications.supported_languages');
+        $translations = [];
+        foreach ($supportedLanguages as $language) {
+            $this->NotificationContents->locale($language);
+            $notificationContent = $this->NotificationContents->get($id, [
+                'locales' => $supportedLanguages
+            ]);
+            $translations[$language] = $notificationContent;
+        }
         $transports = Configure::read('Notifications.transports');
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $notificationContent = $this->NotificationContents->patchEntity($notificationContent, $this->request->data);
-            if ($this->NotificationContents->save($notificationContent)) {
+            $currentLocale = $this->request->data['locale'];
+            $this->NotificationContents->locale($currentLocale);
+            $notificationContent = $translations[$currentLocale];
+            $translations[$currentLocale] = $this->NotificationContents->patchEntity($translations[$currentLocale], $this->request->data);
+            if ($this->NotificationContents->save($translations[$this->request->data['locale']])) {
                 $this->Flash->success(__d('notifications', 'notification_content.crud.save_successful'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__d('notifications', 'notification_content.crud.validation_failed'));
             }
         }
-        $this->set(compact('notificationContent', 'transports'));
+        if (empty($this->request->data['locale'])) {
+            $this->request->data['locale'] = Configure::read('Notifications.default_language');
+        }
+        $this->set(compact('translations', 'transports', 'supportedLanguages'));
     }
 
 }

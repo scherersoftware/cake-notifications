@@ -28,6 +28,8 @@ $config = [
                 'defaultMaxSmsPerMessage' => 1
             ],
         ],
+        'default_language' => 'eng',
+        'supported_languages' => ['eng', 'deu'],
         'Administration' => [
             'layout' => 'default',
             'helpers' => []
