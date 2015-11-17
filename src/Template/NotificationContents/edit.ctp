@@ -20,7 +20,7 @@ use Cake\Core\Configure;
                     $active = 'active';
                 }
             ?>
-            <li role="presentation" class="<?=$active?>"><a href="#<?= $language ?>" aria-controls="<?= $language ?>" role="tab" data-toggle="tab"><?= $language ?></a></li>
+            <li role="presentation" class="<?=$active?>"><a href="#<?= $language ?>" aria-controls="<?= $language ?>" role="tab" data-toggle="tab"><?= $supportedLanguages[$language] ?></a></li>
         <?php endforeach; ?>
     </ul>
 

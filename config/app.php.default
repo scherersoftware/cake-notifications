@@ -29,7 +29,10 @@ $config = [
             ],
         ],
         'default_language' => 'eng',
-        'supported_languages' => ['eng', 'deu'],
+        'supported_languages' => [
+            'eng' => __d('notifications', 'supported_languages.english'),
+            'deu' => __d('notifications', 'supported_languages.german'),
+        ],
         'Administration' => [
             'layout' => 'default',
             'helpers' => []

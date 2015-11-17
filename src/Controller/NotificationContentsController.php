@@ -43,9 +43,20 @@ class NotificationContentsController extends AppController {
  */
     public function add() {
         $notificationContent = $this->NotificationContents->newEntity();
+        $supportedLanguages = Configure::read('Notifications.supported_languages');
+        $defaultLanguage = Configure::read('Notifications.default_language');;
+        $translations = [];
+        foreach ($supportedLanguages as $locale => $languageDescription) {
+            $this->NotificationContents->locale($locale);
+            $notificationContent = $this->NotificationContents->newEntity();
+            $translations[$locale] = $notificationContent;
+        }
         $transports = Configure::read('Notifications.transports');
+
         if ($this->request->is('post')) {
-            $this->NotificationContents->patchEntity($notificationContent, $this->request->data);
+            $currentLocale = empty($this->request->data['locale']) ? $defaultLanguage : $this->request->data['locale'];
+            $this->NotificationContents->locale($currentLocale);
+            $notificationContent = $this->NotificationContents->patchEntity($translations[$currentLocale], $this->request->data);
             if ($this->NotificationContents->save($notificationContent)) {
                 $this->Flash->success(__d('notifications', 'notification_content.crud.save_successful'));
                 return $this->redirect(['action' => 'index']);
@@ -53,7 +64,10 @@ class NotificationContentsController extends AppController {
                 $this->Flash->error(__d('notifications', 'notification_content.crud.validation_failed'));
             }
         }
-        $this->set(compact('notificationContent', 'transports'));
+        if (empty($this->request->data['locale'])) {
+            $this->request->data['locale'] = $defaultLanguage;
+        }
+        $this->set(compact('translations', 'transports', 'supportedLanguages'));
         return $this->render('edit');
     }
 
@@ -66,21 +80,21 @@ class NotificationContentsController extends AppController {
  */
     public function edit($id = null) {
         $supportedLanguages = Configure::read('Notifications.supported_languages');
+        $defaultLanguage = Configure::read('Notifications.default_language');;
         $translations = [];
-        foreach ($supportedLanguages as $language) {
-            $this->NotificationContents->locale($language);
+        foreach ($supportedLanguages as $locale => $languageDescription) {
+            $this->NotificationContents->locale($locale);
             $notificationContent = $this->NotificationContents->get($id, [
                 'locales' => $supportedLanguages
             ]);
-            $translations[$language] = $notificationContent;
+            $translations[$locale] = $notificationContent;
         }
         $transports = Configure::read('Notifications.transports');
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $currentLocale = $this->request->data['locale'];
+            $currentLocale = empty($this->request->data['locale']) ? $defaultLanguage : $this->request->data['locale'];
             $this->NotificationContents->locale($currentLocale);
-            $notificationContent = $translations[$currentLocale];
-            $translations[$currentLocale] = $this->NotificationContents->patchEntity($translations[$currentLocale], $this->request->data);
-            if ($this->NotificationContents->save($translations[$this->request->data['locale']])) {
+            $notificationContent = $this->NotificationContents->patchEntity($translations[$currentLocale], $this->request->data);
+            if ($this->NotificationContents->save($notificationContent)) {
                 $this->Flash->success(__d('notifications', 'notification_content.crud.save_successful'));
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -88,7 +102,7 @@ class NotificationContentsController extends AppController {
             }
         }
         if (empty($this->request->data['locale'])) {
-            $this->request->data['locale'] = Configure::read('Notifications.default_language');
+            $this->request->data['locale'] = $defaultLanguage;
         }
         $this->set(compact('translations', 'transports', 'supportedLanguages'));
     }
