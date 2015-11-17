@@ -49,7 +49,10 @@ class EmailTransport extends Transport {
 
         if (!empty($this->_config['templated']) && !empty($this->_config['template']) && !empty($this->_config['layout'])) {
             $email->template($this->_config['template'], $this->_config['layout']);
-            $email->viewVars(['content' => $htmlBody]);
+            $email->viewVars([
+                'content' => $htmlBody,
+                'config' => $notification->config
+            ]);
             return $email->send();
         }
         return $email->send($htmlBody);

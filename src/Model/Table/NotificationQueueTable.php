@@ -181,7 +181,7 @@ class NotificationQueueTable extends Table
         $query->limit($size);
 
         $batch = $query->all();
-        if (!empty($batch)) {
+        if ($batch->count() > 0) {
             $ids = [];
             foreach ($batch as $item) {
                 $ids[] = $item->id;
