@@ -76,8 +76,8 @@ class NotificationQueueTable extends Table
      *
      * @param string $identifier content identifier
      * @param array  $data view vars
-     * 					To pass in attachments, add a key named 'attachments' - this array
-     * 					will be passed to Email::attachments().
+     *                  To pass in attachments, add a key named 'attachments' - this array
+     *                  will be passed to Email::attachments().
      * @param bool $enqueue whether to immediately save and enqueue the notification
      * @return Notification notification entity
      * @throws \InvalidArgumentException Thrown if a non-existant content identifier is given
@@ -85,7 +85,7 @@ class NotificationQueueTable extends Table
     public function createNotification($identifier, array $data, $enqueue = false)
     {
         $data = Hash::merge([
-            'locale' => Configure::read('locale'),
+            'locale' => Configure::read('Notifications.default_language'),
             'recipient_user_id' => null,
             'transport' => null,
             'config' => [],
@@ -96,6 +96,10 @@ class NotificationQueueTable extends Table
             'send_after' => null,
             'notification_identifier' => $identifier,
         ], $data);
+
+        if (empty($data['locale'])) {
+            $data['locale'] = Configure::read('Notifications.default_language');
+        }
 
         $notificationContent = TableRegistry::get('Notifications.NotificationContents')->getByIdentifier($identifier, $data['locale']);
         if (!$notificationContent) {
@@ -162,7 +166,7 @@ class NotificationQueueTable extends Table
     /**
      * Returns a list of queued notifications that need to be sent
      *
-     * @param int $size 	Limit of notifications
+     * @param int $size     Limit of notifications
      * @return array
      */
     public function getBatch($size = 10)
