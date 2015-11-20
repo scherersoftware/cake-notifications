@@ -113,6 +113,29 @@ class NotificationQueueTable extends Table
             return false;
         }
 
+        if (empty($data['recipient_user_id'])) {
+            return false;
+        }
+
+        if (!$this->RecipientUsers->exists(['id' => $data['recipient_user_id']])) {
+            return false;
+        }
+
+        $recipient = $this->RecipientUsers->get($data['recipient_user_id']);
+
+        if ($data['transport'] == 'email' && empty($recipient->email)) {
+            return false;
+        }
+
+        if ($data['transport'] == 'sms' && empty($recipient->phone)) {
+            return false;
+        }
+
+        if ($data['transport'] !== 'email' && !$content) {
+            // if no notification content defined in i18n for this transport and language, fail silently
+            return false;
+        }
+
         $notification = $this->newEntity($data);
         if ($enqueue) {
             return $this->enqueue($notification);
