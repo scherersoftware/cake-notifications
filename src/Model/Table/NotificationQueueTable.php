@@ -127,7 +127,7 @@ class NotificationQueueTable extends Table
             return false;
         }
 
-        if ($data['transport'] == 'sms' && empty($recipient->phone)) {
+        if ($data['transport'] == 'sms' && empty($recipient->phone) && empty($data['transport_config']['phoneNumberOverride'])) {
             return false;
         }
 
