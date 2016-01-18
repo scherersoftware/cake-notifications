@@ -45,11 +45,11 @@
                 $notificationQueue->notification_identifier
             ]) ?></td>
             <td><?= h($notificationQueue->transport) ?></td>
-            <td><?= $this->Utils->bool($notificationQueue->locked) ?></td>
+            <td><?= ($notificationQueue->locked) ? __('yes') : __('no') ?></td>
             <td><?= ($notificationQueue->send_tries) ?></td>
-            <td><?= $this->Utils->bool($notificationQueue->sent) ?></td>
-            <td><?= h($this->Utils->dateTime($notificationQueue->created)) ?></td>
-            <td><?= h($this->Utils->dateTime($notificationQueue->modified)) ?></td>
+            <td><?= ($notificationQueue->sent) ? __('yes') : __('no') ?></td>
+            <td><?= h($this->Time->nice($notificationQueue->created)) ?></td>
+            <td><?= h($this->Time->nice($notificationQueue->modified)) ?></td>
             <td class="actions text-center">
                 <?= $this->Html->link('<span class="fa fa-search"></span><span class="sr-only">' . __d('notifications', 'notification_queue.view_content') . '</span>',
                 '#collapse-notification-content-' . $notificationQueue->id,
