@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-08-26 18:30+0200\n"
-"PO-Revision-Date: 2015-09-01 16:44+0200\n"
+"POT-Creation-Date: 2016-01-18 20:39+0100\n"
+"PO-Revision-Date: 2016-01-18 20:40+0100\n"
 "Last-Translator: Felix Kempf <fk@codekanzlei.de>\n"
 "Language-Team: EMAIL@ADDRESS\n"
 "Language: de_DE\n"
@@ -13,27 +13,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.6\n"
 
-#: Controller/NotificationContentsController.php:64;89
+#: Controller/NotificationContentsController.php:61;103
+#: Controller/NotificationQueueController.php:102
 msgid "notification_content.crud.save_successful"
 msgstr "Ihre Daten wurden gespeichert."
 
-#: Controller/NotificationContentsController.php:67;92
+#: Controller/NotificationContentsController.php:64;106
+#: Controller/NotificationQueueController.php:104
 msgid "notification_content.crud.validation_failed"
 msgstr ""
 "Die Daten konnten nicht gespeichert werden, bitte überprüfen Sie Ihre "
 "Eingaben."
 
+#: Controller/NotificationQueueController.php:78
+msgid "no_such_transport_content_or_translation"
+msgstr ""
+"Es gibt keinen solchen Nachrichtentyp, Transport oder keine passende "
+"Übersetzung!"
+
 #: Controller/UserNotificationsController.php:76;100
 msgid "error"
 msgstr "Fehler"
 
-#: Model/Table/NotificationQueueTable.php:103;326
+#: Model/Table/NotificationQueueTable.php:107;353
 msgid "create_notification.invalid_identifier"
 msgstr "Ungültige Bezeichnung"
 
-#: Model/Table/NotificationQueueTable.php:320
+#: Model/Table/NotificationQueueTable.php:347
 msgid "create_notification.no_recipient_user_given"
 msgstr "Empfänger fehlt"
 
@@ -45,77 +53,77 @@ msgstr "Keine Nachrichten vorhanden"
 msgid "load_more_onpage_notifications"
 msgstr "Mehr Nachrichten"
 
-#: Template/NotificationContents/edit.ctp:3;6
+#: Template/NotificationContents/edit.ctp:4;7
 #: Template/NotificationContents/index.ctp:2;5
 #: Template/NotificationContents/view.ctp:2
 msgid "notification contents.headline"
 msgstr "Benachrichtigungsinhalte"
 
-#: Template/NotificationContents/edit.ctp:3
+#: Template/NotificationContents/edit.ctp:4
 #: Template/NotificationContents/index.ctp:7
 msgid "notification_contents.add"
 msgstr "hinzufügen"
 
-#: Template/NotificationContents/edit.ctp:3
+#: Template/NotificationContents/edit.ctp:4
 #: Template/NotificationContents/view.ctp:7
 msgid "notification_contents.edit"
 msgstr "bearbeiten"
 
-#: Template/NotificationContents/edit.ctp:8
+#: Template/NotificationContents/edit.ctp:9
 #: Template/NotificationContents/view.ctp:8
 msgid "forms.back_to_list"
 msgstr "Zurück"
 
-#: Template/NotificationContents/edit.ctp:15
+#: Template/NotificationContents/edit.ctp:44
 #: Template/NotificationContents/index.ctp:13
 #: Template/NotificationContents/view.ctp:12
 msgid "notification_content.notification_identifier"
 msgstr "Kennung"
 
-#: Template/NotificationContents/edit.ctp:18
+#: Template/NotificationContents/edit.ctp:47
 #: Template/NotificationContents/view.ctp:15
 msgid "notification_content.notes"
 msgstr "Notizen"
 
-#: Template/NotificationContents/edit.ctp:29
+#: Template/NotificationContents/edit.ctp:58
 msgid "notification_content.email_subject"
 msgstr "Email Betreff"
 
-#: Template/NotificationContents/edit.ctp:33
+#: Template/NotificationContents/edit.ctp:62
 msgid "notification_content.email_body"
 msgstr "Email Inhalt"
 
-#: Template/NotificationContents/edit.ctp:47
+#: Template/NotificationContents/edit.ctp:76
 msgid "notification_content.push_message"
 msgstr "Push Nachricht"
 
-#: Template/NotificationContents/edit.ctp:61
+#: Template/NotificationContents/edit.ctp:90
 msgid "notification_content.hipchat_message"
 msgstr "Hipchat Nachricht"
 
-#: Template/NotificationContents/edit.ctp:74
+#: Template/NotificationContents/edit.ctp:103
 msgid "notification_content.sms"
 msgstr "SMS Nachricht"
 
-#: Template/NotificationContents/edit.ctp:88
+#: Template/NotificationContents/edit.ctp:117
 msgid "notification_content.onpage_message"
 msgstr "Onpage Nachricht"
 
-#: Template/NotificationContents/edit.ctp:92
+#: Template/NotificationContents/edit.ctp:121
 msgid "notification_content.onpage_link"
 msgstr "Onpage Link"
 
-#: Template/NotificationContents/edit.ctp:96
+#: Template/NotificationContents/edit.ctp:125
 msgid "notification_content.onpage_link_title"
 msgstr "Onpage Link Titel"
 
-#: Template/NotificationContents/edit.ctp:101
+#: Template/NotificationContents/edit.ctp:130
 msgid "notification_content.onpage_link_may_have_no_effect"
 msgstr ""
 "Eingaben können keinen Effekt zeigen, wenn der Link im Code überschrieben "
 "wird."
 
-#: Template/NotificationContents/edit.ctp:105
+#: Template/NotificationContents/edit.ctp:134
 msgid "forms.save"
 msgstr "Speichern"
 
@@ -130,14 +138,11 @@ msgid "notification_content.modified"
 msgstr "geändert"
 
 #: Template/NotificationContents/index.ctp:16
+#: Template/NotificationQueue/index.ctp:26
 msgid "notification_content.lists.actions"
 msgstr "Aktionen"
 
 #: Template/NotificationContents/index.ctp:26
-msgid "notification_content.lists.view"
-msgstr "Details"
-
-#: Template/NotificationContents/index.ctp:27
 msgid "notification_content.lists.edit"
 msgstr "bearbeiten"
 
@@ -145,9 +150,64 @@ msgstr "bearbeiten"
 msgid "notification_contents.view"
 msgstr "Details"
 
+#: Template/NotificationQueue/index.ctp:2;6
+msgid "notification_queue.headline"
+msgstr "Benachrichtigungswarteschleife"
+
+#: Template/NotificationQueue/index.ctp:16
+msgid "notification_queue.recipient_user_fullname"
+msgstr "Name"
+
+#: Template/NotificationQueue/index.ctp:17
+msgid "notification_queue.recipient_user_email"
+msgstr "Email"
+
+#: Template/NotificationQueue/index.ctp:18
+msgid "notification_queue.recipient_user_phone"
+msgstr "Telefon"
+
+#: Template/NotificationQueue/index.ctp:19
+msgid "notification_queue.notification_identifier"
+msgstr "Benachrichtigungskennung"
+
+#: Template/NotificationQueue/index.ctp:20
+msgid "notification_queue.notification_transport"
+msgstr "Transport"
+
+#: Template/NotificationQueue/index.ctp:21
+msgid "notification_queue.locked"
+msgstr "Gesperrt"
+
+#: Template/NotificationQueue/index.ctp:22
+msgid "notification_queue.send_tries"
+msgstr "Sendversuche"
+
+#: Template/NotificationQueue/index.ctp:23
+msgid "notification_queue.sent"
+msgstr "Gesendet"
+
+#: Template/NotificationQueue/index.ctp:24
+msgid "notification_queue.created"
+msgstr "Erstellt"
+
+#: Template/NotificationQueue/index.ctp:25
+msgid "notification_queue.modified"
+msgstr "Geändert"
+
+#: Template/NotificationQueue/index.ctp:54;63
+msgid "notification_queue.view_content"
+msgstr "Vorschau"
+
+#: Template/NotificationQueue/index.ctp:65;71
+msgid "notification_queue.resend"
+msgstr "Erneut senden"
+
 #: View/Helper/UserNotificationHelper.php:64
 msgid "from"
 msgstr "von"
+
+#~ msgid "notification_content.lists.view"
+#~ msgstr "Details"
 
 #~ msgid "notification_contents.form"
 #~ msgstr "Formular"

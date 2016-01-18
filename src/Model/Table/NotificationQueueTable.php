@@ -106,7 +106,7 @@ class NotificationQueueTable extends Table
             // if no such notification content identifier exist, fail loudly
             throw new \InvalidArgumentException(__d('notifications', 'create_notification.invalid_identifier', $identifier));
         }
-        
+
         $content = $notificationContent->get($data['transport']);
         if ($data['transport'] !== 'email' && !$content) {
             // if no notification content defined in i18n for this transport and language, fail silently
@@ -342,7 +342,7 @@ class NotificationQueueTable extends Table
             'send_after' => null,
             'notification_identifier' => $identifier
         ], $data);
-        
+
         if (empty($data['recipient_user_id'])) {
             throw new \InvalidArgumentException(__d('notifications', 'create_notification.no_recipient_user_given'));
         }
@@ -378,7 +378,7 @@ class NotificationQueueTable extends Table
             if (!empty($data['config']['redirect_link'])) {
                 $data['config']['redirect_link'] = Router::url($data['config']['redirect_link'], true);
             }
-            
+
             if (is_array($data['recipient_user_id'])) {
                 foreach ($data['recipient_user_id'] as $recipientUserId) {
                     $emailData = [

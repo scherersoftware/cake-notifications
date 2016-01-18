@@ -101,9 +101,9 @@ class NotificationContentsTable extends Table {
             $oldLocale = $this->locale();
             $this->locale($locale);
         }
-        $res = $this->find()->where([
-            'notification_identifier' => $identifier
-        ])->first();
+        $res = $this->find()
+            ->where(['notification_identifier' => $identifier])
+            ->first();
         if ($locale) {
             $this->locale($oldLocale);
         }

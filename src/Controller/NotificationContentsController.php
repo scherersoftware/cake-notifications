@@ -75,18 +75,23 @@ class NotificationContentsController extends AppController {
  * Edit method
  *
  * @param string $id content id
+ * @param string $notificationIdentifier content identifier. Used if $id evaluates to empty, for example '0'
  * @return void
  * @throws \Cake\Network\Exception\NotFoundException
  */
-    public function edit($id = null) {
+    public function edit($id = null, $notificationIdentifier = null) {
         $supportedLanguages = Configure::read('Notifications.supported_languages');
         $defaultLanguage = Configure::read('Notifications.default_language');;
         $translations = [];
         foreach ($supportedLanguages as $locale => $languageDescription) {
             $this->NotificationContents->locale($locale);
-            $notificationContent = $this->NotificationContents->get($id, [
-                'locales' => $supportedLanguages
-            ]);
+            if (empty($id)) {
+                $notificationContent = $this->NotificationContents->getByIdentifier($notificationIdentifier);
+            } else {
+                $notificationContent = $this->NotificationContents->get($id, [
+                    'locales' => $supportedLanguages
+                ]);
+            }
             $translations[$locale] = $notificationContent;
         }
         $transports = Configure::read('Notifications.transports');

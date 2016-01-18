@@ -17,6 +17,8 @@ class AppController extends BaseController {
     public function initialize()
     {
         $this->helpers[] = 'CkTools.CkTools';
+        $this->helpers[] = 'ListFilter.ListFilter';
+        $this->components[] = 'ListFilter.ListFilter';
         parent::initialize();
     }
 
