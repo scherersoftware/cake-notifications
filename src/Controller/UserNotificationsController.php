@@ -3,6 +3,7 @@ namespace Notifications\Controller;
 
 use App\Model\Entity\User;
 use Cake\Core\Configure;
+use CkTools\Lib\ApiReturnCode;
 use Notifications\Controller\AppController;
 
 /**
@@ -122,13 +123,51 @@ class UserNotificationsController extends AppController
     {
         // Force a JSON response regardless of extension
         $this->RequestHandler->renderAs($this, 'json');
-        
+
         $userId = $this->Auth->user('id');
         $unreadNotifications = $this->NotificationQueue->getOnpageNotificationsForUser($userId, true, false, 50, 1);
         unset($unreadNotifications['moreEntriesAvailable']);
-        
+
         $code = 'success';
         $this->set(compact('code', 'unreadNotifications'));
         $this->set('_serialize', ['code', 'unreadNotifications']);
+    }
+
+    /**
+     * Prevent redirects triggered from AuthComponent.
+     *
+     * @param mixed $url redirect url
+     * @param int $status status code
+     * @return Cake\Network\Response
+     */
+    public function redirect($url, $status = null) {
+        return $this->notAuthenticated();
+    }
+
+    /**
+     * returns a not authenticated response
+     *
+     * @param string $message localized message
+     * @param string $returnCode return code (e.g. not_authenticated)
+     * @param array $data optional data
+     * @return Cake\Network\Response
+     */
+    public function notAuthenticated($message = null, $returnCode = null, $data = []) {
+        if (empty($returnCode)) {
+            $returnCode = ApiReturnCode::NOT_AUTHENTICATED;
+        }
+        if (empty($message)) {
+            $message = __d('notifications', 'auth_error');
+        }
+        $statusCode = ApiReturnCode::getStatusCodeMapping()[$returnCode];
+        $this->response->statusCode($statusCode);
+        $responseData = [
+            'code' => $returnCode,
+            'message' => $message,
+            'data' => $data,
+        ];
+        $this->response->type('json');
+        $this->response->body(json_encode($responseData));
+        return $this->response;
     }
 }
