@@ -19,6 +19,10 @@ class PushMessageTransport extends Transport {
     public function __construct(array $config) {
         parent::__construct($config);
         $keys = Configure::read('Notifications.transports.push_message');
+        if (Configure::check('Notifications.transports.push_message.' . ENVIRONMENT)) {
+            // prefer environment specific config keys
+            $keys = Configure::read('Notifications.transports.push_message.' . ENVIRONMENT);
+        }
         ParseClient::initialize( $keys['app_id'], $keys['rest_key'], $keys['master_key'] );
     }
 
