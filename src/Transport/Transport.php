@@ -28,7 +28,8 @@ abstract class Transport {
  * @param User $user The recipient user
  * @param Notification $notification the notification to be sent
  * @param NotificationContent $content the content
- * @return mixed
+ * @return mixed    should return somthing == true on success
+ *                  and something == false on failure
  */
     abstract public function sendNotification(User $user, Notification $notification, NotificationContent $content);
 

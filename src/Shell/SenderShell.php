@@ -16,8 +16,12 @@ class SenderShell extends Shell {
  * @return void
  */
     public function main() {
+        $batchSize = 10;
+        if (is_numeric(Configure::read('Notifications.batch_size'))) {
+            $batchSize = Configure::read('Notifications.batch_size');
+        }
         $this->loadModel('Notifications.NotificationQueue');
-        $batch = $this->NotificationQueue->getBatch(10);
+        $batch = $this->NotificationQueue->getBatch($batchSize);
         if (!empty($batch)) {
             $batchIds = [];
             $sent = 0;
