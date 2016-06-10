@@ -2,6 +2,7 @@
 namespace Notifications\Shell;
 
 use Cake\Console\Shell;
+use Cake\Core\Configure;
 
 /**
  * Responsible for sending a batch from the NotificationQueue
