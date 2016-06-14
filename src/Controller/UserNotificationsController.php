@@ -59,9 +59,8 @@ class UserNotificationsController extends AppController
         $excludeActionWrapper = true;
         $excludeMessageListWrapper = ($page > 1) ? true : false;
 
-        $this->layout = false;
         $this->set(compact('excludeMessageListWrapper', 'unreadNotifications', 'excludeActionWrapper', 'moreEntriesAvailable', 'page'));
-        return $this->render('./Element/user_notification_list');
+        return $this->render('./Element/user_notification_list', false);
     }
 
     /**
