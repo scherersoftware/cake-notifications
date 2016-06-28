@@ -37,6 +37,9 @@ $config = [
         'Administration' => [
             'layout' => 'default',
             'helpers' => []
+        ],
+        'UserNotifications' => [
+            'readRedirectUrlCallback' => null
         ]
     ]
 ];

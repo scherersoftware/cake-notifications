@@ -78,23 +78,32 @@ class UserNotificationsController extends AppController
         }
 
         if ($this->NotificationQueue->read($id)) {
-            // TODO actually business logic and therefor out of place in this plugin
-            // TODO should be hasUserRight('viewCompleteProject') but AuthComponent has no
-            // access to userrights right now, so:
-            // if not a internal employee redirect to normal view of the linked entity, not
-            // the deep link, which normal users don't have access to
-            if (!in_array($this->Auth->user('role'), [User::ROLE_ADMIN, User::ROLE_USER])
-                && !empty($notification->config['model'])
-                && !empty($notification->config['foreign_key'])) {
-                return $this->redirect([
-                    'plugin' => false,
-                    'controller' => $notification->config['model'],
-                    'action' => 'view',
-                    $notification->config['foreign_key']
-                ]);
-            }
-            if (!empty($notification->config['redirect_link'])) {
-                return $this->redirect($notification->config['redirect_link']);
+            $callback = Configure::read('Notifications.UserNotifications.readRedirectUrlCallback');
+            if (is_callable($callback)) {
+                $url = call_user_func_array($callback, [$notification, $this->Auth]);
+                if (!$url) {
+                    $url = $this->referer();
+                }
+                return $this->redirect($url);
+            } else {
+                // TODO actually business logic and therefor out of place in this plugin
+                // TODO should be hasUserRight('viewCompleteProject') but AuthComponent has no
+                // access to userrights right now, so:
+                // if not a internal employee redirect to normal view of the linked entity, not
+                // the deep link, which normal users don't have access to
+                if (!in_array($this->Auth->user('role'), [User::ROLE_ADMIN, User::ROLE_USER])
+                    && !empty($notification->config['model'])
+                    && !empty($notification->config['foreign_key'])) {
+                    return $this->redirect([
+                        'plugin' => false,
+                        'controller' => $notification->config['model'],
+                        'action' => 'view',
+                        $notification->config['foreign_key']
+                    ]);
+                }
+                if (!empty($notification->config['redirect_link'])) {
+                    return $this->redirect($notification->config['redirect_link']);
+                }
             }
         } else {
             $this->Flash->error(__d('notifications', 'error'));
@@ -140,7 +149,10 @@ class UserNotificationsController extends AppController
      * @return Cake\Network\Response
      */
     public function redirect($url, $status = null) {
-        return $this->notAuthenticated();
+        if ($this->request->is('ajax')) {
+            return $this->notAuthenticated();
+        }
+        return parent::redirect($url, $status);
     }
 
     /**
