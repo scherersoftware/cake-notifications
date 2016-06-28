@@ -12,18 +12,19 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*",
-        "cakephp/cakephp": "3.0.x-dev"
+        "cakephp/cakephp": "3.*",
+        "josegonzalez/cakephp-queuesadilla": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Notifications\\": "src"
+            "Notifications\\": "src",
+            "Notifications\\Test\\": "tests"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Notifications\\": "src",
-            "Notifications\\Test\\": "tests",
-            "Notifications\\Test\\Fixture\\": "tests/Fixture"
+            "Notifications\\Test\\": "tests"
         }
     }
 }
