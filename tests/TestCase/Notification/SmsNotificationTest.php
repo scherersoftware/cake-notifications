@@ -5,21 +5,12 @@ use Cake\Mailer\Email;
 use Cake\TestSuite\TestCase;
 use Notifications\Notification\Notification;
 
-class EmailNotificationTest extends TestCase
+class SmsNotificationTest extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
-        
-        Email::dropTransport('debug');
-        Email::configTransport('debug', [
-            'className' => 'Debug'
-        ]);
-
-        $this->Notification = Notification::factory('email', [
-            'transport' => 'debug',
-            'from' => 'foo@bar.com'
-        ]);
+        $this->Notification = Notification::factory('sms');
     }
 
     /**
@@ -113,6 +104,67 @@ class EmailNotificationTest extends TestCase
      *
      * @return void
      */
+    public function testTo()
+    {
+        $this->Notification->to('01605144878');
+        $this->assertEquals('+491605144878' , $this->Notification->to());
+
+        $this->Notification->to('0160/5144878');
+        $this->assertEquals('+491605144878' , $this->Notification->to());
+
+        $this->Notification->to('0160 5144878');
+        $this->assertEquals('+491605144878' , $this->Notification->to());
+
+        $this->Notification->to('+4901605144878');
+        $this->assertEquals('+4901605144878' , $this->Notification->to());
+
+        $this->Notification->to('4901605144878');
+        $this->assertEquals('+4901605144878' , $this->Notification->to());
+
+        $this->Notification->to('');
+        $this->setExpectedException('InvalidArgumentException');
+
+        $this->Notification->to('123456789');
+        $this->setExpectedException('InvalidArgumentException');
+
+        $this->Notification->to('+491605144878123456');
+        $this->setExpectedException('InvalidArgumentException');
+
+        $this->Notification->to([
+            '01605144878',
+            '01605144879'
+        ]);
+        $this->assertEquals([
+            '+491605144878',
+            '+491605144879'
+        ], $this->Notification->to());
+    }
+
+    /**
+     * testQueue method
+     *
+     * @return void
+     */
+    public function testMessage()
+    {
+        $message = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma';
+        $this->Notification->message($message);
+        $this->assertEquals($message, $this->Notification->message());
+
+        $message1 = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu';
+        $this->Notification->message($message1);
+        $this->setExpectedException('InvalidArgumentException');
+
+        $message2 = '';
+        $this->Notification->message($message2);
+        $this->setExpectedException('InvalidArgumentException');
+    }
+
+    /**
+     * testQueue method
+     *
+     * @return void
+     */
     public function testQueue()
     {
         $this->Notification->queue('default');
@@ -130,6 +182,16 @@ class EmailNotificationTest extends TestCase
     }
 
     /**
+     * testSend method
+     *
+     * @return void
+     */
+    public function testSend()
+    {
+        $this->assertTrue($this->Notification->send());
+    }
+
+    /**
      * testReset method
      *
      * @return void
@@ -137,7 +199,7 @@ class EmailNotificationTest extends TestCase
     public function testReset()
     {
         $this->Notification->reset();
-        $email = Notification::factory('email');
-        $this->assertEquals($this->Notification, $email);
+        $sms = Notification::factory('sms');
+        $this->assertEquals($this->Notification, $sms);
     }
 }
