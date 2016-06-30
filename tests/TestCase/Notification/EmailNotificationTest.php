@@ -29,21 +29,18 @@ class EmailNotificationTest extends TestCase
      */
     public function testBeforeSendCallback()
     {
-        $this->Notification->beforeSendCallback('\Foo::bar', [
+        $this->Notification->beforeSendCallback('Foo::bar', [
             'fistParameter' => 'foo',
             'secondParameter' => 'bar'
         ]);
+
         $this->assertEquals([
             'class' => 'Foo::bar',
             'args' => [
                 'fistParameter' => 'foo',
                 'secondParameter' => 'bar'
             ]
-            
-        ],
-        [
-            $this->Notification->beforeSendCallback()
-        ]);
+        ], $this->Notification->beforeSendCallback());
 
         $this->Notification->beforeSendCallback(['Foo', 'bar'], [
             'fistParameter' => 'foo',
@@ -58,11 +55,7 @@ class EmailNotificationTest extends TestCase
                 'fistParameter' => 'foo',
                 'secondParameter' => 'bar'
             ]
-            
-        ],
-        [
-            $this->Notification->beforeSendCallback()
-        ]);
+        ], $this->Notification->beforeSendCallback());
     }
 
     /**
@@ -72,7 +65,7 @@ class EmailNotificationTest extends TestCase
      */
     public function testAfterSendCallback()
     {
-        $this->Notification->afterSendCallback('\Foo::bar', [
+        $this->Notification->afterSendCallback('Foo::bar', [
             'fistParameter' => 'foo',
             'secondParameter' => 'bar'
         ]);
@@ -82,11 +75,7 @@ class EmailNotificationTest extends TestCase
                 'fistParameter' => 'foo',
                 'secondParameter' => 'bar'
             ]
-            
-        ],
-        [
-            $this->Notification->afterSendCallback()
-        ]);
+        ], $this->Notification->afterSendCallback());
 
         $this->Notification->afterSendCallback(['Foo', 'bar'], [
             'fistParameter' => 'foo',
@@ -101,22 +90,25 @@ class EmailNotificationTest extends TestCase
                 'fistParameter' => 'foo',
                 'secondParameter' => 'bar'
             ]
-            
-        ],
-        [
-            $this->Notification->afterSendCallback()
-        ]);
+        ], $this->Notification->afterSendCallback());
     }
 
     /**
-     * testQueue method
+     * testSettings method
      *
      * @return void
      */
-    public function testQueue()
+    public function testSettings()
     {
-        $this->Notification->queue('default');
-        $this->assertEquals('default', $this->Notification->queue());
+        $settings = [
+            'attempts' => 20,
+            'attempts_delay' => 2,
+            'delay' => 2,
+            'expires_in' => 10,
+            'queue' => 'email'
+        ];
+        $this->Notification->settings($settings);
+        $this->assertEquals($settings, $this->Notification->settings());
     }
 
     /**
@@ -126,18 +118,8 @@ class EmailNotificationTest extends TestCase
      */
     public function testPush()
     {
-        $this->assertTrue($this->Notification->push());
-    }
-
-    /**
-     * testReset method
-     *
-     * @return void
-     */
-    public function testReset()
-    {
-        $this->Notification->reset();
-        $email = Notification::factory('email');
-        $this->assertEquals($this->Notification, $email);
+        $this->markTestIncomplete(
+          'This test has not been implemented yet.'
+        );
     }
 }

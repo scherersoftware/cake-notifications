@@ -1,59 +1,84 @@
 <?php
 namespace Notifications\Notification;
 
+use InvalidArgumentException;
 use Notifications\Notification\Notification;
+use Notifications\Transport\Transport;
+use Josegonzalez\CakeQueuesadilla\Queue\Queue;
 
 class SmsNotification extends Notification implements NotificationInterface
 {
 
     /**
-     * Maximum message length - RFC 2822 - 140 octets
+     * Holds the regex pattern for the phone number validation
      *
-     * @var int
+     * @var string
      */
-    const MAX_LENGTH = 140;
+    const PHONE_NUMBER_PATTERN = '/(^\+)|^[0-9]/';
+
+    /**
+     * Transport class
+     *
+     * @var string
+     */
+    protected $_transport = '\Notifications\Transport\SmsTransport';
 
     /**
      * Recipient of the sms
      *
-     * @var array
+     * @var string
      */
-    protected $_to = [];
+    protected $_to = '';
 
     /**
      * Message of the sms
      *
-     * @var array
+     * @var string
      */
-    protected $_message = [];
-
-    /**
-     * Constructor
-     * 
-     */
-    public function __construct()
-    {
-    }
+    protected $_message = '';
 
     /**
      * To
      *
-     * @param string|array|null $number Null to get, String with number,
-     *   Array with numbers as values
-     * @return array|$this
+     * @param string|null $number Null to get, String with number
+     * @return string|$this
      */
     public function to($number = null)
     {
+        if ($number === null) {
+            return $this->_to;
+        }
+        return $this->__setTo($number);
     }
 
     /**
      * Message
      *
-     * @param string|null $message Message of the SMS - max 140 characters
-     * @return array|$this
+     * @param string|null $message Message of the SMS
+     * @return string|$this
      */
     public function message($message = null)
     {
+        if ($message === null) {
+            return $this->_message;
+        }
+        $this->_message = $message;
+        return $this;
+    }
+
+
+    /**
+     * Push the EmailNotification into the queue
+     *
+     * @return bool
+    */
+    public function push()
+    {
+        return Queue::push([
+            $this->_transport, 'sendNotification'
+        ], [
+            'sms' => $this
+        ], $this->_settings);
     }
 
     /**
@@ -63,19 +88,20 @@ class SmsNotification extends Notification implements NotificationInterface
      */
     public function send()
     {
+        Transport::factory('sms')->sendNotification($this);
     }
 
     /**
-     * Reset all the internal variables to be able to send out a new sms.
+     * Set To
      *
      * @return $this
      */
-    public function reset()
+    private function __setTo($number)
     {
-        parent::reset();
-        $this->_to = [];
-        $this->_message = [];
-
+        if (preg_match(self::PHONE_NUMBER_PATTERN, $number) == false) {
+            throw new InvalidArgumentException(sprintf('Invalid phone number: "%s"', $number));
+        }
+        $this->_to = $number;
         return $this;
     }
 

@@ -3,9 +3,17 @@ namespace Notifications\Notification;
 
 use Cake\Mailer\Email;
 use Notifications\Notification\Notification;
+use Josegonzalez\CakeQueuesadilla\Queue\Queue;
 
 class EmailNotification extends Notification implements NotificationInterface
 {
+
+    /**
+     * Transport class
+     *
+     * @var string
+     */
+    protected $_transport = '\Notifications\Transport\EmailTransport';
 
     /**
      * Cake Email object
@@ -21,6 +29,20 @@ class EmailNotification extends Notification implements NotificationInterface
     public function __construct(array $config = [])
     {
         $this->_email = new Email($config);
+    }
+
+    /**
+     * Push the EmailNotification into the queue
+     *
+     * @return bool
+    */
+    public function push()
+    {
+        return Queue::push([
+            $this->_transport, 'sendNotification'
+        ], [
+            'email' => serialize($this->_email)
+        ], $this->_settings);
     }
 
     /**
@@ -46,19 +68,6 @@ class EmailNotification extends Notification implements NotificationInterface
     public static function __callStatic($name, $args)
     {
         call_user_func_array([$this->_email, $name], $args);
-        return $this;
-    }
-
-    /**
-     * Reset all the internal variables to be able to send out a new email.
-     *
-     * @return $this
-     */
-    public function reset()
-    {
-        parent::reset();
-        $this->_email = [];
-
         return $this;
     }
 

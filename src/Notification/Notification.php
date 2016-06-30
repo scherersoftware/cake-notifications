@@ -3,7 +3,6 @@ namespace Notifications\Notification;
 
 abstract class Notification
 {
-
     /**
      * Before send callback.
      *
@@ -19,17 +18,28 @@ abstract class Notification
     protected $_afterSendCallback = [];
 
     /**
-     * Queue
+     * Settings
      *
-     * @var string
+     * @var array
      */
-    protected $_queue = '';
+    protected $_settings = [];
 
     /**
-     * Constructor
-     * 
+     * An array mapping notifications to their classes
+     *
+     * @var array
      */
-    abstract public function __construct();
+    private static $__notifications = [
+        'email' => 'Notifications\Notification\EmailNotification',
+        'sms' => 'Notifications\Notification\SmsNotification'
+    ];
+
+    /**
+     * Push the Notification into the queue
+     *
+     * @return bool
+    */
+    abstract public function push();
 
     /**
      * Get/Set Before send callback.
@@ -39,6 +49,10 @@ abstract class Notification
     */
     public function beforeSendCallback($class = null, $args = null)
     {
+        if ($class === null) {
+            return $this->_beforeSendCallback;
+        }
+        return $this->__setCallback('_beforeSendCallback', $class, $args);
     }
 
     /**
@@ -47,67 +61,87 @@ abstract class Notification
      * @param array|null
      * @return array
     */
-    public function afterSendCallback($afterSendCallback = null)
+    public function afterSendCallback($class = null, $args = null)
     {
+        if ($class === null) {
+            return $this->_afterSendCallback;
+        }
+        return $this->__setCallback('_afterSendCallback', $class, $args);
     }
 
     /**
-     * Get/Set Queue.
+     * Get/Set Settings.
      *
-     * @param string|null
-     * @return string
+     * ### Supported settings
+     *
+     * - attempts: how often the notification will be executed again after failure
+     * - attempts_delay: how long it takes in seconds until the notification will be executed again
+     * - delay: how long it takes until the notification will be executed for the first time  in seconds
+     * - expires_in: how long the notification will stay in the queue in seconds
+     * - queue: name of the queue
+     *
+     * @param array|null
+     * @return array
     */
-    public function queue($queue = null)
+    public function settings(array $settings = null)
     {
+        if ($settings === null) {
+            return $this->_settings;
+        }
+        return $this->__setSettings($settings);
     }
 
     /**
-     * Push the Notification into the queue
-     *
-     * @return bool
-    */
-    public function push()
-    {
-    }
-
-    /**
-     * Reset all the internal variables to be able to send out a notification
-     *
-     * @return $this
-     */
-    public function reset()
-    {
-        $this->_beforeSendCallback = [];
-        $this->_afterSendCallback = [];
-        $this->_queue = [];
-    }
-
-    /**
-     * Return an instnace of the requested notification
+     * Return an instance of the requested notification
      *
      * @param string $type 
      * @param array $config 
-     * @return void
+     * @return Notification
      */
     public static function factory($type, array $config = []) {
-        $map = [
-            'email' => 'Notifications\Notification\EmailNotification',
-            'sms' => 'Notifications\Notification\SmsNotification'
-        ];
-        if (!isset($map[$type])) {
+        if (!isset(self::$__notifications)) {
             throw new \InvalidArgumentException("{$type} is not a valid notification");
         }
-        $className = $map[$type];
+        $className = self::$__notifications[$type];
         $notification = new $className($config);
         return $notification;
     }
 
     /**
-     * undocumented function
+     * Set settings
      *
-     * @return void
+     * @return $this
+     */
+    private function __setSettings($settings)
+    {
+        $this->_settings = $settings;
+        return $this;
+    }
+
+    /**
+     * Set callback
+     *
+     * @return $this
      */
     private function __setCallback($type, $class, $args)
     {
+        if (!is_array($class)) {
+            $this->{$type} = [
+                'class' => $class,
+                'args' => $args
+            ];
+            return $this;
+        } else if (is_array($class) && count($class) == 2) {
+            $className = $class[0];
+            $methodName = $class[1];
+        } else {
+            throw new \InvalidArgumentException("{$class} is missformated");
+        }
+
+        $this->{$type} = [
+            'class' => [$className, $methodName],
+            'args' => $args
+        ];
+        return $this;
     }
 }
