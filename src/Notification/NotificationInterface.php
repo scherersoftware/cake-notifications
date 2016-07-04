@@ -21,12 +21,12 @@ interface NotificationInterface
     public function afterSendCallback();
 
     /**
-     * Get/Set Settings.
+     * Get/Set queue options.
      *
      * @param array|null
      * @return array
     */
-    public function settings();
+    public function queueOptions();
 
     /**
      * Push the notification into a queue

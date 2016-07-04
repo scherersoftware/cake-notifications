@@ -44,7 +44,7 @@ class EmailNotification extends Notification implements NotificationInterface
             'email' => $this->_email->serialize(),
             'beforeSendCallback' => $this->_beforeSendCallback,
             'afterSendCallback' => $this->_afterSendCallback
-        ], $this->_settings);
+        ], $this->_queueOptions);
     }
 
     /**

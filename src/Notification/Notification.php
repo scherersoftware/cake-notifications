@@ -18,21 +18,11 @@ abstract class Notification
     protected $_afterSendCallback = [];
 
     /**
-     * Settings
+     * Queue options
      *
      * @var array
      */
-    protected $_settings = [];
-
-    /**
-     * An array mapping notifications to their classes
-     *
-     * @var array
-     */
-    private static $__notifications = [
-        'email' => 'Notifications\Notification\EmailNotification',
-        'sms' => 'Notifications\Notification\SmsNotification'
-    ];
+    protected $_queueOptions = [];
 
     /**
      * Push the Notification into the queue
@@ -70,9 +60,9 @@ abstract class Notification
     }
 
     /**
-     * Get/Set Settings.
+     * Get/Set Queue Optons.
      *
-     * ### Supported settings
+     * ### Supported options
      *
      * - attempts: how often the notification will be executed again after failure
      * - attempts_delay: how long it takes in seconds until the notification will be executed again
@@ -83,28 +73,12 @@ abstract class Notification
      * @param array|null
      * @return array
     */
-    public function settings(array $settings = null)
+    public function queueOptions(array $options = null)
     {
-        if ($settings === null) {
-            return $this->_settings;
+        if ($options === null) {
+            return $this->_queueOptions;
         }
-        return $this->__setSettings($settings);
-    }
-
-    /**
-     * Return an instance of the requested notification
-     *
-     * @param string $type 
-     * @param array $config 
-     * @return Notification
-     */
-    public static function factory($type, array $config = []) {
-        if (!isset(self::$__notifications)) {
-            throw new \InvalidArgumentException("{$type} is not a valid notification");
-        }
-        $className = self::$__notifications[$type];
-        $notification = new $className($config);
-        return $notification;
+        return $this->__setQueueOptions($options);
     }
 
     /**
@@ -113,9 +87,9 @@ abstract class Notification
      * @param array
      * @return $this
      */
-    private function __setSettings($settings)
+    private function __setQueueOptions($options)
     {
-        $this->_settings = $settings;
+        $this->_queueOptions = $options;
         return $this;
     }
 

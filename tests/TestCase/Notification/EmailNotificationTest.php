@@ -3,20 +3,20 @@ namespace Notifications\Test\TestCase\Notification;
 
 use Cake\Mailer\Email;
 use Cake\TestSuite\TestCase;
-use Notifications\Notification\Notification;
+use Notifications\Notification\EmailNotification;
 
 class EmailNotificationTest extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
-        
+
         Email::dropTransport('debug');
         Email::configTransport('debug', [
             'className' => 'Debug'
         ]);
 
-        $this->Notification = Notification::factory('email', [
+        $this->Notification = new EmailNotification([
             'transport' => 'debug',
             'from' => 'foo@bar.com'
         ]);
@@ -98,17 +98,17 @@ class EmailNotificationTest extends TestCase
      *
      * @return void
      */
-    public function testSettings()
+    public function testQueueOptions()
     {
-        $settings = [
+        $options = [
             'attempts' => 20,
             'attempts_delay' => 2,
             'delay' => 2,
             'expires_in' => 10,
             'queue' => 'email'
         ];
-        $this->Notification->settings($settings);
-        $this->assertEquals($settings, $this->Notification->settings());
+        $this->Notification->queueOptions($options);
+        $this->assertEquals($options, $this->Notification->queueOptions());
     }
 
     /**
