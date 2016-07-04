@@ -30,21 +30,21 @@ class EmailNotificationTest extends TestCase
     public function testBeforeSendCallback()
     {
         $this->Notification->beforeSendCallback('Foo::bar', [
-            'fistParameter' => 'foo',
-            'secondParameter' => 'bar'
+            'foo',
+            'bar'
         ]);
 
         $this->assertEquals([
             'class' => 'Foo::bar',
             'args' => [
-                'fistParameter' => 'foo',
-                'secondParameter' => 'bar'
+                'foo',
+                'bar'
             ]
         ], $this->Notification->beforeSendCallback());
 
         $this->Notification->beforeSendCallback(['Foo', 'bar'], [
-            'fistParameter' => 'foo',
-            'secondParameter' => 'bar'
+            'foo',
+            'bar'
         ]);
         $this->assertEquals([
             'class' => [
@@ -52,8 +52,8 @@ class EmailNotificationTest extends TestCase
                 'bar'
             ],
             'args' => [
-                'fistParameter' => 'foo',
-                'secondParameter' => 'bar'
+                'foo',
+                'bar'
             ]
         ], $this->Notification->beforeSendCallback());
     }
@@ -66,20 +66,20 @@ class EmailNotificationTest extends TestCase
     public function testAfterSendCallback()
     {
         $this->Notification->afterSendCallback('Foo::bar', [
-            'fistParameter' => 'foo',
-            'secondParameter' => 'bar'
+            'foo',
+            'bar'
         ]);
         $this->assertEquals([
             'class' => 'Foo::bar',
             'args' => [
-                'fistParameter' => 'foo',
-                'secondParameter' => 'bar'
+                'foo',
+                'bar'
             ]
         ], $this->Notification->afterSendCallback());
 
         $this->Notification->afterSendCallback(['Foo', 'bar'], [
-            'fistParameter' => 'foo',
-            'secondParameter' => 'bar'
+            'foo',
+            'bar'
         ]);
         $this->assertEquals([
             'class' => [
@@ -87,8 +87,8 @@ class EmailNotificationTest extends TestCase
                 'bar'
             ],
             'args' => [
-                'fistParameter' => 'foo',
-                'secondParameter' => 'bar'
+                'foo',
+                'bar'
             ]
         ], $this->Notification->afterSendCallback());
     }

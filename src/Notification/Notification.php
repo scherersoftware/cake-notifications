@@ -47,7 +47,7 @@ abstract class Notification
      * @param array|null
      * @return array
     */
-    public function beforeSendCallback($class = null, $args = null)
+    public function beforeSendCallback($class = null, array $args = [])
     {
         if ($class === null) {
             return $this->_beforeSendCallback;
@@ -61,7 +61,7 @@ abstract class Notification
      * @param array|null
      * @return array
     */
-    public function afterSendCallback($class = null, $args = null)
+    public function afterSendCallback($class = null, array $args = [])
     {
         if ($class === null) {
             return $this->_afterSendCallback;
@@ -110,6 +110,7 @@ abstract class Notification
     /**
      * Set settings
      *
+     * @param array
      * @return $this
      */
     private function __setSettings($settings)
@@ -121,9 +122,12 @@ abstract class Notification
     /**
      * Set callback
      *
+     * @param string $type _beforeSendCallback or _afterSendCallback
+     * @param string $class name of the class
+     * @param array $args array of arguments
      * @return $this
      */
-    private function __setCallback($type, $class, $args)
+    private function __setCallback($type, $class, array $args)
     {
         if (!is_array($class)) {
             $this->{$type} = [

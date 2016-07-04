@@ -2,5 +2,3 @@ vendor
 composer.lock
 .DS_Store
 build
-
-setup.sh

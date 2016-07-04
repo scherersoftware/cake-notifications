@@ -41,7 +41,9 @@ class EmailNotification extends Notification implements NotificationInterface
         return Queue::push([
             $this->_transport, 'sendNotification'
         ], [
-            'email' => serialize($this->_email)
+            'email' => $this->_email->serialize(),
+            'beforeSendCallback' => $this->_beforeSendCallback,
+            'afterSendCallback' => $this->_afterSendCallback
         ], $this->_settings);
     }
 
@@ -67,8 +69,7 @@ class EmailNotification extends Notification implements NotificationInterface
      */
     public static function __callStatic($name, $args)
     {
-        call_user_func_array([$this->_email, $name], $args);
-        return $this;
+        forward_static_call(['Cake\Mailer\Email', $name], $args);
     }
 
 }
