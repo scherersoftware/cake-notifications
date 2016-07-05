@@ -26,7 +26,7 @@ class EmailNotification extends Notification implements NotificationInterface
      * Constructor
      * 
      */
-    public function __construct(array $config = [])
+    public function __construct($config = null)
     {
         $this->_email = new Email($config);
     }
