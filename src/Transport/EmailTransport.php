@@ -15,12 +15,12 @@ class EmailTransport extends Transport
      * @param obj $notification EmailNotification
      * @return void
      */
-    public static function sendNotification(EmailNotification $notification)
+    public static function sendNotification(Notification $notification, $content = null)
     {
         $beforeSendCallback = $notification->beforeSendCallback();
         self::_performCallback($beforeSendCallback);
 
-        $notification->email()->send();
+        $notification->email()->send($content);
 
         $afterSendCallback = $notification->afterSendCallback();
         self::_performCallback($afterSendCallback);

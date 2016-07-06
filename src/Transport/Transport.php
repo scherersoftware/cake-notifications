@@ -5,11 +5,15 @@ use Notifications\Notification\Notification;
 
 abstract class Transport
 {
+
     /**
-     * Abstract sender method
+     * Abstract sendNotification method
      *
+     * @param Notification $notification Notification object
+     * @param string|array|null $content String with message or array with messages
+     * @return void
      */
-    abstract public static function sendNotification(Notification $notification);
+    abstract public static function sendNotification(Notification $notification, $content = null);
 
     /**
      * Performs the before- or after send callback of the notification

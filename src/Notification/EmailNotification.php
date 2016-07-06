@@ -51,11 +51,12 @@ class EmailNotification extends Notification implements NotificationInterface
     /**
      * Send the EmailNotification immediately using the correspondending transport class
      *
+     * @param string|array|null $content String with message or array with messages
      * @return bool
     */
-    public function send()
+    public function send($content = null)
     {
-        return EmailTransport::sendNotification($this);
+        return EmailTransport::sendNotification($this, $content);
     }
 
     /**

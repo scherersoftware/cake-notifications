@@ -34,9 +34,10 @@ abstract class Notification
     /**
      * Send the Notification immediately
      *
-     * @return bool
-    */
-    abstract public function send();
+     * @param string|array|null $content String with message or array with messages
+     * @return void
+     */
+    abstract public function send($content = null);
 
     /**
      * Get/Set Before send callback.
