@@ -1,15 +1,50 @@
 <?php
 namespace Notifications\Test\TestCase\Notification;
 
+use Cake\Core\Configure;
+use Cake\Log\Log;
 use Cake\Mailer\Email;
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Notifications\Notification\EmailNotification;
+use Josegonzalez\CakeQueuesadilla\Queue\Queue;
 
 class EmailNotificationTest extends TestCase
 {
+
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
+    public $fixtures = [
+        'Jobs' => 'plugin.notifications.jobs'
+    ];
+
+    /**
+     * setUp method
+     *
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
+
+        Log::reset();
+        Log::config('stdout', ['engine' => 'File']);
+        
+
+        $dbConfig = \Cake\Datasource\ConnectionManager::config('test');
+        Queue::reset();
+        Queue::config([
+            'default' => [
+                'engine' => 'josegonzalez\Queuesadilla\Engine\MysqlEngine',
+                'database' => $dbConfig['database'],
+                'host' => $dbConfig['host'],
+                'user' => $dbConfig['username'],
+                'pass' => $dbConfig['password']
+            ]
+        ]);
 
         Email::dropTransport('debug');
         Email::configTransport('debug', [
@@ -20,6 +55,16 @@ class EmailNotificationTest extends TestCase
             'transport' => 'debug',
             'from' => 'foo@bar.com'
         ]);
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        unset($this->Notification);
     }
 
     /**
@@ -94,6 +139,16 @@ class EmailNotificationTest extends TestCase
     }
 
     /**
+     * testEmail method
+     *
+     * @return void
+     */
+    public function FunctionName()
+    {
+        $this->assertEquals(new Email(), $this->Notification->email());
+    }
+
+    /**
      * testSettings method
      *
      * @return void
@@ -118,8 +173,11 @@ class EmailNotificationTest extends TestCase
      */
     public function testPush()
     {
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->Notification->push();
+
+        $job = TableRegistry::get('Jobs')->find()
+            ->first();
+        $this->assertTrue($job->id === 1);
+        $this->assertTrue($job->queue === 'default');
     }
 }

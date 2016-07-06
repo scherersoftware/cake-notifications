@@ -32,6 +32,13 @@ abstract class Notification
     abstract public function push();
 
     /**
+     * Send the Notification immediately
+     *
+     * @return bool
+    */
+    abstract public function send();
+
+    /**
      * Get/Set Before send callback.
      *
      * @param array|null

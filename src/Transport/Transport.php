@@ -1,13 +1,15 @@
 <?php
 namespace Notifications\Transport;
 
+use Notifications\Notification\Notification;
+
 abstract class Transport
 {
     /**
      * Abstract sender method
      *
      */
-    abstract public function sendNotification($notification);
+    abstract public static function sendNotification(Notification $notification);
 
     /**
      * Performs the before- or after send callback of the notification
@@ -15,7 +17,7 @@ abstract class Transport
      * @param array $item Contains the class and function name and optional, function params
      * @return bool
      */
-    protected function _performCallback($item)
+    protected static function _performCallback($item)
     {
         if (!isset($item['class']) || !is_callable($item['class'])) {
             return false;

@@ -3,6 +3,7 @@ namespace Notifications\Notification;
 
 use Cake\Mailer\Email;
 use Notifications\Notification\Notification;
+use Notifications\Transport\EmailTransport;
 use Josegonzalez\CakeQueuesadilla\Queue\Queue;
 
 class EmailNotification extends Notification implements NotificationInterface
@@ -39,12 +40,32 @@ class EmailNotification extends Notification implements NotificationInterface
     public function push()
     {
         return Queue::push([
-            $this->_transport, 'sendNotification'
+            $this->_transport, 'processQueueObject'
         ], [
             'email' => $this->_email->serialize(),
             'beforeSendCallback' => $this->_beforeSendCallback,
             'afterSendCallback' => $this->_afterSendCallback
         ], $this->_queueOptions);
+    }
+
+    /**
+     * Send the EmailNotification immediately using the correspondending transport class
+     *
+     * @return bool
+    */
+    public function send()
+    {
+        return EmailTransport::sendNotification($this);
+    }
+
+    /**
+     * Get the Cake Email object
+     *
+     * @return obj Email
+    */
+    public function email()
+    {
+        return $this->_email;
     }
 
     /**
