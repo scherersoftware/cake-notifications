@@ -2,7 +2,9 @@
 namespace Notifications\Test\TestCase\Notification;
 
 use Cake\Mailer\Email;
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
+use Notifications\Notification\EmailNotification;
 use Notifications\Transport\EmailTransport;
 
 /**
@@ -10,19 +12,19 @@ use Notifications\Transport\EmailTransport;
  *
  */
 class Foo {
-    public function bar($arg1 = null, $arg2 = null)
+
+    public function bar()
     {
-        return $arg1 . ' ' . $arg2;
     }
 
-    public static function barStatic($arg1 = null, $arg2 = null)
+    public static function barStatic()
     {
-        return $arg1 . ' ' . $arg2;
     }
 }
 
 class EmailTransportTest extends TestCase
 {
+
     public function setUp()
     {
         parent::setUp();
@@ -31,14 +33,15 @@ class EmailTransportTest extends TestCase
         Email::configTransport('debug', [
             'className' => 'Debug'
         ]);
-
-        $this->Transport = new EmailTransport();
     }
 
     public function testSendNotification() {
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $email = new EmailNotification();
+        $email->to('foo@bar.com')
+            ->beforeSendCallback(['Notifications\Test\TestCase\Notification\Foo', 'bar'])
+            ->afterSendCallback('Notifications\Test\TestCase\Notification\Foo::barStatic')
+            ->transport('debug');
+        EmailTransport::sendNotification($email);
     }
 
     public function testProcessQueueObject() {

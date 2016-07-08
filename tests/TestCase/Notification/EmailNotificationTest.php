@@ -64,7 +64,11 @@ class EmailNotificationTest extends TestCase
      */
     public function tearDown()
     {
+        parent::tearDown();
+
         unset($this->Notification);
+        Log::reset();
+        Queue::reset();
     }
 
     /**
@@ -179,5 +183,16 @@ class EmailNotificationTest extends TestCase
             ->first();
         $this->assertTrue($job->id === 1);
         $this->assertTrue($job->queue === 'default');
+    }
+
+    /**
+     * testSend method
+     *
+     * @return void
+     */
+    public function testSend()
+    {
+        $this->Notification->to('foo@bar.de')
+            ->send();
     }
 }
