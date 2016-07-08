@@ -3,12 +3,11 @@
     "description": "CakePHP3 Notifications Plugin",
     "license": "MIT",
     "type": "cakephp-plugin",
-    "extra": {
-        "installer-name": "Notifications"
-    },
+    "homepage": "https://github.com/scherersoftware/cake-notifications",
     "require": {
-        "cakephp/plugin-installer": "*",
-        "parse/php-sdk": "1.0.*"
+      "php": ">=5.4",
+      "cakephp/cakephp": "~3.0",
+      "josegonzalez/cakephp-queuesadilla": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

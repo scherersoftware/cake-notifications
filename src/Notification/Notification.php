@@ -121,6 +121,9 @@ abstract class Notification
             $className = $class[0];
             $methodName = $class[1];
         } else {
+            if (is_array($class)) {
+                $class = implode($class);
+            }
             throw new \InvalidArgumentException("{$class} is missformated");
         }
 

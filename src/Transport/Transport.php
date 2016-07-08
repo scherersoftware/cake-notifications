@@ -33,8 +33,14 @@ abstract class Transport
         }
 
         $success = false;
-
-        $success = call_user_func_array($item['class'], $args);
+        if (is_array($item['class']) && count($item['class']) == 2) {
+            $className = $item['class'][0];
+            $methodName = $item['class'][1];
+            $instance = new $className;
+            $success = call_user_func([$instance, $methodName], $args);
+        } elseif (is_string($item['class'])) {
+            $success = call_user_func($item['class'], $args);
+        }
         if ($success !== false) {
             $success = true;
         }
