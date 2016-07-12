@@ -2,11 +2,11 @@
 namespace Notifications\Notification;
 
 use Cake\Mailer\Email;
+use Josegonzalez\CakeQueuesadilla\Queue\Queue;
 use Notifications\Notification\Notification;
 use Notifications\Transport\EmailTransport;
-use Josegonzalez\CakeQueuesadilla\Queue\Queue;
 
-class EmailNotification extends Notification implements NotificationInterface
+class EmailNotification extends Notification
 {
 
     /**
@@ -25,7 +25,7 @@ class EmailNotification extends Notification implements NotificationInterface
 
     /**
      * Constructor
-     * 
+     *
      */
     public function __construct($config = null)
     {
@@ -33,10 +33,8 @@ class EmailNotification extends Notification implements NotificationInterface
     }
 
     /**
-     * Push the EmailNotification into the queue
-     *
-     * @return bool
-    */
+     * {@inheritdoc}
+     */
     public function push()
     {
         return Queue::push([
@@ -53,7 +51,7 @@ class EmailNotification extends Notification implements NotificationInterface
      *
      * @param string|array|null $content String with message or array with messages
      * @return bool
-    */
+     */
     public function send($content = null)
     {
         return EmailTransport::sendNotification($this, $content);
@@ -63,7 +61,7 @@ class EmailNotification extends Notification implements NotificationInterface
      * Get the Cake Email object
      *
      * @return obj Email
-    */
+     */
     public function email()
     {
         return $this->_email;
@@ -72,8 +70,8 @@ class EmailNotification extends Notification implements NotificationInterface
     /**
      * Overload Cake\Mailer\mail functions
      *
-     * @param string $name
-     * @param string $args
+     * @param string $name methodname
+     * @param string $args arguments
      * @return this
      */
     public function __call($name, $args)
@@ -85,13 +83,12 @@ class EmailNotification extends Notification implements NotificationInterface
     /**
      * Overload Cake\Mailer\mail functions
      *
-     * @param string $name
-     * @param string $args
+     * @param string $name methodname
+     * @param string $args arguments
      * @return this
      */
     public static function __callStatic($name, $args)
     {
         forward_static_call(['Cake\Mailer\Email', $name], $args);
     }
-
 }

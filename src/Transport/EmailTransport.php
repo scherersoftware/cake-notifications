@@ -5,14 +5,16 @@ use Cake\Mailer\Email;
 use josegonzalez\Queuesadilla\Job\Base;
 use Notifications\Notification\EmailNotification;
 use Notifications\Notification\Notification;
+use Notifications\Transport\TransportInterface;
 
-class EmailTransport extends Transport
+class EmailTransport extends Transport implements TransportInterface
 {
 
     /**
      * Send function
      *
-     * @param obj $notification EmailNotification
+     * @param Notification $notification Notification object
+     * @param string|array|null $content String with message or array with messages
      * @return void
      */
     public static function sendNotification(Notification $notification, $content = null)
@@ -32,13 +34,14 @@ class EmailTransport extends Transport
      * @param Base $job Queuesadilla base job
      * @return void
      */
-    public static function processQueueObject(Base $job) {
+    public static function processQueueObject(Base $job)
+    {
         $notification = new EmailNotification();
 
-        if($job->data('beforeSendCallback') !== []) {
+        if ($job->data('beforeSendCallback') !== []) {
             $notification->beforeSendCallback($job->data('beforeSendCallback'));
         }
-        if($job->data('afterSendCallback') !== []) {
+        if ($job->data('afterSendCallback') !== []) {
             $notification->afterSendCallback($job->data('beforeSendCallback'));
         }
         $notification->unserialize($job->data('email'));

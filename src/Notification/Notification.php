@@ -1,7 +1,7 @@
 <?php
 namespace Notifications\Notification;
 
-abstract class Notification
+abstract class Notification implements NotificationInterface
 {
     /**
      * Before send callback.
@@ -28,7 +28,7 @@ abstract class Notification
      * Push the Notification into the queue
      *
      * @return bool
-    */
+     */
     abstract public function push();
 
     /**
@@ -40,11 +40,8 @@ abstract class Notification
     abstract public function send($content = null);
 
     /**
-     * Get/Set Before send callback.
-     *
-     * @param array|null
-     * @return array
-    */
+     * {@inheritdoc}
+     */
     public function beforeSendCallback($class = null, array $args = [])
     {
         if ($class === null) {
@@ -54,11 +51,8 @@ abstract class Notification
     }
 
     /**
-     * Get/Set After send callback.
-     *
-     * @param array|null
-     * @return array
-    */
+     * {@inheritdoc}
+     */
     public function afterSendCallback($class = null, array $args = [])
     {
         if ($class === null) {
@@ -68,19 +62,8 @@ abstract class Notification
     }
 
     /**
-     * Get/Set Queue Optons.
-     *
-     * ### Supported options
-     *
-     * - attempts: how often the notification will be executed again after failure
-     * - attempts_delay: how long it takes in seconds until the notification will be executed again
-     * - delay: how long it takes until the notification will be executed for the first time  in seconds
-     * - expires_in: how long the notification will stay in the queue in seconds
-     * - queue: name of the queue
-     *
-     * @param array|null
-     * @return array
-    */
+     * {@inheritdoc}
+     */
     public function queueOptions(array $options = null)
     {
         if ($options === null) {
@@ -92,7 +75,7 @@ abstract class Notification
     /**
      * Set settings
      *
-     * @param array
+     * @param array $options Queue options
      * @return $this
      */
     private function __setQueueOptions($options)
@@ -117,7 +100,7 @@ abstract class Notification
                 'args' => $args
             ];
             return $this;
-        } else if (is_array($class) && count($class) == 2) {
+        } elseif (is_array($class) && count($class) == 2) {
             $className = $class[0];
             $methodName = $class[1];
         } else {

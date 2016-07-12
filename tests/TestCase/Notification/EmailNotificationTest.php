@@ -6,8 +6,8 @@ use Cake\Log\Log;
 use Cake\Mailer\Email;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
-use Notifications\Notification\EmailNotification;
 use Josegonzalez\CakeQueuesadilla\Queue\Queue;
+use Notifications\Notification\EmailNotification;
 
 class EmailNotificationTest extends TestCase
 {

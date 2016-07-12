@@ -5,31 +5,45 @@ interface NotificationInterface
 {
 
     /**
-     * Get/Set Before send callback.
+     * Get/Set before send callback.
      *
-     * @param array|null
-     * @return array
-    */
-    public function beforeSendCallback();
+     * @param string|array|null $class Name of the class and method
+     * - Pass a string in the class::method format to call a static method
+     * - Pass an array in the [class => method] format to call a non static method
+     * @param array $args the method parameters you want to pass to the called method
+     * @package default
+     */
+    public function beforeSendCallback($class = null, array $args = []);
 
     /**
-     * Get/Set After send callback.
+     * Get/Set after send callback.
      *
-     * @param array|null
-     * @return array
-    */
-    public function afterSendCallback();
+     * @param string|array|null $class Name of the class and method
+     * - Pass a string in the class::method format to call a static method
+     * - Pass an array in the [class => method] format to call a non static method
+     * @param array $args the method parameters you want to pass to the called method
+     * @package default
+     */
+    public function afterSendCallback($class = null, array $args = []);
 
     /**
-     * Get/Set queue options.
+     * Get/Set Queue Optons.
      *
-     * @param array|null
+     * @param array|null $options Queue options
+     *
+     * ### Supported options
+     *
+     * - attempts: how often the notification will be executed again after failure
+     * - attempts_delay: how long it takes in seconds until the notification will be executed again
+     * - delay: how long it takes until the notification will be executed for the first time  in seconds
+     * - expires_in: how long the notification will stay in the queue in seconds
+     * - queue: name of the queue
      * @return array
-    */
-    public function queueOptions();
+     */
+    public function queueOptions(array $options = null);
 
     /**
-     * Push the notification into a queue
+     * Push the Notification into the queue
      *
      * @return bool
      */

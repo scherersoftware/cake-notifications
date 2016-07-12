@@ -12,7 +12,8 @@ use Notifications\Transport\EmailTransport;
  * Helper class to test callbacks
  *
  */
-class Foo {
+class Foo
+{
 
     public function bar()
     {
@@ -49,7 +50,8 @@ class EmailTransportTest extends TestCase
         ]);
     }
 
-    public function testSendNotification() {
+    public function testSendNotification()
+    {
         $email = new EmailNotification();
         $email->to('foo@bar.com')
             ->beforeSendCallback(['Notifications\Test\TestCase\Notification\Foo', 'bar'])
@@ -63,9 +65,10 @@ class EmailTransportTest extends TestCase
         $this->assertEquals('barStatic was called', $result['data']);
     }
 
-    public function testProcessQueueObject() {
+    public function testProcessQueueObject()
+    {
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 }
