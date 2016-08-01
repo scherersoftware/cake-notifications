@@ -1,6 +1,8 @@
 <?php
 namespace Notifications\Notification;
 
+use Cake\Core\Configure;
+
 abstract class Notification implements NotificationInterface
 {
     /**
@@ -25,6 +27,13 @@ abstract class Notification implements NotificationInterface
     protected $_queueOptions = [];
 
     /**
+     * Locale string
+     *
+     * @var string
+     */
+    protected $_locale = null;
+
+    /**
      * Push the Notification into the queue
      *
      * @return bool
@@ -38,6 +47,18 @@ abstract class Notification implements NotificationInterface
      * @return void
      */
     abstract public function send($content = null);
+
+    /**
+     * Constructor
+     *
+     * @throws InvalidArgumentException
+     */
+    public function __construct($config = null)
+    {
+        if (Configure::read('Notifications.defaultLocale') === null) {
+            throw new \InvalidArgumentException("Notifications.defaultLocale is not configured");
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -70,6 +91,29 @@ abstract class Notification implements NotificationInterface
             return $this->_queueOptions;
         }
         return $this->__setQueueOptions($options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function locale($locale = null)
+    {
+        if ($locale === null) {
+            return $this->_locale;
+        }
+        return $this->__setLocale($locale);
+    }
+
+    /**
+     * Set lcoale
+     *
+     * @param string $locale locale - must be i18n conform
+     * @return $this
+     */
+    private function __setLocale($locale)
+    {
+        $this->_locale = $locale;
+        return $this;
     }
 
     /**

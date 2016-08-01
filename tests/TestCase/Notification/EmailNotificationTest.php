@@ -147,9 +147,10 @@ class EmailNotificationTest extends TestCase
      *
      * @return void
      */
-    public function FunctionName()
+    public function testEmail()
     {
-        $this->assertEquals(new Email(), $this->Notification->email());
+        $emailNotification = new EmailNotification();
+        $this->assertEquals(new Email(), $emailNotification->email());
     }
 
     /**
@@ -168,6 +169,17 @@ class EmailNotificationTest extends TestCase
         ];
         $this->Notification->queueOptions($options);
         $this->assertEquals($options, $this->Notification->queueOptions());
+    }
+
+    /**
+     * testLocale method
+     *
+     * @return void
+     */
+    public function testLocale()
+    {
+        $this->Notification->locale('de_DE');
+        $this->assertEquals('de_DE', $this->Notification->locale());
     }
 
     /**

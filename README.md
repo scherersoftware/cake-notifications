@@ -33,6 +33,16 @@ Or run the following command directly without changing your `composer.json:
 
 ```Plugin::load('Notifications', ['bootstrap' => true, 'routes' => true]);```
 
+Set your default locale in a config file, for exmaple in ```app.php```
+
+```
+    'Notifications' => [
+        'defaultLocale' => 'en_US'
+    ]
+```
+
+This config is mandatory and will cause an excpetion if not set.
+
 ### 3. Configure `config/app.php`
 
 Be sure to set up the the cakephp-queuesadilla plugin config. You can find an example config here: [https://cakephp-queuesadilla.readthedocs.io/en/latest/](https://github.com/josegonzalez/cakephp-queuesadilla).
@@ -54,8 +64,8 @@ Then simply creta a new EmailNotification object.
 ```
 $email = new EmailNotification();
 $email->to('john.doe@example.com')
-	->subject('Send with cake-notifications v2')
-  	->send('Hello :)');
+    ->subject('Send with cake-notifications v2')
+    ->send('Hello :)');
 
 ```
 
@@ -67,6 +77,9 @@ You can chain all methods provided by the CakePHP Email Class [http://book.cakep
 
 Send out the email immediately. before- and afterSend callbacks are still available
 
+### ` locale( string|null $locale null ) `
+
+Set the locale for the notification. If null, ```Configure::read('Notifications.defaultLocale')``` is used.
 
 #### ` push() `
 
@@ -89,7 +102,7 @@ Supported options:
 Pass a calable as the `$class` parameter. Static and none-static functions are supported.
 
 ```
-	$email->beforeSendCallback(['Foo', 'bar'], ['first_param', 'second_param'])
+    $email->beforeSendCallback(['Foo', 'bar'], ['first_param', 'second_param'])
 
 ```     
 This will call the `bar` method inside the Foo class with two parameters before the email is send.
@@ -99,7 +112,7 @@ This will call the `bar` method inside the Foo class with two parameters before 
 Pass a calable as the `$class` parameter. Static and none-static functions are supported.
 
 ```
-	$email-> afterSendCallback(['Foo::bar'], ['first_param', 'second_param'])
+    $email-> afterSendCallback(['Foo::bar'], ['first_param', 'second_param'])
 
 ```     
 This will call the static `bar` method inside the Foo class with two parameters after the email was send.

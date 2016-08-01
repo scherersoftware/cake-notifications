@@ -29,6 +29,7 @@ class EmailNotification extends Notification
      */
     public function __construct($config = null)
     {
+        parent::__construct();
         $this->_email = new Email($config);
     }
 
@@ -42,7 +43,8 @@ class EmailNotification extends Notification
         ], [
             'email' => $this->_email->serialize(),
             'beforeSendCallback' => $this->_beforeSendCallback,
-            'afterSendCallback' => $this->_afterSendCallback
+            'afterSendCallback' => $this->_afterSendCallback,
+            'locale' => $this->_locale
         ], $this->_queueOptions);
     }
 
