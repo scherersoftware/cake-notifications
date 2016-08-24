@@ -22,7 +22,7 @@ class EmailTransport extends Transport implements TransportInterface
     public static function sendNotification(Notification $notification, $content = null)
     {
         $beforeSendCallback = $notification->beforeSendCallback();
-        self::_performCallback($beforeSendCallback);
+        self::_performCallback($beforeSendCallback, $notification);
 
         if ($notification->locale() !== null) {
             I18n::locale($notification->locale());
@@ -47,10 +47,10 @@ class EmailTransport extends Transport implements TransportInterface
         $notification = new EmailNotification();
 
         if ($job->data('beforeSendCallback') !== []) {
-            $notification->beforeSendCallback($job->data('beforeSendCallback'));
+            $notification->beforeSendCallback($job->data('beforeSendCallback')['class'], $job->data('beforeSendCallback')['args']);
         }
         if ($job->data('afterSendCallback') !== []) {
-            $notification->afterSendCallback($job->data('beforeSendCallback'));
+            $notification->afterSendCallback($job->data('afterSendCallback')['class'], $job->data('afterSendCallback')['args']);
         }
         if ($job->data('locale') !== '') {
             $notification->locale($job->data('locale'));

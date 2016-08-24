@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 
-A CakePHP notification plugin which can send out emails asynchron due to the cakephp-queuesadilla job queue.
+A CakePHP notification plugin which can send out emails asynchronously due to the cakephp-queuesadilla job queue.
 
 ## Requirements
 
@@ -33,7 +33,7 @@ Or run the following command directly without changing your `composer.json:
 
 ```Plugin::load('Notifications', ['bootstrap' => true, 'routes' => true]);```
 
-Set your default locale in a config file, for exmaple in ```app.php```
+Set your default locale in a config file, for example in ```app.php```
 
 ```
     'Notifications' => [
@@ -41,25 +41,25 @@ Set your default locale in a config file, for exmaple in ```app.php```
     ]
 ```
 
-This config is mandatory and will cause an excpetion if not set.
+This config is mandatory and will cause an exception if not set.
 
 ### 3. Configure `config/app.php`
 
 Be sure to set up the the cakephp-queuesadilla plugin config. You can find an example config here: [https://cakephp-queuesadilla.readthedocs.io/en/latest/](https://github.com/josegonzalez/cakephp-queuesadilla).
 
-Or you can find avalable config options inside your used Engine file (`vendor/josegonzalez/queuesadilla/src/josegonzalez/Queuesadilla/Engine/*Engine.php`) inside the `$baseConfig` property.
+Or you can find available config options inside your used Engine file (`vendor/josegonzalez/queuesadilla/src/josegonzalez/Queuesadilla/Engine/*Engine.php`) inside the `$baseConfig` property.
 
 ## Usage
 
 ### Email
 
-The EmailNotification is completely compatible wiht the CakePHP Email.
+The EmailNotification is completely compatible with the CakePHP Email.
 
 Add the following to your class where you want to send an email:
 
 `use Notifications\Notification\EmailNotification;`
 
-Then simply creta a new EmailNotification object.
+Then simply create a new EmailNotification object.
 
 ```
 $email = new EmailNotification();
@@ -71,7 +71,7 @@ $email->to('john.doe@example.com')
 
 You can chain all methods provided by the CakePHP Email Class [http://book.cakephp.org/3.0/en/core-libraries/email.html](http://book.cakephp.org/3.0/en/core-libraries/email.html)
 
-### Additional, follwing functions are available:
+### Additional, following functions are available:
 
 ### ` send( array|string|null $content null ) `
 
@@ -83,7 +83,7 @@ Set the locale for the notification. If null, ```Configure::read('Notifications.
 
 #### ` push() `
 
-Push the email into the queue to send it asynchron
+Push the email into the queue to send it asynchronous
 
 ### ` queueOptions( array $options null ) `
 
@@ -99,7 +99,7 @@ Supported options:
 
 ### `beforeSendCallback( array|string|null $class null, array $args [] )`
 
-Pass a calable as the `$class` parameter. Static and none-static functions are supported.
+Pass a callable as the `$class` parameter. Static and none-static functions are supported.
 
 ```
     $email->beforeSendCallback(['Foo', 'bar'], ['first_param', 'second_param'])
@@ -107,9 +107,24 @@ Pass a calable as the `$class` parameter. Static and none-static functions are s
 ```     
 This will call the `bar` method inside the Foo class with two parameters before the email is send.
 
+To manipulate the EmailNotification instance before sending, the beforeSendCallback may return a function taking the notification instance reference and for example changing the profile.
+The `bar` method may then look something like this:
+
+```
+    public function bar($first_param, $second_param)
+    {
+        // do something
+        return function (&$instance) {
+            $instance->profile([
+                'from' => 'email@example.com'
+            ]);
+        };
+    }
+```
+
 ### `afterSendCallback( array|string|null $class null, array $args [] )`
 
-Pass a calable as the `$class` parameter. Static and none-static functions are supported.
+Pass a callable as the `$class` parameter. Static and none-static functions are supported.
 
 ```
     $email-> afterSendCallback(['Foo::bar'], ['first_param', 'second_param'])
