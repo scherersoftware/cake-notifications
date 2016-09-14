@@ -382,6 +382,7 @@ class NotificationQueueTable extends Table
             if (is_array($data['recipient_user_id'])) {
                 foreach ($data['recipient_user_id'] as $recipientUserId) {
                     $emailData = [
+                        'locale' => $data['locale'],
                         'recipient_user_id' => $recipientUserId,
                         'transport' => 'email',
                         'config' => $data['config'],
@@ -391,6 +392,7 @@ class NotificationQueueTable extends Table
                 }
             } else {
                 $emailData = [
+                    'locale' => $data['locale'],
                     'recipient_user_id' => $data['recipient_user_id'],
                     'transport' => 'email',
                     'config' => $data['config'],
