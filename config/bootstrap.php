@@ -8,3 +8,16 @@ if (!Plugin::loaded('Josegonzalez/CakeQueuesadilla')) {
     // Load Queue config
     Queue::config(Configure::consume('Queuesadilla'));
 }
+
+if (!defined('SIGQUIT')) {
+    define('SIGQUIT', 'SIGQUIT');
+}
+if (!defined('SIGTERM')) {
+    define('SIGTERM', 'SIGTERM');
+}
+if (!defined('SIGINT')) {
+    define('SIGINT', 'SIGINT');
+}
+if (!defined('SIGUSR1')) {
+    define('SIGUSR1', 'SIGUSR1');
+}
