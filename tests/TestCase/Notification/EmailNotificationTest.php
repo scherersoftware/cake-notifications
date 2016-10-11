@@ -32,7 +32,6 @@ class EmailNotificationTest extends TestCase
 
         Log::reset();
         Log::config('stdout', ['engine' => 'File']);
-        
 
         $dbConfig = \Cake\Datasource\ConnectionManager::config('test');
         Queue::reset();

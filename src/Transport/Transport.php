@@ -43,6 +43,7 @@ abstract class Transport
                 $success = true;
             }
         }
+
         return $success;
     }
 }
