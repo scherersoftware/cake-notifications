@@ -81,7 +81,7 @@ abstract class Notification implements NotificationInterface
      */
     public function addBeforeSendCallback($class, array $args = [])
     {
-        return $this->__setCallback('_beforeSendCallback', $class, $args);
+        return $this->__addCallback('_beforeSendCallback', $class, $args);
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class Notification implements NotificationInterface
      */
     public function addAfterSendCallback($class, array $args = [])
     {
-        return $this->__setCallback('_afterSendCallback', $class, $args);
+        return $this->__addCallback('_afterSendCallback', $class, $args);
     }
 
     /**
@@ -163,6 +163,45 @@ abstract class Notification implements NotificationInterface
      * @return $this
      */
     private function __setCallback($type, $class, array $args)
+    {
+        if (!is_array($class)) {
+            $this->{$type} = [
+                [
+                    'class' => $class,
+                    'args' => $args
+                ]
+            ];
+
+            return $this;
+        } elseif (is_array($class) && count($class) == 2) {
+            $className = $class[0];
+            $methodName = $class[1];
+        } else {
+            if (is_array($class)) {
+                $class = implode($class);
+            }
+            throw new \InvalidArgumentException("{$class} is missformated");
+        }
+
+        $this->{$type} = [
+            [
+                'class' => [$className, $methodName],
+                'args' => $args
+            ]
+        ];
+
+        return $this;
+    }
+
+    /**
+     * Add callback
+     *
+     * @param string $type _beforeSendCallback or _afterSendCallback
+     * @param string $class name of the class
+     * @param array $args array of arguments
+     * @return $this
+     */
+    private function __addCallback($type, $class, array $args)
     {
         if (!is_array($class)) {
             $this->{$type}[] = [
