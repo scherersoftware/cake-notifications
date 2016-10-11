@@ -31,9 +31,12 @@ Or run the following command directly without changing your `composer.json:
 
 ### 2. Configure `config/bootstrap.php`
 
-```Plugin::load('Notifications', ['bootstrap' => true, 'routes' => true]);```
+`Plugin::load('Notifications', ['bootstrap' => true, 'routes' => true]);`
 
-Set your default locale in a config file, for example in ```app.php```
+### 3. Configure `config/app.php`
+
+Set your default locale in a config file, for example in `app.php`.
+This config is mandatory and will cause an exception if not set.
 
 ```
     'Notifications' => [
@@ -41,11 +44,19 @@ Set your default locale in a config file, for example in ```app.php```
     ]
 ```
 
-This config is mandatory and will cause an exception if not set.
+You can also override the queue options like `attempts`, `attempts_delay`, `delay`, `expires_in` and `queue`.
 
-### 3. Configure `config/app.php`
+```
+    'Notifications' => [
+        'queueOptions' => [
+            'queue' => 'notification'
+        ]
+    ]
+```
 
-Be sure to set up the the cakephp-queuesadilla plugin config. You can find an example config here: [https://cakephp-queuesadilla.readthedocs.io/en/latest/](https://github.com/josegonzalez/cakephp-queuesadilla).
+This doesn't affect the use of `queueOptions()` later. You can still override the options there.
+
+Also, be sure to set up the the cakephp-queuesadilla plugin config. You can find an example config here: [https://cakephp-queuesadilla.readthedocs.io/en/latest/](https://github.com/josegonzalez/cakephp-queuesadilla).
 
 Or you can find available config options inside your used Engine file (`vendor/josegonzalez/queuesadilla/src/josegonzalez/Queuesadilla/Engine/*Engine.php`) inside the `$baseConfig` property.
 

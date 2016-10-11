@@ -58,6 +58,9 @@ abstract class Notification implements NotificationInterface
         if (Configure::read('Notifications.defaultLocale') === null) {
             throw new \InvalidArgumentException("Notifications.defaultLocale is not configured");
         }
+        if (Configure::check('Notifications.queueOptions') && is_array(Configure::read('Notifications.queueOptions'))) {
+            $this->_queueOptions = Configure::read('Notifications.queueOptions');
+        }
     }
 
     /**
