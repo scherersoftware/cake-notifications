@@ -143,6 +143,13 @@ Pass a callable as the `$class` parameter. Static and none-static functions are 
 ```     
 This will call the static `bar` method inside the Foo class with two parameters after the email was send.
 
+### `addBeforeSendCallback( array|string|null $class null, array $args [] )`
+
+Add an additional callback to beforeSend
+
+### `addAfterSendCallback( array|string|null $class null, array $args [] )`
+
+Add an additional callback to afterSend
 
 ## ToDo
 
