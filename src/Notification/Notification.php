@@ -2,6 +2,7 @@
 namespace Notifications\Notification;
 
 use Cake\Core\Configure;
+use Cake\Utility\Hash;
 
 abstract class Notification implements NotificationInterface
 {
@@ -127,7 +128,7 @@ abstract class Notification implements NotificationInterface
      */
     private function __setQueueOptions($options)
     {
-        $this->_queueOptions = $options;
+        $this->_queueOptions = Hash::merge($this->_queueOptions, $options);
         return $this;
     }
 
