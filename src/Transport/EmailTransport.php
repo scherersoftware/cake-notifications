@@ -17,7 +17,7 @@ class EmailTransport extends Transport implements TransportInterface
      *
      * @param Notification $notification Notification object
      * @param string|array|null $content String with message or array with messages
-     * @return void
+     * @return Notification
      */
     public static function sendNotification(Notification $notification, $content = null)
     {
@@ -34,6 +34,8 @@ class EmailTransport extends Transport implements TransportInterface
 
         $afterSendCallback = $notification->afterSendCallback();
         self::_performCallback($afterSendCallback);
+
+        return $notification;
     }
 
     /**
