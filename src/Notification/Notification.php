@@ -78,11 +78,27 @@ abstract class Notification implements NotificationInterface
     /**
      * {@inheritdoc}
      */
+    public function addBeforeSendCallback($class, array $args = [])
+    {
+        return $this->__setCallback('_beforeSendCallback', $class, $args);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function afterSendCallback($class = null, array $args = [])
     {
         if ($class === null) {
             return $this->_afterSendCallback;
         }
+        return $this->__setCallback('_afterSendCallback', $class, $args);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAfterSendCallback($class, array $args = [])
+    {
         return $this->__setCallback('_afterSendCallback', $class, $args);
     }
 
@@ -143,7 +159,7 @@ abstract class Notification implements NotificationInterface
     private function __setCallback($type, $class, array $args)
     {
         if (!is_array($class)) {
-            $this->{$type} = [
+            $this->{$type}[] = [
                 'class' => $class,
                 'args' => $args
             ];
@@ -158,7 +174,7 @@ abstract class Notification implements NotificationInterface
             throw new \InvalidArgumentException("{$class} is missformated");
         }
 
-        $this->{$type} = [
+        $this->{$type}[] = [
             'class' => [$className, $methodName],
             'args' => $args
         ];

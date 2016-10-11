@@ -47,10 +47,14 @@ class EmailTransport extends Transport implements TransportInterface
         $notification = new EmailNotification();
 
         if ($job->data('beforeSendCallback') !== []) {
-            $notification->beforeSendCallback($job->data('beforeSendCallback')['class'], $job->data('beforeSendCallback')['args']);
+            foreach ($job->data('beforeSendCallback') as $callback) {
+                $notification->addBeforeSendCallback($callback['class'], $callback['args']);
+            }
         }
         if ($job->data('afterSendCallback') !== []) {
-            $notification->afterSendCallback($job->data('afterSendCallback')['class'], $job->data('afterSendCallback')['args']);
+            foreach ($job->data('afterSendCallback') as $callback) {
+                $notification->addAfterSendCallback($callback['class'], $callback['args']);
+            }
         }
         if ($job->data('locale') !== '') {
             $notification->locale($job->data('locale'));
