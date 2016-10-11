@@ -79,6 +79,7 @@ class EmailNotification extends Notification
     public function __call($name, $args)
     {
         call_user_func_array([$this->_email, $name], $args);
+
         return $this;
     }
 
