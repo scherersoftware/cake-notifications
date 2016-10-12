@@ -7,8 +7,9 @@ php:
 
 sudo: false
 
-matrix:
-  fast_finish: true
+env:
+  matrix:
+    - DB=mysql db_dsn='mysql://travis@0.0.0.0/cakephp_test'
 
 before_script:
   - composer self-update
