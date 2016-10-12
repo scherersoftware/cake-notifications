@@ -1,5 +1,6 @@
 # CakePHP 3 Notifications Plugin
 
+[![Build Status](https://travis-ci.org/scherersoftware/cake-notifications.svg?branch=v2-dev)](https://travis-ci.org/scherersoftware/cake-notifications)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 
 A CakePHP notification plugin which can send out emails asynchronously due to the cakephp-queuesadilla job queue.
@@ -145,11 +146,11 @@ This will call the static `bar` method inside the Foo class with two parameters 
 
 ### `addBeforeSendCallback( array|string|null $class null, array $args [] )`
 
-Add an additional callback to beforeSend
+Add an additional callback to beforeSend.
 
 ### `addAfterSendCallback( array|string|null $class null, array $args [] )`
 
-Add an additional callback to afterSend
+Add an additional callback to afterSend.
 
 ## ToDo
 

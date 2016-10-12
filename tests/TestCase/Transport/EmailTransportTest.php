@@ -53,7 +53,8 @@ class EmailTransportTest extends TestCase
     public function testSendNotification()
     {
         $email = new EmailNotification();
-        $email->to('foo@bar.com')
+        $email->from('bar@foo.com')
+            ->to('foo@bar.com')
             ->beforeSendCallback(['Notifications\Test\TestCase\Notification\Foo', 'bar'])
             ->afterSendCallback('Notifications\Test\TestCase\Notification\Foo::barStatic')
             ->transport('debug');

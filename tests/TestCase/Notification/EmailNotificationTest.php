@@ -29,11 +29,11 @@ class EmailNotificationTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
         Log::reset();
         Log::config('stdout', ['engine' => 'File']);
 
         $dbConfig = \Cake\Datasource\ConnectionManager::config('test');
+
         Queue::reset();
         Queue::config([
             'default' => [
@@ -43,13 +43,6 @@ class EmailNotificationTest extends TestCase
                 'user' => $dbConfig['username'],
                 'pass' => $dbConfig['password']
             ]
-        ]);
-
-        Configure::write('Notifications.queueOptions.queue', 'default');
-
-        Email::dropTransport('debug');
-        Email::configTransport('debug', [
-            'className' => 'Debug'
         ]);
 
         $this->Notification = new EmailNotification([

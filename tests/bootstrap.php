@@ -1,4 +1,8 @@
 <?php
+
+use Cake\Core\Configure;
+use Cake\Mailer\Email;
+
 /**
  * Test suite bootstrap for Notifications.
  */
@@ -13,3 +17,24 @@ if ($vendorPos !== false) {
     // Package itself (cloned standalone)
     $loader = require __DIR__ . '/../vendor/autoload.php';
 }
+
+Cake\Datasource\ConnectionManager::config('test', [
+    'className' => 'Cake\Database\Connection',
+    'driver' => 'Cake\Database\Driver\Mysql',
+    'persistent' => false,
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => 'asdf12',
+    'database' => 'test_cakephp_app_template',
+    'encoding' => 'utf8'
+]);
+
+Configure::write('App.encoding', 'UTF-8');
+
+Configure::write('Notifications.queueOptions.queue', 'default');
+Configure::write('Notifications.defaultLocale', 'en_US');
+
+Email::configTransport('debug', [
+    'className' => 'Debug',
+    'charset' => 'utf-8',
+]);
