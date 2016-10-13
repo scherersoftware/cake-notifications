@@ -1,9 +1,7 @@
 <?php
 namespace Notifications\Test\TestCase\Notification;
 
-use Cake\Datasource\ConnectionManager;
-use Cake\Mailer\Email;
-use Cake\ORM\TableRegistry;
+use Cake\I18n\I18n;
 use Cake\TestSuite\TestCase;
 use Notifications\Notification\EmailNotification;
 use Notifications\Transport\EmailTransport;
@@ -12,64 +10,47 @@ use Notifications\Transport\EmailTransport;
  * Helper class to test callbacks
  *
  */
-class Foo
+class SomeClass
 {
 
-    public function bar()
+    public static $someProperty = null;
+    public static $anotherProperty = null;
+
+    public function someMethod()
     {
-        $connection = ConnectionManager::get('test');
-        $connection->execute('INSERT INTO foos (data) VALUES ("bar was called")');
+        self::$someProperty = 'was_called';
     }
 
-    public static function barStatic()
+    public static function someStaticMethod()
     {
-        $connection = ConnectionManager::get('test');
-        $connection->execute('INSERT INTO foos (data) VALUES ("barStatic was called")');
+        self::$anotherProperty = 'was_called';
     }
 }
 
 class EmailTransportTest extends TestCase
 {
 
-    /**
-     * Fixtures
-     *
-     * @var array
-     */
-    public $fixtures = [
-        'Jobs' => 'plugin.notifications.foos'
-    ];
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        Email::dropTransport('debug');
-        Email::configTransport('debug', [
-            'className' => 'Debug'
-        ]);
-    }
-
     public function testSendNotification()
     {
-        $email = new EmailNotification();
-        $email->from('bar@foo.com')
-            ->to('foo@bar.com')
-            ->beforeSendCallback(['Notifications\Test\TestCase\Notification\Foo', 'bar'])
-            ->afterSendCallback('Notifications\Test\TestCase\Notification\Foo::barStatic')
-            ->transport('debug');
+        $email = new EmailNotification([
+            'transport' => 'debug',
+            'from' => 'foo@bar.com'
+        ]);
+        $email->to('foo@bar.com')
+            ->locale('de_DE')
+            ->beforeSendCallback(['Notifications\Test\TestCase\Notification\SomeClass', 'someMethod'])
+            ->afterSendCallback('Notifications\Test\TestCase\Notification\SomeClass::someStaticMethod');
         EmailTransport::sendNotification($email);
-        $connection = ConnectionManager::get('test');
-        $result = $connection->execute('SELECT data FROM foos WHERE id = 1')->fetch('assoc');
-        $this->assertEquals('bar was called', $result['data']);
-        $result = $connection->execute('SELECT data FROM foos WHERE id = 2')->fetch('assoc');
-        $this->assertEquals('barStatic was called', $result['data']);
+
+        $this->assertEquals(I18n::locale(), 'de_DE');
+
+        $this->assertEquals(SomeClass::$someProperty, 'was_called');
+        $this->assertEquals(SomeClass::$anotherProperty, 'was_called');
+
     }
 
     public function testProcessQueueObject()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        
     }
 }
