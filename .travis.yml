@@ -16,3 +16,6 @@ before_script:
 script:
   - vendor/bin/phpunit
   - vendor/bin/phpcs -pn --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests
+
+after_success:
+  - php vendor/bin/coveralls -v

@@ -12,9 +12,9 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "cakephp/cakephp": ">=3.1",
-        "josegonzalez/cakephp-queuesadilla": "dev-master",
         "cakephp/cakephp-codesniffer": "dev-master",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-4": {
