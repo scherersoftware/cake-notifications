@@ -24,9 +24,10 @@ Cake\Datasource\ConnectionManager::config('test', [
     'persistent' => false,
     'host' => 'localhost',
     'username' => 'root',
-    'password' => 'asdf12',
-    'database' => 'test_cakephp_app_template',
-    'encoding' => 'utf8'
+    'password' => '',
+    'database' => 'cake_notifications_test',
+    'encoding' => 'utf8',
+    'timezone' => 'UTC'
 ]);
 
 Configure::write('App.encoding', 'UTF-8');
