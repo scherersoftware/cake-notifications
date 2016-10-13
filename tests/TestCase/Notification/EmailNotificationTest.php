@@ -107,6 +107,7 @@ class EmailNotificationTest extends TestCase
     {
         $this->Notification->beforeSendCallback('Foo::bar', ['foo', 'bar']);
         $this->Notification->addBeforeSendCallback('Foo::bar', ['foo1', 'bar1']);
+        $this->Notification->addBeforeSendCallback(['Foo', 'bar'], ['foo2', 'bar2']);
 
         $this->assertEquals([
             [
@@ -121,6 +122,16 @@ class EmailNotificationTest extends TestCase
                 'args' => [
                     'foo1',
                     'bar1'
+                ]
+            ],
+            [
+                'class' => [
+                    'Foo',
+                    'bar'
+                ],
+                'args' => [
+                    'foo2',
+                    'bar2'
                 ]
             ],
         ], $this->Notification->beforeSendCallback());
@@ -171,6 +182,7 @@ class EmailNotificationTest extends TestCase
     {
         $this->Notification->addAfterSendCallback('Foo::bar', ['foo', 'bar']);
         $this->Notification->addAfterSendCallback('Foo::bar', ['foo1', 'bar1']);
+        $this->Notification->addAfterSendCallback(['Foo', 'bar'], ['foo2', 'bar2']);
 
         $this->assertEquals([
             [
@@ -187,7 +199,32 @@ class EmailNotificationTest extends TestCase
                     'bar1'
                 ]
             ],
+            [
+                'class' => [
+                    'Foo',
+                    'bar'
+                ],
+                'args' => [
+                    'foo2',
+                    'bar2'
+                ]
+            ],
         ], $this->Notification->afterSendCallback());
+    }
+
+    /**
+     * testMissformatedCallback method
+     *
+     * @return void
+     */
+    public function testMissformatedCallback()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        $this->Notification->beforeSendCallback(['Foo'], ['foo', 'bar']);
+        $this->Notification->addBeforeSendCallback(['Foo'], ['foo', 'bar']);
+        $this->Notification->afterSendCallback(['Foo'], ['foo', 'bar']);
+        $this->Notification->addAfterSendCallback(['Foo'], ['foo', 'bar']);
     }
 
     /**
