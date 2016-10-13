@@ -1,6 +1,7 @@
 # CakePHP 3 Notifications Plugin
 
 [![Build Status](https://travis-ci.org/scherersoftware/cake-notifications.svg?branch=v2-dev)](https://travis-ci.org/scherersoftware/cake-notifications)
+[![Coverage Status](https://coveralls.io/repos/github/scherersoftware/cake-notifications/badge.svg?branch=master)](https://coveralls.io/github/scherersoftware/cake-notifications?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 
 A CakePHP notification plugin which can send out emails asynchronously due to the cakephp-queuesadilla job queue.
