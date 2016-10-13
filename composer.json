@@ -13,7 +13,6 @@
         "phpunit/phpunit": "*",
         "cakephp/cakephp": ">=3.1",
         "cakephp/cakephp-codesniffer": "dev-master",
-        "phpunit/phpunit": "*",
         "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
