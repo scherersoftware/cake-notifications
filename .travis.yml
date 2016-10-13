@@ -14,8 +14,5 @@ before_script:
   - mysql -uroot -e "DROP DATABASE IF EXISTS cake_notifications_test; CREATE DATABASE cake_notifications_test;"
 
 script:
-  - sh -c vendor/bin/phpunit
-  - sh -c vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP --ignore=vendor --ignore=docs ./src ./tests
-
-notifications:
-  email: false
+  - vendor/bin/phpunit
+  - vendor/bin/phpcs -pn --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests
