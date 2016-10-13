@@ -46,7 +46,6 @@ class EmailTransportTest extends TestCase
 
         $this->assertEquals(SomeClass::$someProperty, 'was_called');
         $this->assertEquals(SomeClass::$anotherProperty, 'was_called');
-
     }
 
     public function testProcessQueueObject()
