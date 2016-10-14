@@ -32,6 +32,7 @@ class SomeClass
     public function someMethod()
     {
         self::$someProperty = 'was_called';
+
         return function (EmailNotification $email) {
             self::$wasTheCallableCalled = true;
         };
