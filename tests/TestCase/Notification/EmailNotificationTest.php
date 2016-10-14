@@ -233,11 +233,18 @@ class EmailNotificationTest extends TestCase
     public function testMissformatedCallback()
     {
         $this->expectException('\InvalidArgumentException');
-
         $this->Notification->beforeSendCallback(['Foo'], ['foo', 'bar']);
+    }
+
+    /**
+     * testMissformatedCallback method
+     *
+     * @return void
+     */
+    public function testMissformatedAddCallback()
+    {
+        $this->expectException('\InvalidArgumentException');
         $this->Notification->addBeforeSendCallback(['Foo'], ['foo', 'bar']);
-        $this->Notification->afterSendCallback(['Foo'], ['foo', 'bar']);
-        $this->Notification->addAfterSendCallback(['Foo'], ['foo', 'bar']);
     }
 
     /**
