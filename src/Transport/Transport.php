@@ -9,18 +9,19 @@ abstract class Transport
     /**
      * Performs the before- or after send callback of the notification
      *
-     * @param array        $items                Contains the class and function name and optional,
-     *                                           function params
-     * @param Notification $notificationInstance Reference to the notification instance for a
-     *                                           possible callbacks callback
-     * @return bool
+     * @param array $items Contains the class and function name and optional, function params
+     * @param Notification $notificationInstance Reference to the notification instance for a possible callbacks callback
+     * @throws InvalidArgumentException
      */
-    protected static function _performCallback(array $items, &$notificationInstance = null)
+    protected static function _performCallback(array $items, Notification &$notificationInstance = null)
     {
         $success = false;
         foreach ($items as $item) {
             if (!isset($item['class']) || !is_callable($item['class'])) {
-                return false;
+                if (is_array($item['class'])) {
+                    $class = implode($item['class']);
+                }
+                throw new \InvalidArgumentException("{$class} is not callable");
             }
 
             $args = [];
@@ -37,13 +38,8 @@ abstract class Transport
                 $success = call_user_func_array($item['class'], $args);
             }
             if (is_callable($success)) {
-                $success = $success($notificationInstance);
-            }
-            if ($success !== false) {
-                $success = true;
+                $success($notificationInstance);
             }
         }
-
-        return $success;
     }
 }
