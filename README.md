@@ -1,4 +1,4 @@
-![CakePHP 3 Notifications Plugin](https://https://raw.githubusercontent.com/scherersoftware/cake-notifications/v2-dev/cake-notifications.png.png)
+![CakePHP 3 Notifications Plugin](https://raw.githubusercontent.com/scherersoftware/cake-notifications/v2-dev/cake-notifications.png)
 
 [![Build Status](https://travis-ci.org/scherersoftware/cake-notifications.svg?branch=v2-dev)](https://travis-ci.org/scherersoftware/cake-notifications)
 [![Code Coverage v2-dev](https://codecov.io/gh/scherersoftware/cake-notifications/branch/v2-dev/graph/badge.svg)](https://codecov.io/gh/scherersoftware/cake-notifications)
