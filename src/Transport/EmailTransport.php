@@ -39,7 +39,7 @@ class EmailTransport extends Transport implements TransportInterface
     }
 
     /**
-     * Process the job coming frim the Queue
+     * Process the job coming from the queue
      *
      * @param Base $job Queuesadilla base job
      * @return void
