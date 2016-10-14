@@ -276,10 +276,9 @@ class EmailNotificationTest extends TestCase
     {
         $this->Notification->push();
 
-        $job = TableRegistry::get('Jobs')->find()
-            ->first();
-        $this->assertTrue($job->id === 1);
-        $this->assertTrue($job->queue === 'default');
+        $jobs = TableRegistry::get('Jobs')->find()
+            ->count();
+        $this->assertTrue($jobs === 2);
     }
 
     /**
