@@ -38,7 +38,7 @@ class EmailNotification extends Notification
      */
     public function push()
     {
-        return Queue::push($this->_transport .'::processQueueObject', [
+        return Queue::push($this->_transport . '::processQueueObject', [
             'email' => $this->_email->serialize(),
             'beforeSendCallback' => $this->_beforeSendCallback,
             'afterSendCallback' => $this->_afterSendCallback,
