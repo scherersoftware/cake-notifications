@@ -3,6 +3,8 @@
 use Cake\Core\Configure;
 use Cake\Mailer\Email;
 
+Configure::write('debug', true);
+
 /**
  * Test suite bootstrap for Notifications.
  */
