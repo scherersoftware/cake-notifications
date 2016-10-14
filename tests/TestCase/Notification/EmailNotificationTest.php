@@ -66,6 +66,19 @@ class EmailNotificationTest extends TestCase
     }
 
     /**
+     * testMissingLocale method
+     *
+     * @return void
+     */
+    public function testMissingLocale()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        Configure::delete('Notifications.defaultLocale');
+        $this->Notification = new EmailNotification();
+    }
+
+    /**
      * testBeforeSendCallback method
      *
      * @return void
