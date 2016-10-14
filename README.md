@@ -155,5 +155,4 @@ Add an additional callback to afterSend.
 
 ## ToDo
 
-- Finish tests
 - Implement more transports like WebSMS or PushNotifications
