@@ -298,7 +298,7 @@ class EmailNotificationTest extends TestCase
 
         $jobs = TableRegistry::get('Jobs')->find()
             ->count();
-        $this->assertTrue($jobs === 2);
+        $this->assertTrue($jobs === 1);
     }
 
     /**
