@@ -62,6 +62,7 @@ class EmailTransport extends Transport implements TransportInterface
             $notification->locale($job->data('locale'));
         }
         $notification->unserialize($job->data('email'));
-        self::sendNotification($notification);
+
+        return self::sendNotification($notification);
     }
 }
