@@ -9,7 +9,7 @@ A CakePHP 3 notification plugin which can send out emails asynchronously due to 
 ## Requirements
 
 - [CakePHP Queuesadilla Plugin 3.0](https://github.com/josegonzalez/cakephp-queuesadilla)
-- PHP 5.4+
+- PHP 5.6+
 
 ## Installation
 
