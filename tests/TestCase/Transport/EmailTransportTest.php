@@ -6,6 +6,7 @@ use Cake\Log\Log;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Josegonzalez\CakeQueuesadilla\Queue\Queue;
+use josegonzalez\Queuesadilla\Job\Base as BaseJob;
 use Notifications\Notification\EmailNotification;
 use Notifications\Transport\EmailTransport;
 
@@ -15,15 +16,6 @@ use Notifications\Transport\EmailTransport;
  */
 class SomeClass
 {
-
-    /**
-     * Fixtures
-     *
-     * @var array
-     */
-    public $fixtures = [
-        'Jobs' => 'plugin.notifications.jobs'
-    ];
 
     public static $someProperty = null;
     public static $anotherProperty = null;
@@ -46,6 +38,15 @@ class SomeClass
 
 class EmailTransportTest extends TestCase
 {
+
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
+    public $fixtures = [
+        'Jobs' => 'plugin.notifications.jobs'
+    ];
 
     public function setup()
     {
@@ -82,6 +83,8 @@ class EmailTransportTest extends TestCase
 
     public function testNotExistingCallbackCall()
     {
+        $this->expectException('\InvalidArgumentException');
+
         $email = new EmailNotification([
             'transport' => 'debug',
             'from' => 'foo@bar.com'
@@ -116,8 +119,39 @@ class EmailTransportTest extends TestCase
 
     public function testProcessQueueObject()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        SomeClass::$someProperty = null;
+        SomeClass::$anotherProperty = null;
+        SomeClass::$wasTheCallableCalled = false;
+
+        $email = new EmailNotification([
+            'transport' => 'debug',
+            'from' => 'foo@bar.com'
+        ]);
+        $email->to('foo@bar.com')
+            ->locale('de_AT')
+            ->beforeSendCallback(['Notifications\Test\TestCase\Notification\SomeClass', 'someMethod'])
+            ->afterSendCallback('Notifications\Test\TestCase\Notification\SomeClass::someStaticMethod')
+            ->push();
+
+        $result = TableRegistry::get('Jobs')->get(1)->toArray();
+
+        $data = json_decode($result['data'], true);
+        $jobItem = [
+            'id' => $result['id'],
+            'class' => $data['class'],
+            'args' => $data['args'],
+            'queue' => 'default',
+            'options' => $data['options'],
+            'attempts' => (int)$result['attempts']
+        ];
+        $job = new BaseJob($jobItem, null);
+
+        $resultNotification = EmailTransport::processQueueObject($job);
+
+        $this->assertEquals($resultNotification->email()->to(), ['foo@bar.com' => 'foo@bar.com']);
+        $this->assertEquals($resultNotification->locale(), 'de_AT');
+        $this->assertEquals(SomeClass::$someProperty, 'was_called');
+        $this->assertEquals(SomeClass::$anotherProperty, 'was_called');
+        $this->assertTrue(SomeClass::$wasTheCallableCalled);
     }
 }
