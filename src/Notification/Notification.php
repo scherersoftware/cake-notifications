@@ -72,7 +72,16 @@ abstract class Notification implements NotificationInterface
         if ($class === null) {
             return $this->_beforeSendCallback;
         }
+
         return $this->__setCallback('_beforeSendCallback', $class, $args);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addBeforeSendCallback($class, array $args = [])
+    {
+        return $this->__addCallback('_beforeSendCallback', $class, $args);
     }
 
     /**
@@ -83,7 +92,16 @@ abstract class Notification implements NotificationInterface
         if ($class === null) {
             return $this->_afterSendCallback;
         }
+
         return $this->__setCallback('_afterSendCallback', $class, $args);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAfterSendCallback($class, array $args = [])
+    {
+        return $this->__addCallback('_afterSendCallback', $class, $args);
     }
 
     /**
@@ -94,6 +112,7 @@ abstract class Notification implements NotificationInterface
         if ($options === null) {
             return $this->_queueOptions;
         }
+
         return $this->__setQueueOptions($options);
     }
 
@@ -105,6 +124,7 @@ abstract class Notification implements NotificationInterface
         if ($locale === null) {
             return $this->_locale;
         }
+
         return $this->__setLocale($locale);
     }
 
@@ -117,6 +137,7 @@ abstract class Notification implements NotificationInterface
     private function __setLocale($locale)
     {
         $this->_locale = $locale;
+
         return $this;
     }
 
@@ -129,6 +150,7 @@ abstract class Notification implements NotificationInterface
     private function __setQueueOptions($options)
     {
         $this->_queueOptions = Hash::merge($this->_queueOptions, $options);
+
         return $this;
     }
 
@@ -144,9 +166,12 @@ abstract class Notification implements NotificationInterface
     {
         if (!is_array($class)) {
             $this->{$type} = [
-                'class' => $class,
-                'args' => $args
+                [
+                    'class' => $class,
+                    'args' => $args
+                ]
             ];
+
             return $this;
         } elseif (is_array($class) && count($class) == 2) {
             $className = $class[0];
@@ -159,9 +184,47 @@ abstract class Notification implements NotificationInterface
         }
 
         $this->{$type} = [
+            [
+                'class' => [$className, $methodName],
+                'args' => $args
+            ]
+        ];
+
+        return $this;
+    }
+
+    /**
+     * Add callback
+     *
+     * @param string $type _beforeSendCallback or _afterSendCallback
+     * @param string $class name of the class
+     * @param array $args array of arguments
+     * @return $this
+     */
+    private function __addCallback($type, $class, array $args)
+    {
+        if (!is_array($class)) {
+            $this->{$type}[] = [
+                'class' => $class,
+                'args' => $args
+            ];
+
+            return $this;
+        } elseif (is_array($class) && count($class) == 2) {
+            $className = $class[0];
+            $methodName = $class[1];
+        } else {
+            if (is_array($class)) {
+                $class = implode($class);
+            }
+            throw new \InvalidArgumentException("{$class} is missformated");
+        }
+
+        $this->{$type}[] = [
             'class' => [$className, $methodName],
             'args' => $args
         ];
+
         return $this;
     }
 }

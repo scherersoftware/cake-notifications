@@ -1,13 +1,15 @@
-# CakePHP 3 Notifications Plugin
+![CakePHP 3 Notifications Plugin](https://raw.githubusercontent.com/scherersoftware/cake-notifications/v2-dev/cake-notifications.png)
 
+[![Build Status](https://travis-ci.org/scherersoftware/cake-notifications.svg?branch=v2-dev)](https://travis-ci.org/scherersoftware/cake-notifications)
+[![Code Coverage v2-dev](https://codecov.io/gh/scherersoftware/cake-notifications/branch/v2-dev/graph/badge.svg)](https://codecov.io/gh/scherersoftware/cake-notifications)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 
-A CakePHP notification plugin which can send out emails asynchronously due to the cakephp-queuesadilla job queue.
+A CakePHP 3 notification plugin which can send out emails asynchronously due to the cakephp-queuesadilla job queue.
 
 ## Requirements
 
 - [CakePHP Queuesadilla Plugin 3.0](https://github.com/josegonzalez/cakephp-queuesadilla)
-- PHP 5.4+
+- PHP 5.6+
 
 ## Installation
 
@@ -143,8 +145,14 @@ Pass a callable as the `$class` parameter. Static and none-static functions are 
 ```     
 This will call the static `bar` method inside the Foo class with two parameters after the email was send.
 
+### `addBeforeSendCallback( array|string|null $class null, array $args [] )`
+
+Add an additional callback to beforeSend.
+
+### `addAfterSendCallback( array|string|null $class null, array $args [] )`
+
+Add an additional callback to afterSend.
 
 ## ToDo
 
-- Finish tests
 - Implement more transports like WebSMS or PushNotifications

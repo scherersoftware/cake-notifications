@@ -38,9 +38,7 @@ class EmailNotification extends Notification
      */
     public function push()
     {
-        return Queue::push([
-            $this->_transport, 'processQueueObject'
-        ], [
+        return Queue::push($this->_transport . '::processQueueObject', [
             'email' => $this->_email->serialize(),
             'beforeSendCallback' => $this->_beforeSendCallback,
             'afterSendCallback' => $this->_afterSendCallback,
@@ -79,18 +77,7 @@ class EmailNotification extends Notification
     public function __call($name, $args)
     {
         call_user_func_array([$this->_email, $name], $args);
-        return $this;
-    }
 
-    /**
-     * Overload Cake\Mailer\mail functions
-     *
-     * @param string $name methodname
-     * @param string $args arguments
-     * @return this
-     */
-    public static function __callStatic($name, $args)
-    {
-        forward_static_call(['Cake\Mailer\Email', $name], $args);
+        return $this;
     }
 }

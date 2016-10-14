@@ -17,7 +17,7 @@ class EmailTransport extends Transport implements TransportInterface
      *
      * @param Notification $notification Notification object
      * @param string|array|null $content String with message or array with messages
-     * @return void
+     * @return Notification
      */
     public static function sendNotification(Notification $notification, $content = null)
     {
@@ -34,10 +34,12 @@ class EmailTransport extends Transport implements TransportInterface
 
         $afterSendCallback = $notification->afterSendCallback();
         self::_performCallback($afterSendCallback);
+
+        return $notification;
     }
 
     /**
-     * Process the job coming frim the Queue
+     * Process the job coming from the queue
      *
      * @param Base $job Queuesadilla base job
      * @return void
@@ -47,15 +49,20 @@ class EmailTransport extends Transport implements TransportInterface
         $notification = new EmailNotification();
 
         if ($job->data('beforeSendCallback') !== []) {
-            $notification->beforeSendCallback($job->data('beforeSendCallback')['class'], $job->data('beforeSendCallback')['args']);
+            foreach ($job->data('beforeSendCallback') as $callback) {
+                $notification->addBeforeSendCallback($callback['class'], $callback['args']);
+            }
         }
         if ($job->data('afterSendCallback') !== []) {
-            $notification->afterSendCallback($job->data('afterSendCallback')['class'], $job->data('afterSendCallback')['args']);
+            foreach ($job->data('afterSendCallback') as $callback) {
+                $notification->addAfterSendCallback($callback['class'], $callback['args']);
+            }
         }
         if ($job->data('locale') !== '') {
             $notification->locale($job->data('locale'));
         }
         $notification->unserialize($job->data('email'));
-        self::sendNotification($notification);
+
+        return self::sendNotification($notification);
     }
 }

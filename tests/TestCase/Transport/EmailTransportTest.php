@@ -1,10 +1,12 @@
 <?php
 namespace Notifications\Test\TestCase\Notification;
 
-use Cake\Datasource\ConnectionManager;
-use Cake\Mailer\Email;
+use Cake\I18n\I18n;
+use Cake\Log\Log;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
+use Josegonzalez\CakeQueuesadilla\Queue\Queue;
+use josegonzalez\Queuesadilla\Job\Base as BaseJob;
 use Notifications\Notification\EmailNotification;
 use Notifications\Transport\EmailTransport;
 
@@ -12,19 +14,25 @@ use Notifications\Transport\EmailTransport;
  * Helper class to test callbacks
  *
  */
-class Foo
+class SomeClass
 {
 
-    public function bar()
+    public static $someProperty = null;
+    public static $anotherProperty = null;
+    public static $wasTheCallableCalled = false;
+
+    public function someMethod()
     {
-        $connection = ConnectionManager::get('test');
-        $connection->execute('INSERT INTO foos (data) VALUES ("bar was called")');
+        self::$someProperty = 'was_called';
+
+        return function (EmailNotification $email) {
+            self::$wasTheCallableCalled = true;
+        };
     }
 
-    public static function barStatic()
+    public static function someStaticMethod()
     {
-        $connection = ConnectionManager::get('test');
-        $connection->execute('INSERT INTO foos (data) VALUES ("barStatic was called")');
+        self::$anotherProperty = 'was_called';
     }
 }
 
@@ -37,38 +45,113 @@ class EmailTransportTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Jobs' => 'plugin.notifications.foos'
+        'Jobs' => 'plugin.notifications.jobs'
     ];
 
-    public function setUp()
+    public function setup()
     {
         parent::setUp();
+        Log::reset();
+        Log::config('stdout', ['engine' => 'File']);
 
-        Email::dropTransport('debug');
-        Email::configTransport('debug', [
-            'className' => 'Debug'
+        $dbConfig = \Cake\Datasource\ConnectionManager::config('test');
+
+        Queue::reset();
+        Queue::config([
+            'default' => [
+                'engine' => 'josegonzalez\Queuesadilla\Engine\MysqlEngine',
+                'database' => $dbConfig['database'],
+                'host' => $dbConfig['host'],
+                'user' => $dbConfig['username'],
+                'pass' => $dbConfig['password']
+            ]
         ]);
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        Log::reset();
+        Queue::reset();
+    }
+
+    public function testNotExistingCallbackCall()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        $email = new EmailNotification([
+            'transport' => 'debug',
+            'from' => 'foo@bar.com'
+        ]);
+        $email->to('foo@bar.com')
+            ->beforeSendCallback(['SomeClassThatDoesNotExists', 'someMethod']);
+        $return = EmailTransport::sendNotification($email);
+
+        $this->assertEquals(SomeClass::$someProperty, null);
+        $this->assertEquals(SomeClass::$anotherProperty, null);
+        $this->assertFalse(SomeClass::$wasTheCallableCalled);
     }
 
     public function testSendNotification()
     {
-        $email = new EmailNotification();
+        $email = new EmailNotification([
+            'transport' => 'debug',
+            'from' => 'foo@bar.com'
+        ]);
         $email->to('foo@bar.com')
-            ->beforeSendCallback(['Notifications\Test\TestCase\Notification\Foo', 'bar'])
-            ->afterSendCallback('Notifications\Test\TestCase\Notification\Foo::barStatic')
-            ->transport('debug');
+            ->locale('de_DE')
+            ->beforeSendCallback(['Notifications\Test\TestCase\Notification\SomeClass', 'someMethod'])
+            ->afterSendCallback('Notifications\Test\TestCase\Notification\SomeClass::someStaticMethod');
         EmailTransport::sendNotification($email);
-        $connection = ConnectionManager::get('test');
-        $result = $connection->execute('SELECT data FROM foos WHERE id = 1')->fetch('assoc');
-        $this->assertEquals('bar was called', $result['data']);
-        $result = $connection->execute('SELECT data FROM foos WHERE id = 2')->fetch('assoc');
-        $this->assertEquals('barStatic was called', $result['data']);
+
+        $this->assertEquals(I18n::locale(), 'de_DE');
+
+        $this->assertEquals(SomeClass::$someProperty, 'was_called');
+        $this->assertEquals(SomeClass::$anotherProperty, 'was_called');
+        $this->assertTrue(SomeClass::$wasTheCallableCalled);
     }
 
     public function testProcessQueueObject()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        SomeClass::$someProperty = null;
+        SomeClass::$anotherProperty = null;
+        SomeClass::$wasTheCallableCalled = false;
+
+        $email = new EmailNotification([
+            'transport' => 'debug',
+            'from' => 'foo@bar.com'
+        ]);
+        $email->to('foo@bar.com')
+            ->locale('de_AT')
+            ->beforeSendCallback(['Notifications\Test\TestCase\Notification\SomeClass', 'someMethod'])
+            ->afterSendCallback('Notifications\Test\TestCase\Notification\SomeClass::someStaticMethod')
+            ->push();
+
+        $result = TableRegistry::get('Jobs')->get(1)->toArray();
+
+        $data = json_decode($result['data'], true);
+        $jobItem = [
+            'id' => $result['id'],
+            'class' => $data['class'],
+            'args' => $data['args'],
+            'queue' => 'default',
+            'options' => $data['options'],
+            'attempts' => (int)$result['attempts']
+        ];
+        $job = new BaseJob($jobItem, null);
+
+        $resultNotification = EmailTransport::processQueueObject($job);
+
+        $this->assertEquals($resultNotification->email()->to(), ['foo@bar.com' => 'foo@bar.com']);
+        $this->assertEquals($resultNotification->locale(), 'de_AT');
+        $this->assertEquals(SomeClass::$someProperty, 'was_called');
+        $this->assertEquals(SomeClass::$anotherProperty, 'was_called');
+        $this->assertTrue(SomeClass::$wasTheCallableCalled);
     }
 }
