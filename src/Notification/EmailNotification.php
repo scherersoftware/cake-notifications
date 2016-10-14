@@ -80,16 +80,4 @@ class EmailNotification extends Notification
 
         return $this;
     }
-
-    /**
-     * Overload Cake\Mailer\mail functions
-     *
-     * @param string $name methodname
-     * @param string $args arguments
-     * @return this
-     */
-    public static function __callStatic($name, $args)
-    {
-        forward_static_call(['Cake\Mailer\Email', $name], $args);
-    }
 }
