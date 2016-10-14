@@ -41,3 +41,6 @@ Email::configTransport('debug', [
     'className' => 'Debug',
     'charset' => 'utf-8',
 ]);
+Email::config('default', [
+    'transport' => 'debug'
+]);
