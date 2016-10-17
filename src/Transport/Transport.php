@@ -18,6 +18,7 @@ abstract class Transport
         $success = false;
         foreach ($items as $item) {
             if (!isset($item['class']) || !is_callable($item['class'])) {
+                $class = $item['class'];
                 if (is_array($item['class'])) {
                     $class = implode($item['class']);
                 }
