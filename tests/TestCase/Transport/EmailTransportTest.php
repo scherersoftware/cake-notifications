@@ -98,6 +98,23 @@ class EmailTransportTest extends TestCase
         $this->assertFalse(SomeClass::$wasTheCallableCalled);
     }
 
+    public function testNotExistingStaticCallbackCall()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        $email = new EmailNotification([
+            'transport' => 'debug',
+            'from' => 'foo@bar.com'
+        ]);
+        $email->to('foo@bar.com')
+            ->beforeSendCallback('SomeClassThatDoesNotExists::someMethod');
+        $return = EmailTransport::sendNotification($email);
+
+        $this->assertEquals(SomeClass::$someProperty, null);
+        $this->assertEquals(SomeClass::$anotherProperty, null);
+        $this->assertFalse(SomeClass::$wasTheCallableCalled);
+    }
+
     public function testSendNotification()
     {
         $email = new EmailNotification([
