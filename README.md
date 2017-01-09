@@ -41,19 +41,19 @@ Set your default locale in a config file, for example in `app.php`.
 This config is mandatory and will cause an exception if not set.
 
 ```
-    'Notifications' => [
-        'defaultLocale' => 'en_US'
-    ]
+'Notifications' => [
+    'defaultLocale' => 'en_US'
+]
 ```
 
 You can also override the queue options like `attempts`, `attempts_delay`, `delay`, `expires_in` and `queue`.
 
 ```
-    'Notifications' => [
-        'queueOptions' => [
-            'queue' => 'notification'
-        ]
+'Notifications' => [
+    'queueOptions' => [
+        'queue' => 'notification'
     ]
+]
 ```
 
 This doesn't affect the use of `queueOptions()` later. You can still override the options there.
@@ -61,6 +61,9 @@ This doesn't affect the use of `queueOptions()` later. You can still override th
 Also, be sure to set up the the cakephp-queuesadilla plugin config. You can find an example config here: [https://cakephp-queuesadilla.readthedocs.io/en/latest/](https://github.com/josegonzalez/cakephp-queuesadilla).
 
 Or you can find available config options inside your used Engine file (`vendor/josegonzalez/queuesadilla/src/josegonzalez/Queuesadilla/Engine/*Engine.php`) inside the `$baseConfig` property.
+
+
+**IMPORTANT**: Set "date.timezone" in your cli/php.ini to an appropriate value, else notifications with a delay_until could be sent out at the wrong time.
 
 ## Usage
 
@@ -115,7 +118,7 @@ Supported options:
 Pass a callable as the `$class` parameter. Static and none-static functions are supported.
 
 ```
-    $email->beforeSendCallback(['Foo', 'bar'], ['first_param', 'second_param'])
+$email->beforeSendCallback(['Foo', 'bar'], ['first_param', 'second_param'])
 
 ```     
 This will call the `bar` method inside the Foo class with two parameters before the email is send.
@@ -124,15 +127,15 @@ To manipulate the EmailNotification instance before sending, the beforeSendCallb
 The `bar` method may then look something like this:
 
 ```
-    public function bar($first_param, $second_param)
-    {
-        // do something
-        return function (&$instance) {
-            $instance->profile([
-                'from' => 'email@example.com'
-            ]);
-        };
-    }
+public function bar($first_param, $second_param)
+{
+    // do something
+    return function (&$instance) {
+        $instance->profile([
+            'from' => 'email@example.com'
+        ]);
+    };
+}
 ```
 
 ### `afterSendCallback( array|string|null $class null, array $args [] )`
@@ -140,8 +143,7 @@ The `bar` method may then look something like this:
 Pass a callable as the `$class` parameter. Static and none-static functions are supported.
 
 ```
-    $email-> afterSendCallback(['Foo::bar'], ['first_param', 'second_param'])
-
+$email-> afterSendCallback(['Foo::bar'], ['first_param', 'second_param'])
 ```     
 This will call the static `bar` method inside the Foo class with two parameters after the email was send.
 
