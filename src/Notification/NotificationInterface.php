@@ -7,6 +7,7 @@ interface NotificationInterface
     /**
      * Get/Set before send callback.
      *
+     * @deprecated 2.2.0 Use setBeforeSendCallback()/getBeforeSendCallback() instead.
      * @param string|array|null $class Name of the class and method
      * - Pass a string in the class::method format to call a static method
      * - Pass an array in the [class => method] format to call a non static method
@@ -18,7 +19,7 @@ interface NotificationInterface
     /**
      * Get/Set after send callback.
      *
-     * @param string|array|null $class Name of the class and method
+     * @deprecated 2.2.0 Use setAfterSendCallback()/getAfterSendCallback() instead.
      * - Pass a string in the class::method format to call a static method
      * - Pass an array in the [class => method] format to call a non static method
      * @param array $args the method parameters you want to pass to the called method
@@ -29,6 +30,7 @@ interface NotificationInterface
     /**
      * Get/Set Queue Optons.
      *
+     * @deprecated 2.2.0 Use setQueueOptions()/getQueueOptions() instead.
      * @param array|null $options Queue options
      *
      * ### Supported options
@@ -52,6 +54,7 @@ interface NotificationInterface
     /**
      * Get/Set locale used for the notification
      *
+     * @deprecated 2.2.0 Use setLocale()/getLocale() instead.
      * @param string $locale The name of the locale to set
      * @return string|null
      */
