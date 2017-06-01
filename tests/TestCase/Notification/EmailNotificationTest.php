@@ -112,6 +112,39 @@ class EmailNotificationTest extends TestCase
     }
 
     /**
+     * testBeforeSendCallback method
+     *
+     * @return void
+     */
+    public function testGetSetBeforeSendCallback()
+    {
+        $this->Notification->setBeforeSendCallback('Foo::bar', ['foo', 'bar']);
+        $this->assertEquals([
+            [
+                'class' => 'Foo::bar',
+                'args' => [
+                    'foo',
+                    'bar'
+                ]
+            ]
+        ], $this->Notification->getBeforeSendCallback());
+
+        $this->Notification->setBeforeSendCallback(['Foo', 'bar'], ['foo', 'bar']);
+        $this->assertEquals([
+            [
+                'class' => [
+                    'Foo',
+                    'bar'
+                ],
+                'args' => [
+                    'foo',
+                    'bar'
+                ]
+            ]
+        ], $this->Notification->getBeforeSendCallback());
+    }
+
+    /**
      * testAddBeforeSendCallback method
      *
      * @return void
@@ -184,6 +217,42 @@ class EmailNotificationTest extends TestCase
                 ]
             ]
         ], $this->Notification->afterSendCallback());
+    }
+
+    /**
+     * testAfterSendCallback method
+     *
+     * @return void
+     */
+    public function testGetSetAfterSendCallback()
+    {
+        $this->Notification->setAfterSendCallback('Foo::bar', ['foo', 'bar']);
+        $this->assertEquals([
+            [
+                'class' => 'Foo::bar',
+                'args' => [
+                    'foo',
+                    'bar'
+                ]
+            ]
+        ], $this->Notification->getAfterSendCallback());
+
+        $this->Notification->setAfterSendCallback(['Foo', 'bar'], [
+            'foo',
+            'bar'
+        ]);
+        $this->assertEquals([
+            [
+                'class' => [
+                    'Foo',
+                    'bar'
+                ],
+                'args' => [
+                    'foo',
+                    'bar'
+                ]
+            ]
+        ], $this->Notification->getAfterSendCallback());
     }
 
     /**
@@ -277,6 +346,24 @@ class EmailNotificationTest extends TestCase
     }
 
     /**
+     * testSettings method
+     *
+     * @return void
+     */
+    public function testGetSetQueueOptions()
+    {
+        $options = [
+            'attempts' => 20,
+            'attempts_delay' => 2,
+            'delay' => 2,
+            'expires_in' => 10,
+            'queue' => 'email'
+        ];
+        $this->Notification->setQueueOptions($options);
+        $this->assertEquals($options, $this->Notification->getQueueOptions());
+    }
+
+    /**
      * testLocale method
      *
      * @return void
@@ -285,6 +372,17 @@ class EmailNotificationTest extends TestCase
     {
         $this->Notification->locale('de_DE');
         $this->assertEquals('de_DE', $this->Notification->locale());
+    }
+
+    /**
+     * testLocale method
+     *
+     * @return void
+     */
+    public function testGetSetLocale()
+    {
+        $this->Notification->setLocale('de_DE');
+        $this->assertEquals('de_DE', $this->Notification->getLocale());
     }
 
     /**

@@ -80,7 +80,7 @@ Then simply create a new EmailNotification object.
 ```
 $email = new EmailNotification();
 $email->to('john.doe@example.com')
-    ->subject('Send with cake-notifications v2')
+    ->setSubject('Send with cake-notifications v2')
     ->send('Hello :)');
 
 ```
@@ -93,7 +93,7 @@ You can chain all methods provided by the CakePHP Email Class [http://book.cakep
 
 Send out the email immediately. before- and afterSend callbacks are still available
 
-### ` locale( string|null $locale null ) `
+### ` setLocale( string|null $locale null ) `
 
 Set the locale for the notification. If null, ```Configure::read('Notifications.defaultLocale')``` is used.
 
@@ -101,7 +101,7 @@ Set the locale for the notification. If null, ```Configure::read('Notifications.
 
 Push the email into the queue to send it asynchronous
 
-### ` queueOptions( array $options null ) `
+### ` setQueueOptions( array $options null ) `
 
 You can change some of the default options from the cakephp-queuesadilla plugin.
 
@@ -113,7 +113,7 @@ Supported options:
 - `expires_in` how long the notification will stay in the queue in seconds
 - `queue` name of the queue
 
-### `beforeSendCallback( array|string|null $class null, array $args [] )`
+### `setBeforeSendCallback( array|string|null $class null, array $args [] )`
 
 Pass a callable as the `$class` parameter. Static and none-static functions are supported.
 
@@ -138,7 +138,7 @@ public function bar($first_param, $second_param)
 }
 ```
 
-### `afterSendCallback( array|string|null $class null, array $args [] )`
+### `setAfterSendCallback( array|string|null $class null, array $args [] )`
 
 Pass a callable as the `$class` parameter. Static and none-static functions are supported.
 

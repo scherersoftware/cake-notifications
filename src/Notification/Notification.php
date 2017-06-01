@@ -79,6 +79,22 @@ abstract class Notification implements NotificationInterface
     /**
      * {@inheritdoc}
      */
+    public function getBeforeSendCallback()
+    {
+        return $this->_beforeSendCallback;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBeforeSendCallback($class = null, array $args = [])
+    {
+        return $this->__setCallback('_beforeSendCallback', $class, $args);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addBeforeSendCallback($class, array $args = [])
     {
         return $this->__addCallback('_beforeSendCallback', $class, $args);
@@ -93,6 +109,22 @@ abstract class Notification implements NotificationInterface
             return $this->_afterSendCallback;
         }
 
+        return $this->__setCallback('_afterSendCallback', $class, $args);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAfterSendCallback()
+    {
+        return $this->_afterSendCallback;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAfterSendCallback($class = null, array $args = [])
+    {
         return $this->__setCallback('_afterSendCallback', $class, $args);
     }
 
@@ -119,12 +151,44 @@ abstract class Notification implements NotificationInterface
     /**
      * {@inheritdoc}
      */
+    public function getQueueOptions()
+    {
+        return $this->_queueOptions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQueueOptions(array $options = null)
+    {
+        return $this->__setQueueOptions($options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function locale($locale = null)
     {
         if ($locale === null) {
             return $this->_locale;
         }
 
+        return $this->__setLocale($locale);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocale()
+    {
+        return $this->_locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocale($locale = null)
+    {
         return $this->__setLocale($locale);
     }
 
