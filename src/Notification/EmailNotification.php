@@ -19,13 +19,14 @@ class EmailNotification extends Notification
     /**
      * Cake Email object
      *
-     * @var obj
+     * @var object
      */
     protected $_email;
 
     /**
      * Constructor
      *
+     * @param array|null $config
      */
     public function __construct($config = null)
     {
@@ -47,10 +48,10 @@ class EmailNotification extends Notification
     }
 
     /**
-     * Send the EmailNotification immediately using the correspondending transport class
+     * Send the EmailNotification immediately using the corresponding transport class
      *
      * @param string|array|null $content String with message or array with messages
-     * @return bool
+     * @return \Notifications\Notification\Notification
      */
     public function send($content = null)
     {
@@ -60,7 +61,7 @@ class EmailNotification extends Notification
     /**
      * Get the Cake Email object
      *
-     * @return obj Email
+     * @return object Email
      */
     public function email()
     {
@@ -70,9 +71,9 @@ class EmailNotification extends Notification
     /**
      * Overload Cake\Mailer\mail functions
      *
-     * @param string $name methodname
-     * @param string $args arguments
-     * @return this
+     * @param string $name method name
+     * @param array  $args arguments
+     * @return \Notifications\Notification\EmailNotification
      */
     public function __call($name, $args)
     {

@@ -1,6 +1,7 @@
 <?php
 namespace Notifications\Transport;
 
+use InvalidArgumentException;
 use Notifications\Notification\Notification;
 
 abstract class Transport

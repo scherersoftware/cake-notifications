@@ -3,6 +3,7 @@ namespace Notifications\Notification;
 
 use Cake\Core\Configure;
 use Cake\Utility\Hash;
+use InvalidArgumentException;
 
 abstract class Notification implements NotificationInterface
 {
@@ -52,6 +53,7 @@ abstract class Notification implements NotificationInterface
     /**
      * Constructor
      *
+     * @param array|null $config
      * @throws InvalidArgumentException
      */
     public function __construct($config = null)
@@ -193,7 +195,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * Set lcoale
+     * Set locale
      *
      * @param string $locale locale - must be i18n conform
      * @return $this
@@ -244,7 +246,7 @@ abstract class Notification implements NotificationInterface
             if (is_array($class)) {
                 $class = implode($class);
             }
-            throw new \InvalidArgumentException("{$class} is missformated");
+            throw new \InvalidArgumentException("{$class} is misformated");
         }
 
         $this->{$type} = [
@@ -281,7 +283,7 @@ abstract class Notification implements NotificationInterface
             if (is_array($class)) {
                 $class = implode($class);
             }
-            throw new \InvalidArgumentException("{$class} is missformated");
+            throw new \InvalidArgumentException("{$class} is misformated");
         }
 
         $this->{$type}[] = [

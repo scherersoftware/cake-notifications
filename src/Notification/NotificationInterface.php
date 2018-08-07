@@ -20,6 +20,7 @@ interface NotificationInterface
      * Get/Set after send callback.
      *
      * @deprecated 2.2.0 Use setAfterSendCallback()/getAfterSendCallback() instead.
+     * @param string|array|null $class Name of the class and method
      * - Pass a string in the class::method format to call a static method
      * - Pass an array in the [class => method] format to call a non static method
      * @param array $args the method parameters you want to pass to the called method
@@ -28,7 +29,7 @@ interface NotificationInterface
     public function afterSendCallback($class = null, array $args = []);
 
     /**
-     * Get/Set Queue Optons.
+     * Get/Set Queue Options.
      *
      * @deprecated 2.2.0 Use setQueueOptions()/getQueueOptions() instead.
      * @param array|null $options Queue options

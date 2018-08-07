@@ -3,7 +3,6 @@ namespace Notifications\Transport;
 
 use Cake\Core\Configure;
 use Cake\I18n\I18n;
-use Cake\Mailer\Email;
 use josegonzalez\Queuesadilla\Job\Base;
 use Notifications\Notification\EmailNotification;
 use Notifications\Notification\Notification;
@@ -17,7 +16,7 @@ class EmailTransport extends Transport implements TransportInterface
      *
      * @param Notification $notification Notification object
      * @param string|array|null $content String with message or array with messages
-     * @return Notification
+     * @return \Notifications\Notification\Notification
      */
     public static function sendNotification(Notification $notification, $content = null)
     {
@@ -25,9 +24,9 @@ class EmailTransport extends Transport implements TransportInterface
         self::_performCallback($beforeSendCallback, $notification);
 
         if ($notification->locale() !== null) {
-            I18n::locale($notification->locale());
+            I18n::setLocale($notification->locale());
         } else {
-            I18n::locale(Configure::read('Notifications.defaultLocale'));
+            I18n::setLocale(Configure::read('Notifications.defaultLocale'));
         }
 
         $notification->email()->send($content);
@@ -42,7 +41,7 @@ class EmailTransport extends Transport implements TransportInterface
      * Process the job coming from the queue
      *
      * @param Base $job Queuesadilla base job
-     * @return void
+     * @return \Notifications\Notification\Notification
      */
     public static function processQueueObject(Base $job)
     {
