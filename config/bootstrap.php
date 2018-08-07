@@ -6,7 +6,7 @@ use Josegonzalez\CakeQueuesadilla\Queue\Queue;
 if (!Plugin::loaded('Josegonzalez/CakeQueuesadilla')) {
     Plugin::load('Josegonzalez/CakeQueuesadilla');
     // Load Queue config
-    Queue::config(Configure::consume('Queuesadilla'));
+    Queue::setConfig(Configure::consume('Queuesadilla'));
 }
 
 if (!defined('SIGQUIT')) {

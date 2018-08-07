@@ -20,7 +20,7 @@ if ($vendorPos !== false) {
     $loader = require __DIR__ . '/../vendor/autoload.php';
 }
 
-Cake\Datasource\ConnectionManager::config('test', [
+Cake\Datasource\ConnectionManager::setConfig('test', [
     'className' => 'Cake\Database\Connection',
     'driver' => 'Cake\Database\Driver\Mysql',
     'persistent' => false,
@@ -37,10 +37,10 @@ Configure::write('App.encoding', 'UTF-8');
 Configure::write('Notifications.queueOptions.queue', 'default');
 Configure::write('Notifications.defaultLocale', 'en_US');
 
-Email::configTransport('debug', [
+Email::setConfigTransport('debug', [
     'className' => 'Debug',
     'charset' => 'utf-8',
 ]);
-Email::config('default', [
+Email::setConfig('default', [
     'transport' => 'debug'
 ]);
