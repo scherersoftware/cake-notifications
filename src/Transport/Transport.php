@@ -10,11 +10,12 @@ abstract class Transport
     /**
      * Performs the before- or after send callback of the notification
      *
-     * @param array $items Contains the class and function name and optional, function params
-     * @param Notification $notificationInstance Reference to the notification instance for a possible callbacks callback
-     * @throws InvalidArgumentException
+     * @param array                                    $items                Contains the class and function name and optional, function params
+     * @param \Notifications\Notification\Notification $notificationInstance Reference to the notification instance for a possible callbacks callback
+     * @return void
+     * @throws \InvalidArgumentException
      */
-    protected static function _performCallback(array $items, Notification &$notificationInstance = null)
+    protected static function _performCallback(array $items, Notification $notificationInstance = null)
     {
         $success = false;
         foreach ($items as $item) {

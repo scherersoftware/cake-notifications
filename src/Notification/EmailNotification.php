@@ -61,7 +61,7 @@ class EmailNotification extends Notification
     /**
      * Get the Cake Email object
      *
-     * @return object Email
+     * @return \Cake\Mailer\Email
      */
     public function email()
     {
