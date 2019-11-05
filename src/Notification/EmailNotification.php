@@ -3,9 +3,12 @@ namespace Notifications\Notification;
 
 use Cake\Mailer\Email;
 use Josegonzalez\CakeQueuesadilla\Queue\Queue;
-use Notifications\Notification\Notification;
+use Notifications\Notification\NotificationInterface;
 use Notifications\Transport\EmailTransport;
 
+/**
+ * @method \Cake\Mailer\Email unserialize(string $data)
+ */
 class EmailNotification extends Notification
 {
 
@@ -19,15 +22,16 @@ class EmailNotification extends Notification
     /**
      * Cake Email object
      *
-     * @var obj
+     * @var \Cake\Mailer\Email
      */
     protected $_email;
 
     /**
      * Constructor
      *
+     * @param array|null $config Config
      */
-    public function __construct($config = null)
+    public function __construct(?array $config = null)
     {
         parent::__construct();
         $this->_email = new Email($config);
@@ -36,23 +40,23 @@ class EmailNotification extends Notification
     /**
      * {@inheritdoc}
      */
-    public function push()
+    public function push(): bool
     {
         return Queue::push($this->_transport . '::processQueueObject', [
             'email' => $this->_email->serialize(),
             'beforeSendCallback' => $this->_beforeSendCallback,
             'afterSendCallback' => $this->_afterSendCallback,
-            'locale' => $this->_locale
+            'locale' => $this->_locale,
         ], $this->_queueOptions);
     }
 
     /**
-     * Send the EmailNotification immediately using the correspondending transport class
+     * Send the EmailNotification immediately using the corresponding transport class
      *
      * @param string|array|null $content String with message or array with messages
-     * @return bool
+     * @return \Notifications\Notification\NotificationInterface
      */
-    public function send($content = null)
+    public function send($content = null): NotificationInterface
     {
         return EmailTransport::sendNotification($this, $content);
     }
@@ -60,9 +64,9 @@ class EmailNotification extends Notification
     /**
      * Get the Cake Email object
      *
-     * @return obj Email
+     * @return \Cake\Mailer\Email
      */
-    public function email()
+    public function email(): Email
     {
         return $this->_email;
     }
@@ -70,11 +74,11 @@ class EmailNotification extends Notification
     /**
      * Overload Cake\Mailer\mail functions
      *
-     * @param string $name methodname
-     * @param string $args arguments
-     * @return this
+     * @param string $name method name
+     * @param array  $args arguments
+     * @return \Notifications\Notification\EmailNotification
      */
-    public function __call($name, $args)
+    public function __call(string $name, array $args): EmailNotification
     {
         call_user_func_array([$this->_email, $name], $args);
 

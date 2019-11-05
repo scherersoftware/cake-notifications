@@ -1,7 +1,8 @@
 <?php
+declare(strict_types = 1);
 namespace Notifications\Transport;
 
-use Notifications\Notification\Notification;
+use Notifications\Notification\NotificationInterface;
 
 interface TransportInterface
 {
@@ -9,9 +10,12 @@ interface TransportInterface
     /**
      * sendNotification method
      *
-     * @param Notification $notification Notification object
+     * @param \Notifications\Notification\NotificationInterface $notification Notification object
      * @param string|array|null $content String with message or array with messages
-     * @return void
+     * @return \Notifications\Notification\NotificationInterface
      */
-    public static function sendNotification(Notification $notification, $content = null);
+    public static function sendNotification(
+        NotificationInterface $notification,
+        $content = null
+    ): NotificationInterface;
 }
