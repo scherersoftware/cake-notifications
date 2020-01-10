@@ -4,15 +4,14 @@
     "license": "MIT",
     "type": "cakephp-plugin",
     "require": {
-      "php": ">=7.1",
-      "cakephp/cakephp": ">=3.8",
-      "josegonzalez/cakephp-queuesadilla": "^0.6.0"
+      "php": ">=7.2",
+      "cakephp/cakephp": ">=4.0.0",
+      "josegonzalez/cakephp-queuesadilla": "^0.7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0",
         "phpstan/phpstan": "^0.11",
-        "cakephp/cakephp-codesniffer": "^3.1",
-        "scherersoftware/coding-standard": "^3.1"
+        "scherersoftware/coding-standard": "^4.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -34,7 +33,7 @@
             "@phpunit"
         ],
         "php-check": "vendor/bin/phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src",
-        "php-check-strict": "vendor/bin/phpcs -p --standard=vendor/scherersoftware/coding-standard/scherersoftware ./src",
+        "php-check-strict": "vendor/bin/phpcs --colors -p --standard=vendor/scherersoftware/coding-standard/scherersoftware ./src",
         "phpstan": "php -d memory_limit=-1 vendor/bin/phpstan analyse -c phpstan.neon -l 5 ./src",
         "phpunit": "vendor/bin/phpunit --coverage-clover=coverage.xml"
     }
