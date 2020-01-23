@@ -72,7 +72,7 @@ abstract class Notification implements NotificationInterface
     public function beforeSendCallback($class = null, array $args = [])
     {
         trigger_error('Notification::beforeSendCallback() is deprecated. '
-            . 'Use Notification::setBeforeSendCallback()/getBeforeSendCallback() instead.', E_DEPRECATED);
+            . 'Use Notification::setBeforeSendCallback()/getBeforeSendCallback() instead.', E_USER_DEPRECATED);
 
         if ($class === null) {
             return $this->_beforeSendCallback;
@@ -111,7 +111,7 @@ abstract class Notification implements NotificationInterface
     public function afterSendCallback($class = null, array $args = [])
     {
         trigger_error('Notification::afterSendCallback() is deprecated. '
-            . 'Use Notification::setAfterSendCallback()/getAfterSendCallback() instead.', E_DEPRECATED);
+            . 'Use Notification::setAfterSendCallback()/getAfterSendCallback() instead.', E_USER_DEPRECATED);
 
         if ($class === null) {
             return $this->_afterSendCallback;
@@ -150,7 +150,7 @@ abstract class Notification implements NotificationInterface
     public function queueOptions(array $options = null)
     {
         trigger_error('Notification::queueOptions() is deprecated. '
-            . 'Use Notification::setQueueOptions()/getQueueOptions() instead.', E_DEPRECATED);
+            . 'Use Notification::setQueueOptions()/getQueueOptions() instead.', E_USER_DEPRECATED);
 
         if ($options === null) {
             return $this->_queueOptions;
@@ -181,7 +181,7 @@ abstract class Notification implements NotificationInterface
     public function locale($locale = null)
     {
         trigger_error('Notification::locale() is deprecated. '
-            . 'Use Notification::setLocale()/getLocale() instead.', E_DEPRECATED);
+            . 'Use Notification::setLocale()/getLocale() instead.', E_USER_DEPRECATED);
 
         if ($locale === null) {
             return $this->_locale;
