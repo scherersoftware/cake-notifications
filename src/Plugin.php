@@ -1,8 +1,8 @@
 <?php
 namespace Notifications;
 
-use Cake\Core\Configure;
 use Cake\Core\BasePlugin;
+use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Routing\Router;
 use Josegonzalez\CakeQueuesadilla\Queue\Queue;
@@ -16,7 +16,7 @@ class Plugin extends BasePlugin
      */
     protected $name = 'Notifications';
 
-    /*
+    /**
      * {@inheritDoc}
      */
     public function bootstrap(PluginApplicationInterface $app)
@@ -42,7 +42,7 @@ class Plugin extends BasePlugin
         }
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     public function routes($routes)

@@ -6,7 +6,7 @@
     "type": "cakephp-plugin",
     "homepage": "https://github.com/scherersoftware/cake-notifications",
     "require": {
-      "php": ">=7.0",
+      "php": ">=7.1",
       "cakephp/cakephp": ">=3.6",
       "josegonzalez/cakephp-queuesadilla": "^0.4.2"
     },

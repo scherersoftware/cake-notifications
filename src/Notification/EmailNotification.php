@@ -26,7 +26,7 @@ class EmailNotification extends Notification
     /**
      * Constructor
      *
-     * @param array|null $config
+     * @param array|null $config config
      */
     public function __construct($config = null)
     {
